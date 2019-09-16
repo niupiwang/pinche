@@ -11,7 +11,7 @@ class User(models.Model):
     username = models.CharField(max_length=100, verbose_name='用户名')
     password = models.CharField(max_length=128, verbose_name='密码')
     real_name = models.CharField(null=True, max_length=20, verbose_name='真实姓名')
-    id_num = models.IntegerField(null=True, unique=True, max_length=18, verbose_name='身份证号')
+    id_num = models.IntegerField(null=True, unique=True, verbose_name='身份证号')
     birthday = models.DateTimeField(null=True, verbose_name='生日')
     address = models.CharField(null=True, max_length=200, verbose_name='地址')
     age = models.IntegerField(null=True, verbose_name='年龄')
@@ -51,8 +51,8 @@ class Bus(models.Model):
 
 #3我的订单表
 class MyList(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE,)
-    driver = models.ForeignKey(User, on_delete=models.CASCADE, )
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
+    driver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='driver')
     bus = models.ForeignKey(Bus, on_delete=models.CASCADE,)
     # start_time = models.DateTimeField(default=datetime.now(), null=True)
     s_list = ((0, '未完成'), (1, '已取消'), (2, '已完成'))
