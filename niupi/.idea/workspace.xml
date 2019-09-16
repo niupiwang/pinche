@@ -18,7 +18,13 @@
   <component name="ProjectId" id="1QuvzEoC2BGNj5OLPcFKi5PaocH" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../a1" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates" />
+      <recent name="$PROJECT_DIR$/static" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -68,6 +74,7 @@
       <option name="presentableId" value="Default" />
       <updated>1568633555245</updated>
       <workItem from="1568633556511" duration="893000" />
+      <workItem from="1568635178000" duration="745000" />
     </task>
     <servers />
   </component>
