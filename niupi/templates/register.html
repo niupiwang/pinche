@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
@@ -5,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="assets/img/basic/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="{% static 'assets/img/basic/favicon.ico'%}" type="image/x-icon">
     <title>Paper</title>
     <!-- CSS -->
-    <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="stylesheet" href="{% static 'assets/css/app.css' %}">
     <style>
         .loader {
             position: fixed;
@@ -82,27 +83,70 @@
             <div class="row">
                 <div class="col-lg-4 mx-md-auto paper-card">
                     <div class="text-center">
-                        <img src="assets/img/dummy/u4.png" alt="">
+                        <img src="{% static 'assets/img/dummy/u4.png' %}" alt="">
                         <h3 class="mt-2">注册用户</h3>
                         <p class="p-t-b-20">请填写以下信息以注册您的新用户</p>
                     </div>
-                    <form action="dashboard2.html">
-                        <div class="form-group has-icon"><i class="icon-envelope-o"></i>
-                            <input type="text" class="form-control form-control-lg"
-                                   placeholder="用户名">
-                        </div>
-                        <div class="form-group has-icon"><i class="icon-user-secret"></i>
-                            <input type="text" class="form-control form-control-lg"
+                    <form action="{% url 'app:register' %}" method="post" name="register">
+                        {% csrf_token %}
+                        <table>
+                            <tr>
+                                <td class="form-group has-icon"><i class="icon-envelope-o"></i>
+                                    <input name='username' type="text" class="form-control form-control-lg"
+                                       placeholder="用户名">
+                                </td>
+                                <td>
+                                    {{ form.username.errors }}
+                                </td>
+                            </tr>
+                        </table>
+                        <table>
+                            <tr>
+                                <td class="form-group has-icon"><i class="icon-user-secret"></i>
+                            <input name='password' type="text" class="form-control form-control-lg"
                                    placeholder="密码">
-                        </div>
-                        <div class="form-group has-icon"><i class="icon-user-secret"></i>
-                            <input type="text" class="form-control form-control-lg"
+                        </td>
+                                <td>
+                                    {{ form.password.errors }}
+                                </td>
+                            </tr>
+                        </table>
+                        <table>
+                            <tr>
+                                <td class="form-group has-icon"><i class="icon-user-secret"></i>
+                            <input name='repassword' type="text" class="form-control form-control-lg"
                                    placeholder="确认密码">
-                        </div>
-                        <div class="form-group has-icon"><i class="icon-user-secret"></i>
-                            <input type="text" class="form-control form-control-lg"
+                        </td>
+                                <td>
+                                    {{ form.repassword.errors }}
+                                </td>
+                            </tr>
+                        </table>
+                        <table>
+                            <tr>
+                                <td class="form-group has-icon"><i class="icon-user-secret"></i>
+                            <input name='phonenum' type="text" class="form-control form-control-lg"
                                    placeholder="手机号">
-                        </div>
+                        </td>
+                                <td>
+                                    {{ form.phonenum.errors }}
+                                </td>
+                            </tr>
+                        </table>
+
+                        <table>
+                            <tr>
+                                <td>
+                                    <div class="form-group has-icon"><i class="icon-user-secret"></i>
+                                        <input name='yzm' type="text" class="form-control form-control-lg" style="width: 150px;"
+                                            placeholder="验证码">
+                                    </div>
+                                </td>
+                                <td class="tipcol"><i id="tip_yzm" class="p_tip"><img src="{% url 'app:yzm' %}" id="p_yzm" onclick="show('p_yzm')" style="cursor:pointer" /> <a href="javascript:;" onclick="show('p_yzm')">看不清？</a></i>&nbsp;&nbsp;{{ form.yzm.errors }}</td>
+                                <td>{{ form.yzm.errors }}</td>
+                            </tr>
+                        </table>
+
                         <input type="submit" class="btn btn-primary btn-lg btn-block" value="注册">
                         <p class="forget-pass"></p>
                     </form>
@@ -120,6 +164,22 @@
 <div class="control-sidebar-bg shadow white fixed"></div>
 </div>
 <!--/#app -->
-<script src="assets/js/app.js"></script>
+<script src="{% static 'assets/js/app.js'%}">
+    function checkReg(obj){
+	document.getElementById('tip_'+obj).style.display='block';
+}
+
+function checkRegOut(obj,test){
+	if(document.getElementById(obj).value==''){
+		document.getElementById('tip_'+obj).innerHTML='<b style="color:red;">'+test+'</b>';
+	}else{
+		document.getElementById('tip_'+obj).style.display='none';
+	}
+}
+
+function show(obj){
+	document.getElementById(obj).src='{% url "app:yzm" %}?math='+Math.random();
+}
+</script>
 </body>
 </html>
