@@ -142,9 +142,7 @@
                                             placeholder="验证码">
                                     </div>
                                 </td>
-                                <td>
-                                    <a href="#">yzm</a>
-                                </td>
+                                <td class="tipcol"><i id="tip_yzm" class="p_tip"><img src="{% url 'app:yzm' %}" id="p_yzm" onclick="show('p_yzm')" style="cursor:pointer" /> <a href="javascript:;" onclick="show('p_yzm')">看不清？</a></i>&nbsp;&nbsp;{{ form.yzm.errors }}</td>
                                 <td>{{ form.yzm.errors }}</td>
                             </tr>
                         </table>
@@ -166,6 +164,22 @@
 <div class="control-sidebar-bg shadow white fixed"></div>
 </div>
 <!--/#app -->
-<script src="{% static 'assets/js/app.js'%}"></script>
+<script src="{% static 'assets/js/app.js'%}">
+    function checkReg(obj){
+	document.getElementById('tip_'+obj).style.display='block';
+}
+
+function checkRegOut(obj,test){
+	if(document.getElementById(obj).value==''){
+		document.getElementById('tip_'+obj).innerHTML='<b style="color:red;">'+test+'</b>';
+	}else{
+		document.getElementById('tip_'+obj).style.display='none';
+	}
+}
+
+function show(obj){
+	document.getElementById(obj).src='{% url "app:yzm" %}?math='+Math.random();
+}
+</script>
 </body>
 </html>
