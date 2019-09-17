@@ -18,6 +18,7 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^',include('App.urls',namespace='app'))
+    url(r'^', include('App.urls', namespace='app')),
+    url(r'^myadmin/', include('niupih.urls', namespace='myadmin')),
 
 ]

@@ -65,3 +65,9 @@ class MyList(models.Model):
         verbose_name_plural = '订单表'
 
 
+#管理员表
+class Admin(models.Model):
+    username = models.CharField(max_length=20, unique=True, verbose_name='管理员')
+    password = models.CharField(max_length=128, verbose_name='密码')
+
+
