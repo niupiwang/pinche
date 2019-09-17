@@ -1,0 +1,187 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{#内容开始        #}
+{% block content %}
+
+			<div class="page has-sidebar-left height-full">
+				<header class="blue accent-3 relative nav-sticky">
+					<div class="container-fluid text-white">
+						<div class="row p-t-b-10 ">
+							<div class="col">
+								<h4><i class="icon icon-plus-circle mb-3"></i>车票</h4>
+							</div>
+						</div>
+					</div>
+				</header>
+				<div class="container-fluid relative animatedParent animateOnce">
+					<div class="tab-content pb-3" id="v-pills-tabContent">
+
+						<!--车票 Start-->
+						<div class="tab-pane animated fadeInUpShort show active" id="v-pills-1">
+							<div class="row my-3">
+								<div class="col-md-12">
+									<div class="counter-box white r-5 p-3">
+										<div class="p-1">
+											<h4>{{ start_city }} - {{ end_city }}</h4>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row my-3">
+								<div class="col-md-12">
+									<div class="card my-3 no-b">
+										<div class="card-header white b-0 p-3">
+											<h4 class="card-title">查询结果</h4>
+											<small class="card-subtitle mb-2 text-muted">所有车次已列出</small>
+										</div>
+										<div class="collapse show" id="salesCard">
+											<div class="card-body p-0" style="margin: 10px 30px;">
+												<div class="table-responsive">
+													<table class="table table-hover earning-box">
+														<thead class="bg-light">
+															<tr>
+																<th>车次</th>
+																<th>车主</th>
+																<th>出发站/到达站</th>
+																<th>出发时间/到达时间</th>
+																<th>剩余座位/总座位数</th>
+																<th>价格</th>
+																<th>----</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td class="w-10">KC101012025</td>
+																<td><a href="#">李子坤</a></td>
+																<td>
+																	<h6><img src="{% static 'assets/img/shi.png' %}" width="16px" alt="" style="opacity: 0.5;">&nbsp;&nbsp;&nbsp;{{ start_city }}</h6>
+																	<h6><img src="{% static 'assets/img/zhong.png' %}" width="16px" alt="" style="opacity: 0.5;margin-top: 0;">&nbsp;&nbsp;&nbsp;{{ end_city }}</h6>
+																</td>
+																<td>
+																	<h6>2019-12-5 18:56:55</h6>
+																	<h6>2019-12-5 21:56:55</h6>
+																</td>
+																<td>12 / 45</td>
+																<td>￥250</td>
+																<td><a href="{% url 'app:buy' %}"><input type="submit" class="btn btn-success btn-lg btn-block" style="width: 60px;height: 30px;line-height: 14px;font-size: 12px;"
+																	 value="购买" /></a>
+
+																</td>
+															</tr>
+
+                                                            {% for bus in buses %}
+                                                                <tr>
+                                                                    <td class="w-10">{{ bus.bus_num }}</td>
+                                                                    <td><a href="#">{{ bus.num }}</a></td>
+                                                                    <td>
+                                                                        <h6><img src="{% static 'assets/img/shi.png' %}" width="16px" alt="" style="opacity: 0.5;">&nbsp;&nbsp;&nbsp;{{ start_city }}</h6>
+                                                                        <h6><img src="{% static 'assets/img/zhong.png' %}" width="16px" alt="" style="opacity: 0.5;margin-top: 0;">&nbsp;&nbsp;&nbsp;{{ end_city }}</h6>
+                                                                    </td>
+                                                                    <td>
+                                                                        <h6>{{ bus.start_time }}</h6>
+                                                                        <h6>{{ bus.end_time }}</h6>
+                                                                    </td>
+                                                                    <td>{{ bus.standby_ticket }} / {{ bus.ticket }}</td>
+                                                                    <td> ￥ {{ bus.price }}</td>
+                                                                    <td><a href="{% url 'app:buy' %}"><input type="submit" class="btn btn-success btn-lg btn-block" style="width: 60px;height: 30px;line-height: 14px;font-size: 12px;"
+                                                                         value="购买" /></a>
+
+                                                                    </td>
+
+                                                                </tr>
+                                                            {% endfor %}
+
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--车票 End-->
+
+						<!--信息查询 Start-->
+						<div class="tab-pane animated fadeInUpShort" id="v-pills-3">
+						    <div class="container-fluid my-3">
+						        <div class="d-flex row">
+						            <div class="col-md-6">
+						                <div class="card">
+						                    <div>
+						                        <div class="card-body b-b">
+						                            <div class="card-title">KL101</div>
+						                            <h5>列车信息</h5>
+						                        </div>
+						                        <div class="card-body b-b">
+						                            <div class="card-title">出发 / 到达</div>
+						                                <h5>2019-05-12 00:00:00 <span>唐山</span></h5>
+														<h5>2019-05-12 00:00:00 <span>北京</span></h5>
+						                        </div>
+						                        <div class="card-body b-b">
+						                            <div class="card-title">票务情况</div>
+													<h5><span><strong>6</strong></span> /  8</h5>
+						                        </div>
+						                        <div class="card-body b-b">
+						                            <div class="card-title">乘客信息</div>
+						                            <div class="color-picker input-group" >
+														<input style="height: 25px;margin-bottom: 5px;" class="form-control form-control-lg datePicker" placeholder="乘客" type="text">
+						                                <!-- <input type="text" value="乘客" class="form-control"/> -->
+						                            </div>
+													<div class="color-picker input-group" >
+													    <input style="height: 25px;margin-bottom: 5px;" class="form-control form-control-lg datePicker" placeholder="身份证号" type="text">
+													</div>
+													<div class="color-picker input-group" >
+													    <input style="height: 25px;margin-bottom: 5px;" class="form-control form-control-lg datePicker" placeholder="电话" type="text">
+													</div>
+						                        </div>
+						                        <div class="card-body b-b">
+						                            <div><a href="" target="_blank" class="btn btn-xs btn-primary">添加</a></div>
+						                            <div class="color-picker">
+
+						                            </div>
+						                        </div>
+						                    </div>
+						                </div>
+						            </div>
+
+									<div class="col-md-6">
+
+										<div style="background-color: white;border: 1px solid gainsboro;">
+											<div style="margin-left: 5%;margin-top: 3%;margin-bottom: 3%;">
+												<h3>添加你的订单</h3>
+											</div>
+											<table style="margin-left: 5%;margin-top: 3%;margin-bottom: 3%;width: 94%;">
+												<tr>
+													<td>乘客</td>
+													<td>订单号</td>
+													<td>价格</td>
+												</tr>
+												<tr>
+													<td>李子坤</td>
+													<td>527419</td>
+													<td>255</td>
+												</tr>
+											</table>
+											<div style="margin-left: 5%;margin-bottom: 3%;">
+												<a href="" target="_blank" class="btn btn-xs btn-primary">提交</a>
+												<a href="" target="_blank" class="btn btn-outline-primary btn-xs">加入订单</a>
+											</div>
+
+										</div>
+
+
+									</div>
+						    </div>
+						</div>
+
+					</div>
+						<!--信息查询 End-->
+
+					</div>
+				</div>
+			</div>
+
+{% endblock %}
+<!-- 内容结束 -->
