@@ -5,10 +5,12 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-body">
-                  <h6 class="card-title">Order status</h6>
+                  <h6 class="card-title">Bus status</h6>
                   <div class="d-flex table-responsive">
                     <div class="btn-group mr-2">
+                        <a href="{% url 'myadmin:bus_add' %}">
                       <button class="btn btn-sm btn-info"><i class="mdi mdi-plus-circle-outline"></i> Add</button>
+                        </a>
                     </div>
                     <div class="btn-group mr-2">
                       <button type="button" class="btn btn-light"><i class="mdi mdi-alert-circle-outline"></i></button>

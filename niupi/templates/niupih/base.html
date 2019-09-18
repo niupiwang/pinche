@@ -200,13 +200,13 @@
                     <li class="nav-item nav-profile">
                         <div class="nav-link">
                             <div class="profile-image">
-                                <img src="/static/niupih/images/king.jpg" alt="image"/>
+                                <img src="/static/niupih/images/{{ admin.pic }}" alt="image"/>
                                 <span class="online-status online"></span>
                                 <!--change class online to offline or busy as needed-->
                             </div>
                             <div class="profile-name">
                                 <p class="name">
-                                    <h3>ADMIN</h3>
+                                    <h3>{{ admin.user_uid.username }}</h3>
                                 </p>
                                 <p class="designation">
                                     管理员
@@ -216,7 +216,7 @@
                     </li>
 {#                    管理员个人信息，user_detail页面#}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'myadmin:admin_detail' %}">
+                        <a class="nav-link" href="{% url 'myadmin:admin_detail' admin.user_uid.uid %}">
                             <i class="icon-rocket menu-icon"></i>
                             <span class="menu-title">个人中心</span>
                             <span class="badge badge-success">管理员</span>
@@ -250,8 +250,8 @@
                         <div class="collapse" id="ui-advanced">
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item"><a class="nav-link" href="{% url 'myadmin:bus_list' %}">查询车次</a></li>
-                                <li class="nav-item"><a class="nav-link" href="pages/ui-features/clipboard.html">添加车次</a></li>
-                                <li class="nav-item"><a class="nav-link" href="pages/ui-features/context-menu.html">取消车次</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{% url 'myadmin:bus_add' %}">添加车次</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{% url 'myadmin:bus_delete' 1 %}">取消车次</a></li>
                             </ul>
                         </div>
                     </li>
@@ -268,108 +268,6 @@
                                 <li class="nav-item"><a class="nav-link" href="{% url 'myadmin:car_list' %}">查看信息</a></li>
                             </ul>
                         </div>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="pages/ui-features/popups.html">
-                            <i class="icon-diamond menu-icon"></i>
-                            <span class="menu-title">会员中心</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false"
-                           aria-controls="icons">
-                            <i class="icon-globe menu-icon"></i>
-                            <span class="menu-title">局域网</span>
-                            <span class="badge badge-info">4</span>
-                        </a>
-                        <div class="collapse" id="icons">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"><a class="nav-link" href="pages/icons/flag-icons.html">Flag
-                                    icons</a></li>
-                                <li class="nav-item"><a class="nav-link" href="pages/icons/font-awesome.html">Font
-                                    Awesome</a></li>
-                                <li class="nav-item"><a class="nav-link" href="pages/icons/simple-line-icon.html">Simple
-                                    line icons</a></li>
-                                <li class="nav-item"><a class="nav-link" href="pages/icons/themify.html">Themify
-                                    icons</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false"
-                           aria-controls="auth">
-                            <i class="icon-bubbles menu-icon"></i>
-                            <span class="menu-title">附近的人</span>
-                            <span class="badge badge-danger">5</span>
-                        </a>
-                        <div class="collapse" id="auth">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"><a class="nav-link" href="pages/samples/login.html"> Login </a>
-                                </li>
-                                <li class="nav-item"><a class="nav-link" href="pages/samples/login-2.html"> Login 2 </a>
-                                </li>
-                                <li class="nav-item"><a class="nav-link" href="pages/samples/register.html">
-                                    Register </a></li>
-                                <li class="nav-item"><a class="nav-link" href="pages/samples/register-2.html"> Register
-                                    2 </a></li>
-                                <li class="nav-item"><a class="nav-link" href="pages/samples/lock-screen.html">
-                                    Lockscreen </a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false"
-                           aria-controls="general-pages">
-                            <i class="icon-user menu-icon"></i>
-                            <span class="menu-title">好友页面</span>
-                            <span class="badge badge-warning">6</span>
-                        </a>
-                        <div class="collapse" id="general-pages">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"><a class="nav-link" href="pages/samples/blank-page.html"> Blank
-                                    Page </a></li>
-                                <li class="nav-item"><a class="nav-link" href="pages/samples/landing-page.html"> Landing
-                                    Page </a></li>
-                                <li class="nav-item"><a class="nav-link" href="pages/samples/profile.html"> Profile </a>
-                                </li>
-                                <li class="nav-item"><a class="nav-link" href="pages/samples/faq.html"> FAQ </a></li>
-                                <li class="nav-item"><a class="nav-link" href="pages/samples/faq-2.html"> FAQ 2 </a>
-                                </li>
-                                <li class="nav-item"><a class="nav-link" href="pages/samples/news-grid.html"> News
-                                    grid </a></li>
-                                <li class="nav-item"><a class="nav-link" href="pages/samples/timeline.html">
-                                    Timeline </a></li>
-                                <li class="nav-item"><a class="nav-link" href="pages/samples/search-results.html">
-                                    Search Results </a></li>
-                                <li class="nav-item"><a class="nav-link" href="pages/samples/portfolio.html">
-                                    Portfolio </a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#e-commerce" aria-expanded="false"
-                           aria-controls="e-commerce">
-                            <i class="icon-briefcase menu-icon"></i>
-                            <span class="menu-title">办公手段</span>
-                            <span class="badge badge-info">3</span>
-                        </a>
-                        <div class="collapse" id="e-commerce">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"><a class="nav-link" href="pages/samples/invoice.html"> Invoice </a>
-                                </li>
-                                <li class="nav-item"><a class="nav-link" href="pages/samples/pricing-table.html">
-                                    Pricing Table </a></li>
-                                <li class="nav-item"><a class="nav-link" href="pages/samples/orders.html"> Orders </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="pages/apps/email.html">
-                            <i class="icon-cursor menu-icon"></i>
-                            <span class="menu-title">E-mail</span>
-                        </a>
                     </li>
                     <li class="nav-item nav-doc">
                         <a class="nav-link bg-primary" href="pages/documentation.html">
@@ -403,7 +301,11 @@
             </nav>
             <!-- 右侧动态栏 -->
             <!-- ================================================================================================ -->
-                {% block gallery %}
+{% block portfolio %}
+{% endblock portfolio %}
+        {% block index %}
+        {% endblock index %}
+            {% block gallery %}
                 {% endblock gallery %}
                 {% block popups %}
                 {% endblock popups %}
@@ -425,6 +327,38 @@
                 {% endblock list_detail %}
         {% block data_table %}
         {% endblock data_table %}
+        {% block badges %}
+        {% endblock badges %}
+        {% block accordions %}
+        {% endblock accordions %}
+        {% block widgets %}
+        {% endblock widgets %}
+        {% block documentation %}
+        {% endblock documentation %}
+        {% block simple %}
+        {% endblock simple %}
+        {% block themify %}
+        {% endblock themify %}
+        {% block c3 %}
+        {% endblock c3 %}
+        {% block boxed %}
+        {% endblock boxed %}
+        {% block landing %}
+        {% endblock landing %}
+        {% block orders %}
+        {% endblock orders %}
+        {% block blank_page %}
+        {% endblock blank_page %}
+        {% block rtl_layout %}
+        {% endblock rtl_layout %}
+        {% block hori %}
+        {% endblock hori %}
+        {% block compact %}
+        {% endblock compact %}
+        {% block news %}
+        {% endblock news %}
+        {% block profile %}
+        {% endblock profile %}
                 <footer class="footer">
                     <div class="container-fluid clearfix">
                         <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © 2017 <a
@@ -436,7 +370,7 @@
         </div>
     </div>
 </div>
-            {% block script %}
+{% block script %}
                 <script src="/static/niupih/node_modules/jquery/dist/jquery.min.js"></script>
                 <script src="/static/niupih/node_modules/popper.js/dist/umd/popper.min.js"></script>
                 <script src="/static/niupih/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -452,6 +386,6 @@
                 <script src="/static/niupih/js/settings.js"></script>
                 <script src="/static/niupih/js/todolist.js"></script>
                 <script src="/static/niupih/js/dashboard.js"></script>
-            {% endblock script %}
+{% endblock script %}
 </body>
 </html>

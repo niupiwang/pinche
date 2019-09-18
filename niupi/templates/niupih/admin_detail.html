@@ -1,0 +1,106 @@
+{% extends 'niupih/base.html' %}
+{% block list_detail %}
+    <div class="content-wrapper">
+          <div class="row user-profile">
+            <div class="col-lg-8 side-right stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <div class="wrapper d-block d-sm-flex align-items-center justify-content-between">
+                    <h4 class="card-title mb-0">管理员详细信息</h4>
+                    <ul class="nav nav-tabs tab-solid tab-solid-primary mb-0" id="myTab" role="tablist">
+                      <li class="nav-item">
+                        <a class="nav-link active" id="info-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-expanded="true">Info</a>
+                      </li>
+                        <li class="nav-item">
+                        <a class="nav-link" id="avatar-tab" data-toggle="tab" href="#avatar" role="tab" aria-controls="avatar">Avatar</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="security-tab" data-toggle="tab" href="#security" role="tab" aria-controls="security">Security</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="wrapper">
+                    <hr>
+                    <div class="tab-content" id="myTabContent">
+                      <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info">
+                        <form method="post" action="{% url 'myadmin:admin_update' admin.user_uid.uid %}" >
+                            {% csrf_token %}
+                          <div class="form-group">
+                            <label for="real_name">真实姓名</label>
+                            <input  name="real_name" type="text" class="form-control" id="name" value="{{ admin.real_name }}">
+                          </div>
+                            <div class="form-group">
+                            <label for="id_num">身份证号码</label>
+                            <input  name="id_num" type="text" class="form-control" id="name" value="{{ admin.id_num }}" >
+                          </div>
+                          <div class="form-group">
+                            <label for="gender">性别</label>
+                              {% ifequal admin.gender 0 %}
+                            <input  name="gender" type="text" class="form-control" id="designation" value="保密">
+                              {% endifequal %}
+                            {% ifequal admin.gender 1 %}
+                            <input  name="gender" type="text" class="form-control" id="designation" value="男">
+                              {% endifequal %}
+                              {% ifequal admin.gender 2 %}
+                            <input  name="gender" type="text" class="form-control" id="designation" value="女">
+                              {% endifequal %}
+                          </div>
+                            <div class="form-group">
+                            <label for="age">年龄</label>
+                            <input   name="age" type="text" class="form-control" id="email" value="{{ admin.age }}">
+                          </div>
+                            <div class="form-group">
+                            <label for="birthday">生日</label>
+                            <input  name="birthday" type='text' class="form-control" id="name" placeholder="请使用YYYY-MM-DD格式" value="{{ admin.birthday }}">
+                          </div>
+                          <div class="form-group">
+                            <label for="phone">手机号码</label>
+                            <input  name="phone" type="text" class="form-control" id="mobile" value="{{ admin.user_uid.phone }}">
+                          </div>
+                          <div class="form-group">
+                            <label for="address">居住地址</label>
+                            <textarea  name="address" id="address" rows="6" class="form-control" >{{ admin.address }}</textarea>
+                          </div>
+                          <div >
+                              <button class="btn-outline-danger"><input type="submit" hidden >修改</button>
+                                  <button class="btn btn-outline-danger"><a href="{% url 'myadmin:index' %}">返回</a></button>
+                          </div>
+                        </form>
+                      </div>
+                        <!-- tab content ends -->
+                      <div class="tab-pane fade" id="avatar" role="tabpanel" aria-labelledby="avatar-tab">
+                        <div class="wrapper mb-5 mt-4">
+                          <span class="badge badge-warning text-white">Note : </span>
+                          <p class="d-inline ml-3 text-muted">Image size is limited to not greater than 1MB .</p>
+                        </div>
+                        <form action="#">
+                          <input type="file" class="dropify" data-max-file-size="1mb" data-default-file="../../images/faces/face6.jpg"/>
+                          <div class="form-group mt-5">
+                            <button type="submit" class="btn btn-success mr-2">Update</button>
+                            <button class="btn btn-outline-danger">Cancel</button>
+                          </div>
+                        </form>
+                      </div>
+                      <div class="tab-pane fade" id="security" role="tabpanel" aria-labelledby="security-tab">
+                        <form action="#">
+                          <div class="form-group">
+                            <label for="change-password">Change password</label>
+                            <input type="password" class="form-control" id="change-password" placeholder="Enter you current password">
+                          </div>
+                          <div class="form-group">
+                            <input type="password" class="form-control" id="new-password" placeholder="Enter you new password">
+                          </div>
+                          <div class="form-group mt-5">
+                            <button type="submit" class="btn btn-success mr-2">Update</button>
+                            <button class="btn btn-outline-danger">Cancel</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+{% endblock list_detail %}
