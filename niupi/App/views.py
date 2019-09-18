@@ -19,9 +19,10 @@ def index(request):
         start_city = request.POST.get('from')
         end_city = request.POST.get('go')
         buses = Bus.objects.filter(start_city=start_city,end_city=end_city).order_by('start_time')
+        print(buses)
         if start_city and end_city:
 
-            return render(request, 'app/select.html',locals())
+            return render(request, 'app/picket.html', locals())
     return render(request,'app/index.html')
 
 def select(request):
@@ -30,13 +31,13 @@ def select(request):
         end_city = request.POST.get('go')
         print(start_city)
     # cars = Bus.objects.filter(start_city=start_city,end_city=end_city)
-    return render(request,'app/select.html')
+    return render(request, 'app/picket.html')
 
 def buy(request):
-    return render(request,'app/buy.html')
+    return render(request, 'app/buy_before.html')
 
 def userinfo(request):
-    return render(request,'userinfo.html')
+    return render(request, 'app/userinfo.html')
 
 
 class UserView(View):
@@ -90,3 +91,19 @@ def yzm(request):
     res = vc.output()
     request.session['code'] = vc.code
     return HttpResponse(res,'image/png')
+
+
+def pay(request):
+    return render(request,'app/buy.html')
+
+
+def relation(request):
+    return render(request,'app/add_user.html')
+
+
+def payment(request):
+    return render(request, 'app/payment.html')
+
+
+def news(request):
+    return render(request, 'app/news.html')
