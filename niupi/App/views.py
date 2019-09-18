@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.shortcuts import render, redirect
@@ -49,7 +49,7 @@ class UserView(View):
 
 
 
-def login(request):
+def user_login(request):
     if request.method == 'POST':
         if request.POST.get('loginsubmit'):
             username = request.POST.get('username')
@@ -62,31 +62,40 @@ def login(request):
     return render(request,'login.html')
 
 
-def logout(request):
+def user_logout(request):
     return None
 
 
 def register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
-        yzm1 = request.POST.get('code')
+        yzm1 = request.POST.get('yzm')
         yzm2 = request.session.get('code')
         res = (yzm1 == yzm2)
         if not res:
             form.errors['yzm'] = "验证码错误"
         if res and form.is_valid():
-            form.cleaned_data.pop('repassword')
-            form.cleaned_data.pop('yzm')
-            User.objects.create(**form.cleaned_data)
+            # form.cleaned_data.pop('repassword')
+            # form.cleaned_data.pop('yzm')
+            # User.objects.create(**form.cleaned_data)
+            # user = User()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            phone = form.cleaned_data.get('phone')
+            user = User.objects.create_user(username=username,password=password,phone=phone)
+            login(request,user)
             return render(request,'register.html',{'form':form})
         return render(request,'register.html',{'form':form})
     else:
         form = RegisterForm()
         return render(request,'register.html',locals())
 
-
 def yzm(request):
     vc = VerifyCode()
     res = vc.output()
     request.session['code'] = vc.code
     return HttpResponse(res,'image/png')
+
+
+def findpassword(request):
+    return render(request,'findpassword.html',locals())

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="{% static 'assets/img/basic/favicon.ico'%}" type="image/x-icon">
+    <link rel="icon" href="{% static 'assets/img/basic/favicon.ico' %}" type="image/x-icon">
     <title>Paper</title>
     <!-- CSS -->
     <link rel="stylesheet" href="{% static 'assets/css/app.css' %}">
@@ -37,149 +37,168 @@
             <div class="spinner-layer spinner-blue">
                 <div class="circle-clipper left">
                     <div class="circle"></div>
-                </div><div class="gap-patch">
-                <div class="circle"></div>
-            </div><div class="circle-clipper right">
-                <div class="circle"></div>
-            </div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
             </div>
 
             <div class="spinner-layer spinner-red">
                 <div class="circle-clipper left">
                     <div class="circle"></div>
-                </div><div class="gap-patch">
-                <div class="circle"></div>
-            </div><div class="circle-clipper right">
-                <div class="circle"></div>
-            </div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
             </div>
 
             <div class="spinner-layer spinner-yellow">
                 <div class="circle-clipper left">
                     <div class="circle"></div>
-                </div><div class="gap-patch">
-                <div class="circle"></div>
-            </div><div class="circle-clipper right">
-                <div class="circle"></div>
-            </div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
             </div>
 
             <div class="spinner-layer spinner-green">
                 <div class="circle-clipper left">
                     <div class="circle"></div>
-                </div><div class="gap-patch">
-                <div class="circle"></div>
-            </div><div class="circle-clipper right">
-                <div class="circle"></div>
-            </div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 <div id="app">
-<main>
-    <div id="primary" class="p-t-b-100 height-full">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 mx-md-auto paper-card">
-                    <div class="text-center">
-                        <img src="{% static 'assets/img/dummy/u4.png' %}" alt="">
-                        <h3 class="mt-2">注册用户</h3>
-                        <p class="p-t-b-20">请填写以下信息以注册您的新用户</p>
-                    </div>
-                    <form action="{% url 'app:register' %}" method="post" name="register">
-                        {% csrf_token %}
-                        <table>
-                            <tr>
-                                <td class="form-group has-icon"><i class="icon-envelope-o"></i>
-                                    <input name='username' type="text" class="form-control form-control-lg"
-                                       placeholder="用户名">
-                                </td>
+    <main>
+        <div id="primary" class="p-t-b-100 height-full">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 mx-md-auto paper-card">
+                        <div class="text-center">
+                            <img src="{% static 'assets/img/dummy/u4.png' %}" alt="">
+                            <h3 class="mt-2">注册用户</h3>
+                            <p class="p-t-b-20">请填写以下信息以注册您的新用户</p>
+                        </div>
+                        <form action="{% url 'app:register' %}" method="post" name="register">
+                            {% csrf_token %}
+                            <table>
+                                <tr>
+                                    <td class="form-group has-icon"><i class="icon-envelope-o"></i>
+                                        <input name='username' type="text" class="form-control form-control-lg"
+                                               placeholder="用户名">
+                                    </td>
+
+                                </tr>
                                 <td>
                                     {{ form.username.errors }}
                                 </td>
-                            </tr>
-                        </table>
-                        <table>
-                            <tr>
-                                <td class="form-group has-icon"><i class="icon-user-secret"></i>
-                            <input name='password' type="text" class="form-control form-control-lg"
-                                   placeholder="密码">
-                        </td>
+                            </table>
+                            <table>
+                                <tr>
+                                    <td class="form-group has-icon"><i class="icon-user-secret"></i>
+                                        <input name='password' type="password" class="form-control form-control-lg"
+                                               placeholder="密码">
+                                    </td>
+
+                                </tr>
                                 <td>
                                     {{ form.password.errors }}
                                 </td>
-                            </tr>
-                        </table>
-                        <table>
-                            <tr>
-                                <td class="form-group has-icon"><i class="icon-user-secret"></i>
-                            <input name='repassword' type="text" class="form-control form-control-lg"
-                                   placeholder="确认密码">
-                        </td>
+                            </table>
+                            <table>
+                                <tr>
+                                    <td class="form-group has-icon"><i class="icon-user-secret"></i>
+                                        <input name='repassword' type="password" class="form-control form-control-lg"
+                                               placeholder="确认密码">
+                                    </td>
+
+                                </tr>
                                 <td>
                                     {{ form.repassword.errors }}
                                 </td>
-                            </tr>
-                        </table>
-                        <table>
-                            <tr>
-                                <td class="form-group has-icon"><i class="icon-user-secret"></i>
-                            <input name='phonenum' type="text" class="form-control form-control-lg"
-                                   placeholder="手机号">
-                        </td>
-                                <td>
-                                    {{ form.phonenum.errors }}
-                                </td>
-                            </tr>
-                        </table>
+                            </table>
+                            <table>
+                                <tr>
+                                    <td class="form-group has-icon"><i class="icon-user-secret"></i>
+                                        <input name='phone' type="text" class="form-control form-control-lg"
+                                               placeholder="手机号">
+                                    </td>
 
-                        <table>
-                            <tr>
+                                </tr>
                                 <td>
-                                    <div class="form-group has-icon"><i class="icon-user-secret"></i>
-                                        <input name='yzm' type="text" class="form-control form-control-lg" style="width: 150px;"
-                                            placeholder="验证码">
-                                    </div>
+                                    {{ form.phone.errors }}
                                 </td>
-                                <td class="tipcol"><i id="tip_yzm" class="p_tip"><img src="{% url 'app:yzm' %}" id="p_yzm" onclick="show('p_yzm')" style="cursor:pointer" /> <a href="javascript:;" onclick="show('p_yzm')">看不清？</a></i>&nbsp;&nbsp;{{ form.yzm.errors }}</td>
+                            </table>
+
+                            <table>
+                                <tr>
+                                    <td>
+                                        <div class="form-group has-icon"><i class="icon-user-secret"></i>
+                                            <input name='yzm' type="text" class="form-control form-control-lg"
+                                                   style="width: 150px;"
+                                                   placeholder="验证码">
+                                        </div>
+                                    </td>
+                                    <td class="tipcol"><i id="tip_yzm" class="p_tip">
+                                        <img src="{% url 'app:yzm' %}" id="p_yzm"
+                                             onclick="this.src='{% url 'app:yzm' %}?'+Math.random()"
+                                             style="cursor:pointer"/>
+                                        {#                                    <a href="{% url 'app:yzm' %}" id="p_yzm" onclick="this.src='{% url 'app:yzm' %}?'+Math.random()" style="cursor:pointer">看不清？</a>#}
+                                    </i></td>
+
+                                </tr>
                                 <td>{{ form.yzm.errors }}</td>
-                            </tr>
-                        </table>
+                            </table>
 
-                        <input type="submit" class="btn btn-primary btn-lg btn-block" value="注册">
-                        <p class="forget-pass"></p>
-                    </form>
+                            <input type="submit" class="btn btn-primary btn-lg btn-block" value="注册">
+                            <p class="forget-pass"></p>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- #primary -->
-</main>
-<!-- Right Sidebar -->
+        <!-- #primary -->
+    </main>
+    <!-- Right Sidebar -->
 
-<!-- /.right-sidebar -->
-<!-- Add the sidebar's background. This div must be placed
-         immediately after the control sidebar -->
-<div class="control-sidebar-bg shadow white fixed"></div>
+    <!-- /.right-sidebar -->
+    <!-- Add the sidebar's background. This div must be placed
+             immediately after the control sidebar -->
+    <div class="control-sidebar-bg shadow white fixed"></div>
 </div>
 <!--/#app -->
-<script src="{% static 'assets/js/app.js'%}">
-    function checkReg(obj){
-	document.getElementById('tip_'+obj).style.display='block';
-}
+<script src="{% static 'assets/js/app.js' %}">
+    function checkReg(obj) {
+        document.getElementById('tip_' + obj).style.display = 'block';
+    }
 
-function checkRegOut(obj,test){
-	if(document.getElementById(obj).value==''){
-		document.getElementById('tip_'+obj).innerHTML='<b style="color:red;">'+test+'</b>';
-	}else{
-		document.getElementById('tip_'+obj).style.display='none';
-	}
-}
+    function checkRegOut(obj, test) {
+        if (document.getElementById(obj).value == '') {
+            document.getElementById('tip_' + obj).innerHTML = '<b style="color:red;">' + test + '</b>';
+        } else {
+            document.getElementById('tip_' + obj).style.display = 'none';
+        }
+    }
 
-function show(obj){
-	document.getElementById(obj).src='{% url "app:yzm" %}?math='+Math.random();
-}
+    function show(obj) {
+        document.getElementById(obj).src = '{% url "app:yzm" %}?math=' + Math.random();
+    }
 </script>
 </body>
 </html>

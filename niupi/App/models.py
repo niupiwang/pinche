@@ -1,4 +1,6 @@
 from datetime import datetime
+
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
@@ -6,10 +8,10 @@ from django.db import models
 
 
 #1用户表
-class User(models.Model):
+class User(AbstractUser):
     uid = models.AutoField(primary_key=True)
-    username = models.CharField(max_length=100, verbose_name='用户名')
-    password = models.CharField(max_length=128, verbose_name='密码')
+    #username = models.CharField(max_length=100, verbose_name='用户名')
+    #password = models.CharField(max_length=128, verbose_name='密码')
     phone = models.CharField(max_length=64,verbose_name='手机号')
     is_active = models.IntegerField(default=1) # 1代表激活 0代表锁定
     type = models.IntegerField(default=0) # 0为普通用户 1为司机 2为管理员用户

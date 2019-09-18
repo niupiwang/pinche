@@ -12,9 +12,10 @@ urlpatterns = [
     url(r'^userinfo/$', views.userinfo,name='userinfo'),
     url(r'^last/$',views.UserView.as_view(),name='last'),
 
-    # 登录登出注册
-    url(r'^login/$',views.login,name='login'),
-    url(r'^logout/$',views.logout,name='logout'),
+    # 登录登出注册找回密码
+    url(r'^login/$',views.user_login,name='login'),
+    url(r'^logout/$',views.user_logout,name='logout'),
     url(r'^register/$',views.register,name='register'),
     url(r'^yzm/$',views.yzm,name='yzm'),
+    url(r'^findpassword/$',views.findpassword,name='findpassword')
 ]

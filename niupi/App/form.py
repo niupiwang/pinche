@@ -7,17 +7,17 @@ from App.models import User
 
 
 def check_password(password):
-    if re.search(r'\d',password) and \
+    if re.search(r'\d+',password) and \
        re.search(r'[a-z]',password) and  \
-       re.search(r'[A-Z]',password) and  \
-       re.search(r'[^0-9a-zA-Z]',password): \
+       re.search(r'[A-Z]',password):# and  \
+       # re.search(r'[^0-9a-zA-Z]',password): \
         return password
     raise ValidationError('密码强度不满足要求')
 
 
-def check_phonenum(phonenum):
-    if re.search(r'^(1[3|5|7|8])\d{9}$'):
-        return phonenum
+def check_phone(phone):
+    if re.match(r'^1[3|5|7|8]\d{9}$',phone):
+        return phone
     raise ValidationError('请输入正确的手机号')
 
 class RegisterForm(forms.Form):
@@ -58,12 +58,12 @@ class RegisterForm(forms.Form):
                                      'required': '用户名必须输入'
                                  })
 
-    phonenum = forms.CharField(label='手机号',
+    phone = forms.CharField(label='手机号',
                                widget=forms.PasswordInput(attrs={
                                    'placehold': '请输入手机号',
                                    'class': 'hahahaya'
                                }),
-                               validators=[check_phonenum],
+                               validators=[check_phone],
                                error_messages={
                                    'required': '手机号必须输入'
                                })

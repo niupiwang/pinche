@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4aed1007-1d69-4625-8bd7-c4da6392e5d3" name="Default Changelist" comment="" />
+    <list default="true" id="4aed1007-1d69-4625-8bd7-c4da6392e5d3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/form.py" beforeDir="false" afterPath="$PROJECT_DIR$/App/form.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/App/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/App/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/App/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/niupi/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/niupi/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/findpassword.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/findpassword.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/register.html" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,6 +97,14 @@
       <workItem from="1568635178000" duration="745000" />
       <workItem from="1568636810924" duration="852000" />
       <workItem from="1568719919804" duration="7620000" />
+      <workItem from="1568767582942" duration="1737000" />
+      <workItem from="1568784773676" duration="1812000" />
+      <workItem from="1568796137794" duration="1564000" />
+      <workItem from="1568798199335" duration="2026000" />
+      <workItem from="1568800485221" duration="4152000" />
+      <workItem from="1568807755905" duration="1463000" />
+      <workItem from="1568809302377" duration="3900000" />
+      <workItem from="1568813830413" duration="3429000" />
     </task>
     <task id="LOCAL-00001" summary="threed">
       <created>1568636930137</created>
