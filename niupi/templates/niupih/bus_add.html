@@ -1,0 +1,49 @@
+{% extends 'niupih/base.html' %}
+{% block validation %}
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">添加一个BUS车次</h4>
+                  <form class="cmxform" id="signupForm" method="get" action="{% url 'myadmin:bus_add' %}">
+                    <fieldset>
+                        <div class="card-body">
+                      <h4 class="card-title">Color picker (default)</h4>
+                      <p class="card-description">Click to select color</p>
+                      <input type='text' class="color-picker" value="#ffe74c" />
+                        </div>
+                      <div class="form-group">
+                        <label for="firstname">起始城市</label>
+                          <input id="firstname" class="form-control" type='text' name="start_city" />
+{#                        <input id="firstname" class="form-control" name="start_city" type="text">#}
+                      </div>
+                      <div class="form-group">
+                        <label for="lastname">到达城市</label>
+                        <input id="lastname" class="form-control" name="end_city" type="text">
+                      </div>
+                      <div class="form-group">
+                        <label for="username">发车时间</label>
+                        <input id="username" class="form-control" name="start_time" type="text">
+                      </div>
+                      <div class="form-group">
+                        <label for="password">预计到达时间</label>
+                        <input id="password" class="form-control" name="end_time" type="text">
+                      </div>
+                      <div class="form-group">
+                        <label for="confirm_password">票价</label>
+                        <input id="confirm_password" class="form-control" name="price" type="text">
+                      </div>
+                      <div class="form-group">
+                        <label for="email">总座位数</label>
+                        <input id="email" class="form-control" name="ticket" type="email">
+                      </div>
+                      <input class="btn btn-primary" type="submit" value="Submit">
+                    </fieldset>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+{% endblock validation %}

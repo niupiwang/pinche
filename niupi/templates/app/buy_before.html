@@ -1,0 +1,136 @@
+{% extends 'app/base.html' %}
+
+{% block head %}
+    {{ block.super }}
+    <script src="https://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+
+{% endblock %}
+
+{% load static %}
+
+{#内容开始        #}
+{% block content %}
+
+			<div class="page has-sidebar-left height-full">
+				<header class="blue accent-3 relative nav-sticky">
+					<div class="container-fluid text-white">
+						<div class="row p-t-b-10 ">
+							<div class="col">
+								<h4><i class="icon icon-calendar"></i>牛皮网</h4>
+							</div>
+						</div>
+                        <ul class="nav responsive-tab nav-material nav-material-white">
+                    <li>
+                        <a class="nav-link " href="{% url 'app:index' %}"><i class="icon icon-list"></i>首页</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{% url 'app:select' %}"><i
+                                class="icon icon-plus-circle"></i> 车票</a>
+                    </li>
+                    <li>
+                        <a class="nav-link  active" href="{% url 'app:buy' %}"><i class="icon icon-trash-can"></i>购买</a>
+                    </li>
+                </ul>
+					</div>
+				</header>
+				<div class="container-fluid relative animatedParent animateOnce">
+					<div class="tab-content pb-3" id="v-pills-tabContent">
+
+						<!--信息查询 Start-->
+						<div class="tab-pane animated fadeInUpShort show active" id="v-pills-1">
+						    <div class="container-fluid my-3">
+						        <div class="d-flex row">
+						            <div class="col-md-6">
+						                <div class="card">
+						                    <div>
+						                        <div class="card-body b-b">
+						                            <div class="card-title">KL101</div>
+						                            <h5>列车信息</h5>
+						                        </div>
+						                        <div class="card-body b-b">
+						                            <div class="card-title">出发 / 到达</div>
+						                                <h5>2019-05-12 00:00:00 <span>唐山</span></h5>
+														<h5>2019-05-12 00:00:00 <span>北京</span></h5>
+						                        </div>
+						                        <div class="card-body b-b">
+						                            <div class="card-title">票务情况</div>
+													<h5><span><strong>6</strong></span> /  8</h5>
+						                        </div>
+						                        <div class="card-body b-b">
+						                            <div class="card-title">乘客信息</div>
+						                            <div>
+														<input style="height: 25px;margin-bottom: 5px;" class="form-control form-control-lg datePicker" placeholder="乘客" type="text" id="usero">
+						                                <!-- <input type="text" value="乘客" class="form-control"/> -->
+                                                        <input hidden="hidden" value="222" id="bianhao">
+                                                        <input hidden="hidden" value="222" id="jiage">
+						                            </div>
+													<div>
+													    <input style="height: 25px;margin-bottom: 5px;" class="form-control form-control-lg datePicker" placeholder="身份证号" type="text">
+													</div>
+													<div>
+													    <input style="height: 25px;margin-bottom: 5px;" class="form-control form-control-lg datePicker" placeholder="电话" type="text">
+													</div>
+						                        </div>
+						                        <div class="card-body b-b">
+
+                                                    <input class="btn btn-success btn-lg btn-block" value="添加" type="submit" id="ooo">
+
+						                        </div>
+						                    </div>
+						                </div>
+						            </div>
+
+									<div class="col-md-6">
+
+										<div style="background-color: white;border: 1px solid gainsboro;">
+											<div style="margin-left: 5%;margin-top: 3%;margin-bottom: 3%;">
+												<h3>添加你的订单</h3>
+											</div>
+											<table style="margin-left: 5%;margin-top: 3%;margin-bottom: 3%;width: 94%;" id="ppp">
+												<tr style="height: 40px">
+													<td>乘客</td>
+													<td>订单号</td>
+													<td>价格</td>
+												</tr>
+												<tr>
+													<td>李子坤</td>
+													<td>527419</td>
+													<td>255</td>
+												</tr>
+											</table>
+											<div style="margin-left: 5%;margin-bottom: 3%;">
+												<a href=""  class="btn btn-xs btn-primary">提交</a>
+												<a href=""  class="btn btn-outline-primary btn-xs">加入订单</a>
+											</div>
+
+										</div>
+
+
+									</div>
+						    </div>
+						</div>
+
+					</div>
+						<!--信息查询 End-->
+
+					</div>
+				</div>
+			</div>
+
+    <script>
+    console.log('lll');
+    $("#ooo").click(function () {
+        console.log('ooo');
+        var a = $('#usero').val();
+        var b = $('#bianhao').val();
+        var c = $('#jiage').val();
+        $("#ppp").append('<tr><td>'+a+'</td><td>'+b+'</td><td>'+c+'</td></tr>')
+    })
+</script>
+
+{% endblock %}
+
+
+
+<!-- 内容结束 -->
+

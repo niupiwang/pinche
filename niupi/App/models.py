@@ -25,7 +25,7 @@ class Userdetail(models.Model):
     eid = models.AutoField(primary_key=True)
     is_vip = models.IntegerField(default=0) # 0否 1是
     real_name = models.CharField(null=True, max_length=20, verbose_name='真实姓名')
-    id_num = models.IntegerField(null=True, unique=True, verbose_name='身份证号')
+    id_num = models.CharField(null=True, unique=True,max_length=128, verbose_name='身份证号')
     birthday = models.DateTimeField(null=True, verbose_name='生日')
     address = models.CharField(null=True, max_length=200, verbose_name='地址')
     age = models.IntegerField(null=True, verbose_name='年龄')
@@ -99,5 +99,7 @@ class List(models.Model):
 class Admin(models.Model):
     username = models.CharField(max_length=20, unique=True, verbose_name='管理员')
     password = models.CharField(max_length=128, verbose_name='密码')
+
+
 
 

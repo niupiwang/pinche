@@ -1,0 +1,70 @@
+{% extends 'niupih/base.html' %}
+{% block base_table %}
+      <!-- partial -->
+    <div class="content-wrapper">
+          <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h3 class="card-title">用户列表</h3>
+                  <p class="card-description">
+{#                    Add class <code>.table-striped</code>#}
+                  </p>
+                  <div class="table-responsive">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>
+                            <b>用户头像</b>
+                          </th>
+                          <th>
+                            <b>用户昵称</b>
+                          </th>
+                          <th>
+                              <b>身份证号</b>
+                          </th>
+                          <th>
+                            <b>联系电话</b>
+                          </th>
+                          <th>
+                            <b>居住地址</b>
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+{#                      循环#}
+{% for u in userdetail %}
+    <input type="hidden" name="uid" value="{{ u.user_uid.uid }}">
+                        <tr>
+                          <td class="py-1">
+                            <img src="/static/niupih/images/{{ u.pic }}" alt="image"/>
+                          </td>
+                          <td>
+                              <a href="{% url 'myadmin:user_detail' u.user_uid.uid %}">{{ u.user_uid.username }}</a>
+                          </td>
+                          <td>
+                            {{ u.id_num }}
+                          </td>
+                          <td>
+                            {{ u.user_uid.phone }}
+                          </td>
+{#                            {% if udetail.user_uid == u.uid %}#}
+                          <td>
+                            {{ u.address }}
+                          </td>
+{#                            {% endif %}#}
+                        </tr>
+
+{% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.html -->
+{% endblock base_table %}

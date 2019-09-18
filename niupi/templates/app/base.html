@@ -118,7 +118,7 @@
 					</div>
 					<ul class="sidebar-menu">
 						<li class="header"><strong>个人中心</strong></li>
-						<li class="treeview"><a href="#">
+						<li class="treeview"><a href="{% url 'app:userinfo' %}">
 								<i class="icon icon-sailing-boat-water purple-text s-18"></i><span>个人信息</span>
 							</a>
 							<!-- <ul class="treeview-menu">
@@ -141,7 +141,7 @@
 								</li>
 							</ul>
 						</li> -->
-						<li class="treeview no-b"><a href="#">
+						<li class="treeview no-b"><a href="{% url 'app:relation' %}">
 								<i class="icon icon-package light-green-text s-18"></i> <span>常用联系人管理</span>
 							</a>
 							<!-- <ul class="treeview-menu">
@@ -152,7 +152,7 @@
 							</ul> -->
 						</li>
 
-						<li class="treeview"><a href="#">
+						<li class="treeview"><a href="{% url 'app:news' %}">
 								<i class="icon icon icon-package blue-text s-18"></i> <span>消息</span>
 								<span class="badge r-3 badge-primary pull-right">4</span></a>
 							<!-- <ul class="treeview-menu">
@@ -165,7 +165,7 @@
 
 						<li class="header light mt-3"><strong>订单中心</strong></li>
 						<li class="treeview ">
-							<a href="#">
+							<a href="{% url 'app:payment' %}">
 								<i class="icon icon-package text-lime s-18"></i><span>车票订单</span>
 
 							</a>

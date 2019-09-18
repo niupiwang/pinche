@@ -1,0 +1,228 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{#内容开始        #}
+{% block content %}
+
+
+
+    <div class="page has-sidebar-left">
+    <header class="blue accent-3 relative">
+        <div class="container-fluid text-white">
+            <div class="row p-t-b-10 ">
+                <div class="col">
+                    <h4>
+                        <i class="icon-package"></i>
+                        牛皮网
+                    </h4>
+                </div>
+            </div>
+            <div class="row">
+                <ul class="nav responsive-tab nav-material nav-material-white">
+                    <li>
+                        <a class="nav-link" href="{% url 'app:index' %}"><i class="icon icon-list"></i>首页</a>
+                    </li>
+                    <li>
+                        <a class="nav-link  active" href="{% url 'app:select' %}"><i
+                                class="icon icon-plus-circle"></i> 车票</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{% url 'app:buy' %}"><i class="icon icon-trash-can"></i>购买</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <div class="container-fluid animatedParent animateOnce my-3">
+        <div class="animated fadeInUpShort">
+            <div class="row">
+                <div class="col-md-10 mx-md-auto m-4">
+{#                    <div class="card no-b shadow">#}
+                        <span><select id="category" class="custom-select form-control" required="">
+
+                                    <option value="1">所有车辆</option>
+                                    <option value="2">大巴</option>
+                                    <option value="3">私家车</option>
+                                </select><button type="button" class="btn btn-primary btn-sm">Small button</button></span>
+                    </div>
+
+                    <div class="card no-b shadow">
+                        <span><input type="text" placeholder="{{ start_city }}"><button type="button" class="btn btn-primary btn-sm">Small button</button><input type="text" placeholder="{{ end_city }}"></span>
+                    </div>
+{#                    {% if start_city %}#}
+{#                        <span>{{ start_city }}</span>#}
+{#                        <button value="">交换</button>#}
+{#                        <span>{{ end_city }}</span>#}
+{#                    {% else %}#}
+{#                        <span> -- </span>#}
+{#                        <button value="">交换</button>#}
+{#                        <span> -- </span>#}
+{#                    {% endif %}#}
+
+                </div>
+
+                <div class="col-md-10 mx-md-auto m-5">
+                    <div class="card no-b shadow">
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-hover ">
+                                    <tbody>
+                                    <tr class="no-b">
+                                        <th class="w-10">
+                                            <h6>车牌号</h6>
+                                        </th>
+                                        <th>
+                                            <h6>车牌号</h6>
+                                            <small class="text-muted">Mobile Phones</small>
+                                        </th>
+                                        <th><h6>车牌号</h6></th>
+                                        <th><h6>车牌号</h6></th>
+                                        <th>
+                                            <span><i class="icon icon-data_usage"></i> 5 days ago</span><br>
+                                            <span><i class="icon icon-timer"></i> 5 September, 2017</span>
+                                        </th>
+                                        <th>
+                                            <h6>车牌号</h6>
+                                        </th>
+                                    </tr>
+                                    {% for foo in request %}
+                                        <tr>
+                                        <td class="w-10">
+                                            <img src="assets/img/demo/shop/s2.png" alt="">
+                                        </td>
+                                        <td>
+                                            <h6>Apple Product</h6>
+                                            <small class="text-muted">Mobile Phones</small>
+                                        </td>
+                                        <td>$250</td>
+                                        <td><span class="badge badge-success">Published</span></td>
+                                        <td>
+                                            <span><i class="icon icon-data_usage"></i> 5 days ago</span><br>
+                                            <span><i class="icon icon-timer"></i> 5 September, 2017</span>
+                                        </td>
+                                        <td>
+                                            <a class="btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-pencil"></i></a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+
+                                    <tr>
+                                        <td class="w-10">
+                                            <img src="assets/img/demo/shop/s2.png" alt="">
+                                        </td>
+                                        <td>
+                                            <h6>Apple Product</h6>
+                                            <small class="text-muted">Mobile Phones</small>
+                                        </td>
+                                        <td>$250</td>
+                                        <td><span class="badge badge-success">Published</span></td>
+                                        <td>
+                                            <span><i class="icon icon-data_usage"></i> 5 days ago</span><br>
+                                            <span><i class="icon icon-timer"></i> 5 September, 2017</span>
+                                        </td>
+                                        <td>
+                                            <a class="btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-pencil"></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="w-10">
+                                            <img src="assets/img/demo/shop/s3.png" alt="">
+                                        </td>
+                                        <td>
+                                            <h6>Apple Product</h6>
+                                            <small class="text-muted">Mobile Phones</small>
+                                        </td>
+                                        <td>$250</td>
+                                        <td><span class="badge badge-danger">Pending</span></td>
+                                        <td>
+                                            <span><i class="icon icon-data_usage"></i> 5 days ago</span><br>
+                                            <span><i class="icon icon-timer"></i> 5 September, 2017</span>
+                                        </td>
+                                        <td>
+                                            <a class="btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-pencil"></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="w-10">
+                                            <img src="assets/img/demo/shop/s4.png" alt="">
+                                        </td>
+                                        <td>
+                                            <h6>Apple Product</h6>
+                                            <small class="text-muted">Mobile Phones</small>
+                                        </td>
+                                        <td>$250</td>
+                                        <td><span class="badge badge-success">Published</span></td>
+                                        <td>
+                                            <span><i class="icon icon-data_usage"></i> 5 days ago</span><br>
+                                            <span><i class="icon icon-timer"></i> 5 September, 2017</span>
+                                        </td>
+                                        <td>
+                                            <a class="btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-pencil"></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="w-10">
+                                            <img src="assets/img/demo/shop/s5.png" alt="">
+                                        </td>
+                                        <td>
+                                            <h6>Apple Product</h6>
+                                            <small class="text-muted">Mobile Phones</small>
+                                        </td>
+                                        <td>$250</td>
+                                        <td><span class="badge badge-primary">Sold Out</span></td>
+                                        <td>
+                                            <span><i class="icon icon-data_usage"></i> 5 days ago</span><br>
+                                            <span><i class="icon icon-timer"></i> 5 September, 2017</span>
+                                        </td>
+                                        <td>
+                                            <a class="btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-pencil"></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="w-10">
+                                            <img src="assets/img/demo/shop/s6.png" alt="">
+                                        </td>
+                                        <td>
+                                            <h6>Apple Product</h6>
+                                            <small class="text-muted">Mobile Phones</small>
+                                        </td>
+                                        <td>$250</td>
+                                        <td><span class="badge badge-warning">Low Stock</span></td>
+                                        <td>
+                                            <span><i class="icon icon-data_usage"></i> 5 days ago</span><br>
+                                            <span><i class="icon icon-timer"></i> 5 September, 2017</span>
+                                        </td>
+                                        <td>
+                                            <a class="btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-pencil"></i></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                    <nav class="pt-3" aria-label="Page navigation">
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="#">Previous</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">2</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">3</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+<!-- 内容结束 -->
