@@ -6,53 +6,56 @@
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Striped Table</h4>
+                  <h3 class="card-title">用户列表</h3>
                   <p class="card-description">
-                    Add class <code>.table-striped</code>
+{#                    Add class <code>.table-striped</code>#}
                   </p>
                   <div class="table-responsive">
                     <table class="table table-striped">
                       <thead>
                         <tr>
                           <th>
-                            User
+                            <b>用户头像</b>
                           </th>
                           <th>
-                            First name
+                            <b>用户昵称</b>
                           </th>
                           <th>
-                            Progress
+                              <b>身份证号</b>
                           </th>
                           <th>
-                            Amount
+                            <b>联系电话</b>
                           </th>
                           <th>
-                            Deadline
+                            <b>居住地址</b>
                           </th>
                         </tr>
                       </thead>
                       <tbody>
 {#                      循环#}
+{% for u in userdetail %}
+    <input type="hidden" name="uid" value="{{ u.user_uid.uid }}">
                         <tr>
                           <td class="py-1">
-                            <img src="/static/niupih/images/faces-clipart/pi.png" alt="image"/>
+                            <img src="/static/niupih/images/{{ u.pic }}" alt="image"/>
                           </td>
                           <td>
-                            Herman Beck
+                              <a href="{% url 'myadmin:user_detail' u.user_uid.uid %}">{{ u.user_uid.username }}</a>
                           </td>
                           <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
+                            {{ u.id_num }}
                           </td>
                           <td>
-                            $ 77.99
+                            {{ u.user_uid.phone }}
                           </td>
+{#                            {% if udetail.user_uid == u.uid %}#}
                           <td>
-                            May 15, 2015
+                            {{ u.address }}
                           </td>
+{#                            {% endif %}#}
                         </tr>
 
+{% endfor %}
                       </tbody>
                     </table>
                   </div>
