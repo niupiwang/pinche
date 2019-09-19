@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^user_detail/(\d+)/$', views.user_detail, name='user_detail'),
     url(r'^user_update/(\d+)/$', views.user_update, name='user_update'),  # 不修改用户信息
     url(r'^admin_add', views.admin_add, name='admin_add'),
+    url(r'^admin_list', views.admin_lsit, name='admin_list'),
     url(r'^admin_update/(\d+)/$', views.admin_update, name='admin_update'),
     url(r'^admin_detail/(\d+)/$', views.admin_detail, name='admin_detail'),
     url(r'^bus_list/$', views.bus_list, name='bus_list'),
@@ -18,4 +19,6 @@ urlpatterns = [
     url(r'^bus_delete/(\d+)/$', views.bus_delete, name='bus_delete'),
     url(r'^bus_update/(\d+)/$', views.bus_update, name='bus_update'),
     url(r'^car_list/$', views.car_list, name='car_list'),
+    url(r'^car_detail/(\d+)/$', views.car_detail, name='car_detail'),
+
 ]

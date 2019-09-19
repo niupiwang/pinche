@@ -27,6 +27,13 @@
             left: 50%;
         }
     </style>
+    <style type="text/css">
+            #times{
+                width: 200px;
+                height: 20px;
+                {#border: 3px solid gray;  /*如果不加实线无法显示边框*/#}
+            }
+        </style>
 </head>
 <body class="light">
 <!-- Pre loader -->
@@ -84,6 +91,23 @@
                     <img src="/static/assets/img/icon/icon-plane.png" alt="">
                 </div>
                 <div class="col-lg-6 p-t-100">
+                    <div id="times" class="white-text" >
+                    </div>
+                    <script type="text/javascript">
+            //得到时间并写入div
+            function getDate(){
+                //获取当前时间
+                var date = new Date();
+                //格式化为本地时间格式
+                var date1 = date.toLocaleString();
+                //获取div
+                var div1 = document.getElementById("times");
+                //将时间写入div
+                div1.innerHTML = date1;
+            }
+            //使用定时器每秒向div写入当前时间
+            setInterval("getDate()",1000);
+        </script>
                     <div class="text-white">
                         <h1>Welcome Back</h1>
                         <p class="s-18 p-t-b-20 font-weight-lighter">
@@ -95,13 +119,13 @@
                             <div class="col-lg-6">
                                 <div class="form-group has-icon"><i class="icon-envelope-o"></i>
                                     <input type="text" name="admin" class="form-control form-control-lg no-b"
-                                           placeholder="Admin">{{ form.admin.errors }}111
+                                           placeholder="Admin">{{ form.username.errors }}
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group has-icon"><i class="icon-user-secret"></i>
                                     <input type="password" name="password" class="form-control form-control-lg no-b"
-                                           placeholder="Password">
+                                           placeholder="Password">{{ form.password.errors }}
                                 </div>
                             </div>
                             <div class="col-lg-12">

@@ -26,9 +26,10 @@
                       </thead>
                       <tbody>
 {#                      循环，信息列表#}
+{% for b in bus %}
                         <tr>
                             <td>1</td>
-                            <td>2012/08/03</td>
+                            <td>{{b.start_time}}</td>
                             <td>Edinburgh</td>
                             <td>New York</td>
                             <td>$1500</td>
@@ -40,6 +41,7 @@
                               <button class="btn btn-outline-primary">View</button>
                             </td>
                         </tr>
+{% endfor %}
                         <tr>
                             <td>2</td>
                             <td>2015/04/01</td>

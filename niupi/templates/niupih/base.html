@@ -53,10 +53,10 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
                          aria-labelledby="notificationDropdown">
-                        <a class="dropdown-item">
+                        <a class="dropdown-item" href="{% url 'myadmin:logout' %}">
                             <p class="mb-0 font-weight-normal float-left">你有4条新信息
                             </p>
-                            <span class="badge badge-pill badge-warning float-right">View all</span>
+                            <span class="badge badge-pill badge-warning float-right">退出登录</span>
                         </a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item preview-item">
@@ -66,7 +66,7 @@
                                 </div>
                             </div>
                             <div class="preview-item-content">
-                                <h6 class="preview-subject font-weight-medium">日志信息</h6>
+                                <h6 class="preview-subject font-weight-medium">用户消息</h6>
                                 <p class="font-weight-light small-text">展示</p>
                             </div>
                         </a>
@@ -235,7 +235,8 @@
 {#                                小模块循环#}
                                 <li class="nav-item"><a class="nav-link" href="{% url 'myadmin:user_list' %}">所有用户</a>
                                 </li>
-
+                                <li class="nav-item"><a class="nav-link" href="{% url 'myadmin:admin_list' %}">所有管理员</a>
+                                </li>
                             </ul>
                         </div>
                     </li>
@@ -270,7 +271,7 @@
                         </div>
                     </li>
                     <li class="nav-item nav-doc">
-                        <a class="nav-link bg-primary" href="pages/documentation.html">
+                        <a class="nav-link bg-primary" href="#">
                             <i class="icon-magnet menu-icon"></i>
                             <span class="menu-title">最近动态</span>
                         </a>

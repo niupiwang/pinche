@@ -1,65 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4aed1007-1d69-4625-8bd7-c4da6392e5d3" name="Default Changelist" comment="threed">
-      <change afterPath="$PROJECT_DIR$/static/assets/img/portrait/19091913251098002.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/img/portrait/19091913265855653.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/img/portrait/19091913271332346.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/img/portrait/19091913284510039.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/img/portrait/19091913294395862.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/img/portrait/19091913301050060.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/img/portrait/19091913353785174.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/img/portrait/19091913363876230.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tools/file.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/niupi.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/niupi.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/migrations/0002_auto_20190918_1748.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/App/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/App/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app/add_user.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/app/add_user.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app/buy_before.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/app/buy_before.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/app/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app/picket.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/app/picket.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app/userinfo.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/app/userinfo.html" afterDir="false" />
-    </list>
+    <list default="true" id="4aed1007-1d69-4625-8bd7-c4da6392e5d3" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="DatabaseView">
-    <option name="SHOW_INTERMEDIATE" value="true" />
-    <option name="GROUP_DATA_SOURCES" value="true" />
-    <option name="GROUP_SCHEMA" value="true" />
-    <option name="GROUP_CONTENTS" value="false" />
-    <option name="SORT_POSITIONED" value="false" />
-    <option name="SHOW_EMPTY_GROUPS" value="false" />
-    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
-    <option name="HIDDEN_KINDS">
-      <set />
-    </option>
-    <expand>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="MySQL - bbs@49.235.196.114" type="feb32156:DbDataSourceImpl" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="MySQL - bbs@49.235.196.114" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="MySQL - bbs@49.235.196.114" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="bbs: schema" type="76f4a085:MysqlImplModel$Schema" />
-      </path>
-    </expand>
-    <select />
   </component>
   <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
@@ -78,16 +25,16 @@
   <component name="ProjectId" id="1QuvzEoC2BGNj5OLPcFKi5PaocH" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
-    <property name="DatabaseDriversLRU" value="mysql" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/tools" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/tools" />
       <recent name="$PROJECT_DIR$/templates" />
       <recent name="$PROJECT_DIR$/static" />
     </key>
@@ -129,21 +76,6 @@
       <method v="2" />
     </configuration>
   </component>
-  <component name="ServiceViewManager">
-    <option name="allServicesViewState">
-      <serviceView>
-        <treeState>
-          <expand>
-            <path>
-              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@61c1d6e8" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-            </path>
-          </expand>
-          <select />
-        </treeState>
-      </serviceView>
-    </option>
-  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -166,7 +98,6 @@
       <workItem from="1568807755905" duration="1463000" />
       <workItem from="1568809302377" duration="3900000" />
       <workItem from="1568813830413" duration="3429000" />
-      <workItem from="1568860777029" duration="12503000" />
     </task>
     <task id="LOCAL-00001" summary="threed">
       <created>1568636930137</created>

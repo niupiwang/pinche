@@ -1,0 +1,114 @@
+{#<html>#}
+{#<head>#}
+{#    <title></title>#}
+{#    <meta http-equiv="Content-Type" content="text/html; charset=GBK">#}
+{#    <style type="text/css">#}
+{#        <!--#}
+{#        * {#}
+{#            margin: 0;#}
+{#            padding: 0;#}
+{#            font-size: 12px;#}
+{#        }#}
+{##}
+{#        body {#}
+{#            background-repeat: repeat-y;#}
+{#            background-position: left top;#}
+{#        }#}
+{##}
+{#        #footer {#}
+{#            clear: both;#}
+{#            width: 100%;#}
+{#            padding: 1px 0;#}
+{#            margin: 0 0px;#}
+{#            background-color: steelblue;#}
+{#        }#}
+{##}
+{#        #footer p {#}
+{#            padding: 0;#}
+{#            margin: 0;#}
+{#            text-align: center;#}
+{#        }#}
+{##}
+{#        #footer a {#}
+{#            color: #f0f0f0;#}
+{#            background-color: inherit;#}
+{#            font-weight: bold;#}
+{#        }#}
+{##}
+{#        #footer a:hover {#}
+{#            color: #ffffff;#}
+{#            background-color: inherit;#}
+{#            text-decoration: underline;#}
+{#        }#}
+{##}
+{#        -->#}
+{#    </style>#}
+{#</head>#}
+{#<body>#}
+{#<div id="footer">#}
+{#    <p>#}
+{#    <table width="100%" border="0" height="20" cellpadding="0" cellspacing="0">#}
+{#        <tr>#}
+{#            <td width="10">&nbsp;</td>#}
+{#            <td width="200" align="center">#}
+{#                <nobr><span id="timetest" style="COLOR:white"></span>#}
+{#                    <!--动态日期的js代码 -->#}
+{#                    <script>#}
+{#                        dt = new Date();#}
+{#                        var tmpstr = "";#}
+{#                        var month = dt.getMonth();#}
+{#                        var date = dt.getDate();#}
+{#                        if ((month == 0) && (date == 1)) tmpstr = "元旦";#}
+{#                        if ((month == 4) && (date == 1)) tmpstr = "国际劳动节";#}
+{#                        if ((month == 4) && (date == 4)) tmpstr = "青年节";#}
+{#                        if ((month == 5) && (date == 1)) tmpstr = "国际儿童节";#}
+{#                        if ((month == 9) && (date == 1)) tmpstr = "国庆节";#}
+{#                        if ((month == 11) && (date == 25)) tmpstr = "圣诞节";#}
+{#                        tmpstr = " " + "<font color='#BB0000'>" + tmpstr + "&nbsp;&nbsp;</font>"#}
+{#                        setInterval("timetest.innerHTML=new Date().toLocaleString()+' 星期'+'日一二三四五六'.charAt (new Date().getDay())+tmpstr;", 1000);#}
+{#                    </script>#}
+{#                </nobr>#}
+{#            </td>#}
+{#        </tr>#}
+{#    </table>#}
+{#    </p>#}
+{#</div>#}
+{#</body>#}
+{#</html>#}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>动态显示时间</title>
+
+        <style type="text/css">
+            #times{
+                width: 200px;
+                height: 20px;
+                border: 3px solid gray;  /*如果不加实线无法显示边框*/
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="times">
+
+        </div>
+
+        <script type="text/javascript">
+            //得到时间并写入div
+            function getDate(){
+                //获取当前时间
+                var date = new Date();
+                //格式化为本地时间格式
+                var date1 = date.toLocaleString();
+                //获取div
+                var div1 = document.getElementById("times");
+                //将时间写入div
+                div1.innerHTML = date1;
+            }
+            //使用定时器每秒向div写入当前时间
+            setInterval("getDate()",1000);
+        </script>
+    </body>
+</html>
