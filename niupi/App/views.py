@@ -1,6 +1,5 @@
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
 from django.shortcuts import render, redirect
 
 # Create your views here.
@@ -8,7 +7,7 @@ from django.urls import reverse
 from django.views import View
 
 from App.form import RegisterForm
-from App.models import User
+from App.models import User, Userdetail
 from tools.verifycode import VerifyCode
 
 from App.models import Bus
@@ -23,7 +22,7 @@ def index(request):
         if start_city and end_city:
 
             return render(request, 'app/picket.html', locals())
-    return render(request,'app/index.html')
+    return render(request,'app/index.html',locals())
 
 def select(request):
     if request.method == 'POST':
@@ -58,13 +57,16 @@ def user_login(request):
             # autologin = request.POST.get('cookietime')
 
             user = authenticate(request, username=username, password=password)
+            print(user)
             if user:
+                login(request,user)
                 return redirect(reverse('app:index'))
     return render(request,'login.html')
 
 
 def user_logout(request):
-    return None
+    logout(request)
+    return redirect(reverse('app:index'))
 
 
 def register(request):
@@ -85,7 +87,7 @@ def register(request):
             phone = form.cleaned_data.get('phone')
             user = User.objects.create_user(username=username,password=password,phone=phone)
             login(request,user)
-            return render(request,'register.html',{'form':form})
+            return redirect(reverse('app:index'))
         return render(request,'register.html',{'form':form})
     else:
         form = RegisterForm()
