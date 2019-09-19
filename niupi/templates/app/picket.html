@@ -43,12 +43,17 @@
                                     <option value="1">所有车辆</option>
                                     <option value="2">大巴</option>
                                     <option value="3">私家车</option>
-                                </select><button type="button" class="btn btn-primary btn-sm">Small button</button></span>
+                                </select><button type="button" class="btn btn-primary btn-sm">过滤</button></span>
+                    <span><br>
+
+                        <input type="text" placeholder="{{ start_city }}">
+                        <button type="button" class="btn btn-primary btn-sm">交换</button>
+                        <input type="text" placeholder="{{ end_city }}"></span>
                     </div>
 
-                    <div class="card no-b shadow">
-                        <span><input type="text" placeholder="{{ start_city }}"><button type="button" class="btn btn-primary btn-sm">Small button</button><input type="text" placeholder="{{ end_city }}"></span>
-                    </div>
+{#                    <div class="card no-b shadow">#}
+{#                        <span><input type="text" placeholder="{{ start_city }}"><button type="button" class="btn btn-primary btn-sm">Small button</button><input type="text" placeholder="{{ end_city }}"></span>#}
+{#                    </div>#}
 {#                    {% if start_city %}#}
 {#                        <span>{{ start_city }}</span>#}
 {#                        <button value="">交换</button>#}
@@ -69,133 +74,92 @@
                                     <tbody>
                                     <tr class="no-b">
                                         <th class="w-10">
-                                            <h6>车牌号</h6>
+                                            <h6>编号</h6>
                                         </th>
                                         <th>
                                             <h6>车牌号</h6>
-                                            <small class="text-muted">Mobile Phones</small>
+{#                                            <small class="text-muted">Mobile Phones</small>#}
                                         </th>
-                                        <th><h6>车牌号</h6></th>
-                                        <th><h6>车牌号</h6></th>
+
+                                        <th><h6>起始城市 / 到达城市</h6></th>
                                         <th>
-                                            <span><i class="icon icon-data_usage"></i> 5 days ago</span><br>
-                                            <span><i class="icon icon-timer"></i> 5 September, 2017</span>
+                                            <span><i class="icon icon-data_usage"></i> 起始时间</span><br>
+                                            <span><i class="icon icon-timer"></i> 到达时间</span>
                                         </th>
                                         <th>
-                                            <h6>车牌号</h6>
+                                            <h6>价格</h6>
+                                        </th>
+                                        <th><h6>是否有票</h6></th>
+                                        <th>
+                                            <h6>购买</h6>
                                         </th>
                                     </tr>
-                                    {% for foo in request %}
+                                    {% for bus in buses %}
                                         <tr>
                                         <td class="w-10">
-                                            <img src="assets/img/demo/shop/s2.png" alt="">
+                                            <h6>{{ bus.num }}</h6>
                                         </td>
                                         <td>
-                                            <h6>Apple Product</h6>
-                                            <small class="text-muted">Mobile Phones</small>
+                                            <h6>{{ bus.bus_num }}</h6>
                                         </td>
-                                        <td>$250</td>
-                                        <td><span class="badge badge-success">Published</span></td>
+                                        <td>{{ start_city }} / {{ end_city }}</td>
                                         <td>
-                                            <span><i class="icon icon-data_usage"></i> 5 days ago</span><br>
-                                            <span><i class="icon icon-timer"></i> 5 September, 2017</span>
+                                            <span><i class="icon icon-data_usage"></i> {{ bus.start_time }}</span><br>
+                                            <span><i class="icon icon-timer"></i> {{ bus.end_time }}</span>
                                         </td>
                                         <td>
-                                            <a class="btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-pencil"></i></a>
+                                            <h6>{{ bus.price }}</h6>
+                                        </td>
+                                        {% if bus.standby_ticket > 0 %}
+                                            <td><span class="badge badge-success">有</span></td>
+                                        {% elif bus.standby_ticket == 0 %}
+                                            <td><span class="badge badge-danger">无</span></td>
+                                        {% endif %}
+                                        <td>
+                                            <a class="btn-fab btn-fab-sm btn-primary shadow text-white" href="{% url 'app:buy' %}?bid={{ bus.bid }}"><i class="icon-pencil"></i></a>
                                         </td>
                                     </tr>
                                     {% endfor %}
 
-                                    <tr>
-                                        <td class="w-10">
-                                            <img src="assets/img/demo/shop/s2.png" alt="">
-                                        </td>
-                                        <td>
-                                            <h6>Apple Product</h6>
-                                            <small class="text-muted">Mobile Phones</small>
-                                        </td>
-                                        <td>$250</td>
-                                        <td><span class="badge badge-success">Published</span></td>
-                                        <td>
-                                            <span><i class="icon icon-data_usage"></i> 5 days ago</span><br>
-                                            <span><i class="icon icon-timer"></i> 5 September, 2017</span>
-                                        </td>
-                                        <td>
-                                            <a class="btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-pencil"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="w-10">
-                                            <img src="assets/img/demo/shop/s3.png" alt="">
-                                        </td>
-                                        <td>
-                                            <h6>Apple Product</h6>
-                                            <small class="text-muted">Mobile Phones</small>
-                                        </td>
-                                        <td>$250</td>
-                                        <td><span class="badge badge-danger">Pending</span></td>
-                                        <td>
-                                            <span><i class="icon icon-data_usage"></i> 5 days ago</span><br>
-                                            <span><i class="icon icon-timer"></i> 5 September, 2017</span>
-                                        </td>
-                                        <td>
-                                            <a class="btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-pencil"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="w-10">
-                                            <img src="assets/img/demo/shop/s4.png" alt="">
-                                        </td>
-                                        <td>
-                                            <h6>Apple Product</h6>
-                                            <small class="text-muted">Mobile Phones</small>
-                                        </td>
-                                        <td>$250</td>
-                                        <td><span class="badge badge-success">Published</span></td>
-                                        <td>
-                                            <span><i class="icon icon-data_usage"></i> 5 days ago</span><br>
-                                            <span><i class="icon icon-timer"></i> 5 September, 2017</span>
-                                        </td>
-                                        <td>
-                                            <a class="btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-pencil"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="w-10">
-                                            <img src="assets/img/demo/shop/s5.png" alt="">
-                                        </td>
-                                        <td>
-                                            <h6>Apple Product</h6>
-                                            <small class="text-muted">Mobile Phones</small>
-                                        </td>
-                                        <td>$250</td>
-                                        <td><span class="badge badge-primary">Sold Out</span></td>
-                                        <td>
-                                            <span><i class="icon icon-data_usage"></i> 5 days ago</span><br>
-                                            <span><i class="icon icon-timer"></i> 5 September, 2017</span>
-                                        </td>
-                                        <td>
-                                            <a class="btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-pencil"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="w-10">
-                                            <img src="assets/img/demo/shop/s6.png" alt="">
-                                        </td>
-                                        <td>
-                                            <h6>Apple Product</h6>
-                                            <small class="text-muted">Mobile Phones</small>
-                                        </td>
-                                        <td>$250</td>
-                                        <td><span class="badge badge-warning">Low Stock</span></td>
-                                        <td>
-                                            <span><i class="icon icon-data_usage"></i> 5 days ago</span><br>
-                                            <span><i class="icon icon-timer"></i> 5 September, 2017</span>
-                                        </td>
-                                        <td>
-                                            <a class="btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-pencil"></i></a>
-                                        </td>
-                                    </tr>
+
+
+
+{#                                    <tr>#}
+{#                                        <td class="w-10">#}
+{#                                            <img src="assets/img/demo/shop/s5.png" alt="">#}
+{#                                        </td>#}
+{#                                        <td>#}
+{#                                            <h6>Apple Product</h6>#}
+{#                                            <small class="text-muted">Mobile Phones</small>#}
+{#                                        </td>#}
+{#                                        <td>$250</td>#}
+{#                                        <td><span class="badge badge-primary">Sold Out</span></td>#}
+{#                                        <td>#}
+{#                                            <span><i class="icon icon-data_usage"></i> 5 days ago</span><br>#}
+{#                                            <span><i class="icon icon-timer"></i> 5 September, 2017</span>#}
+{#                                        </td>#}
+{#                                        <td>#}
+{#                                            <a class="btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-pencil"></i></a>#}
+{#                                        </td>#}
+{#                                    </tr>#}
+{#                                    <tr>#}
+{#                                        <td class="w-10">#}
+{#                                            <img src="assets/img/demo/shop/s6.png" alt="">#}
+{#                                        </td>#}
+{#                                        <td>#}
+{#                                            <h6>Apple Product</h6>#}
+{#                                            <small class="text-muted">Mobile Phones</small>#}
+{#                                        </td>#}
+{#                                        <td>$250</td>#}
+{#                                        <td><span class="badge badge-warning">Low Stock</span></td>#}
+{#                                        <td>#}
+{#                                            <span><i class="icon icon-data_usage"></i> 5 days ago</span><br>#}
+{#                                            <span><i class="icon icon-timer"></i> 5 September, 2017</span>#}
+{#                                        </td>#}
+{#                                        <td>#}
+{#                                            <a class="btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-pencil"></i></a>#}
+{#                                        </td>#}
+{#                                    </tr>#}
                                     </tbody>
                                 </table>
                             </div>

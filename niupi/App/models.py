@@ -95,11 +95,16 @@ class List(models.Model):
         verbose_name_plural = '订单表'
 
 
-#管理员表
-class Admin(models.Model):
-    username = models.CharField(max_length=20, unique=True, verbose_name='管理员')
-    password = models.CharField(max_length=128, verbose_name='密码')
+# 消息
+class News(models.Model):
+    nid = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=128,null=True)
+    content = models.CharField(max_length=128,null=True)
+    set_time = models.DateTimeField(null=True)
+    from_user = models.IntegerField(null=True)
+    belong_user = models.ForeignKey(User, models.DO_NOTHING, db_column='uid', blank=True, null=False)
 
-
+    class Meta:
+        db_table = 'news'
 
 

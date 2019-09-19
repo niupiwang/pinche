@@ -29,7 +29,7 @@
                         <a class="nav-link  active"  href="{% url 'app:relation' %}"><i class="icon icon-plus-circle"></i>常用联系人</a>
                     </li>
                     <li>
-                        <a class="nav-link"  href="panel-page-users.html"><i class="icon icon-home2"></i>消息</a>
+                        <a class="nav-link"  href="{% url 'app:news' %}"><i class="icon icon-home2"></i>消息</a>
                     </li>
 
                 </ul>
@@ -44,7 +44,7 @@
                    <div class="card-header white">
                         <form>
                             <div class="form-group has-right-icon m-0 focused">
-                                <input class="form-control light r-30" placeholder="Search" type="text">
+                                <input class="form-control light r-30" placeholder="查找用户" type="text">
                                 <i class="icon-search"></i>
                             </div>
                         </form>
@@ -52,11 +52,10 @@
                    <div class="card my-3">
                        <div class="card-header white">
                            <i class="icon-clipboard-edit blue-text"></i>
-                           <strong> CONTACTS </strong>
+                           <strong> 查询结果 </strong>
                        </div>
                        <div class="card-body pt-0 bg-light slimScroll" data-height="300">
                            <ul class="list-unstyled">
-                               <!-- Alphabet with number of contacts -->
                                <li class="pt-3 pb-3 bg-light sticky">
                                    <strong>A</strong>
                                    <span class="badge r-3 badge-success float-right">20</span>

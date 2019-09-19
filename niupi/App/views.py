@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
+import os
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
@@ -8,6 +9,8 @@ from django.views import View
 
 from App.form import RegisterForm
 from App.models import User, Userdetail
+from niupi.settings import BASE_DIR
+from tools.file import Fileup
 from tools.verifycode import VerifyCode
 
 from App.models import Bus
@@ -33,10 +36,31 @@ def select(request):
     return render(request, 'app/picket.html')
 
 def buy(request):
-    return render(request, 'app/buy_before.html')
+    bid = request.GET.get('bid')
+    print(bid)
+    bus = Bus.objects.filter(bid=bid).first()
+    print(bus)
+    return render(request, 'app/buy_before.html',locals())
 
 def userinfo(request):
-    return render(request, 'app/userinfo.html')
+    # 上传头像
+    uid = request.GET.get('uid')
+    print(uid)
+    if request.method == 'POST':
+        print('----------------------')
+        obj = Fileup(request.FILES.get('file'), is_randomname=True)
+        path = os.path.join(BASE_DIR,'static/assets/img/portrait')
+        if obj.upload(path) > 0:
+            userdetail = Userdetail.objects.filter(user_uid=uid).first()
+            print()
+            print(os.path.join('static/assets/img/portrait',obj.file_name))
+            userdetail.pic = os.path.join('static/assets/img/portrait',obj.file_name)
+            userdetail.save()
+            user = User.objects.filter(uid=uid).first()
+            return render(request, 'app/userinfo.html',locals())
+        else:
+            return HttpResponse('失败')
+    return render(request, 'app/userinfo.html', locals())
 
 
 class UserView(View):
