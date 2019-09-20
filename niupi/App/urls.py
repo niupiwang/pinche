@@ -10,6 +10,15 @@ url(r'^pay/$', views.pay, name='pay'),
 url(r'^payment/$', views.payment, name='payment'),
 url(r'^news/$', views.news, name='news'),
 
+url(r'^pay_ali/$', views.pay_ali, name='pay_ali'),
+url(r'^all/$', views.all, name='all'),
+url(r'^pay_list/$', views.pay_list, name='pay_list'),
+
+
+url(r'^add_payment/$', views.add_payment, name='add_payment'),
+
+
+
 
 
     # 常用联系人

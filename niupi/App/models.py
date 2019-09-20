@@ -45,8 +45,6 @@ class Userdetail(models.Model):
 #3汽车信息表
 class Bus(models.Model):
     bid = models.AutoField(primary_key=True)
-    num = models.CharField(max_length=10, verbose_name='列车编号')
-    bus_num = models.CharField(max_length=10, verbose_name='车牌号码')
     num = models.CharField(max_length=128, verbose_name='列车编号')
     bus_num = models.CharField(max_length=10, unique=True, verbose_name='车牌号码')
     start_time = models.DateTimeField(verbose_name='起始时间')
@@ -84,15 +82,16 @@ class Car(models.Model):
 #5我的订单表
 class List(models.Model):
     lid = models.AutoField(primary_key=True)
+    # 订单号
     num_list = models.CharField(max_length=128)
+    # 订单金额
+    price_list = models.IntegerField(null=True)
     s_list = ((0, '未完成'), (1, '已取消'), (2, '已完成'))
     status = models.IntegerField(default=0, choices=s_list, verbose_name='订单状态')
     list_time = models.DateTimeField(default=datetime.now, verbose_name='下单时间')
-
-
-    # waijian
     list_uid = models.ForeignKey(User, models.DO_NOTHING, db_column='uid', blank=True, null=False)
-    list = models.CharField(max_length=128, null=False) # 订单的车辆列表
+    list = models.CharField(max_length=128, null=False) # 订单的乘客列表
+    traffic = models.ForeignKey(Bus, models.DO_NOTHING, db_column='bid', blank=True, null=False)
 
     class Meta:
         db_table = 'list'
