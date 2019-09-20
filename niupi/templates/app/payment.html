@@ -27,12 +27,9 @@
                     </ul>
                 </div>
             </div>
-
         </header>
         <div class="container">
             <div class="invoice white shadow">
-
-
                 <div class="p-5">
                     <!-- title row -->
                     <div class="row">
@@ -60,14 +57,9 @@
                                         <td>968-34567</td>
                                     </tr>
                                 </table>
-
                             </div>
-
                         </div>
-                        <!-- /.col -->
                     </div>
-
-                    <!-- info row -->
                     <div class="row my-3 ">
                         <div class="col-sm-4">
                             来自
@@ -78,7 +70,6 @@
                                 邮箱：{{ user.email }}
                             </address>
                         </div>
-                        <!-- /.col -->
                         <div class="col-sm-4">
                             支付提供
                             <address>
@@ -88,15 +79,9 @@
                                 认证号：ICP955J0X
                             </address>
                         </div>
-                        <!-- /.col -->
                         <div class="col-sm-4">
-
                         </div>
-                        <!-- /.col -->
                     </div>
-                    <!-- /.row -->
-
-                    <!-- Table row -->
                     <div class="row my-3">
                         <div class="col-12 table-responsive">
                             <table class="table table-striped">
@@ -123,76 +108,56 @@
                                 </tbody>
                             </table>
                         </div>
-                        <!-- /.col -->
                     </div>
-                    <!-- /.row -->
-
                     <div class="row">
                         <!-- accepted payments column -->
                         <div class="col-6">
                             <p class="lead">支付方式:</p>
-                            <img src="{% static 'assets/img/basic/visa.png' %}" alt="Visa">
-
-                            <img src="{% static 'assets/img/basic/mastercard.png' %}" alt="Mastercard">
+                            <img style="height: 40px;width: 40px" src="{% static 'assets/img/basic/001.png' %}" alt="Visa">
+                            &nbsp;
+                            <img style="height: 40px;width: 40px" src="{% static 'assets/img/basic/002.png' %}" alt="Mastercard">
                             <span>(目前暂不支持此支付方式)</span>
-{#                            <img src="assets/img/basic/visa.png" alt="Visa">#}
-{#                            <img src="assets/img/basic/mastercard.png" alt="Mastercard">#}
-{#                            <img src="assets/img/basic/american-express.png" alt="American Express">#}
-{#                            <img src="assets/img/basic/paypal2.png" alt="Paypal">#}
-
                             <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
                                 请在支付之前确认客户信息,订单出错造成的损失我们概不负责
                                 ！ ！ ！
                                 您可以在右边选择更改和付款
                             </p>
                         </div>
-                        <!-- /.col -->
                         <div class="col-6">
                             <p class="lead">&nbsp;&nbsp;{{ time }}</p>
-
                             <div class="table-responsive">
                                 <table class="table">
                                     <tbody>
                                     <tr>
-                                        <th style="width:50%">总票价:</th>
-                                        <td>{{ cash }}</td>
+                                        <th style="width:50%">总票价:</th><td>{{ cash }}</td>
                                     </tr>
                                     <tr>
-                                        <th>保险费率:</th>
-                                        <td>10%</td>
+                                        <th>保险费率:</th><td>10%</td>
                                     </tr>
                                     <tr>
-                                        <th>保险费:</th>
-                                        <td>{{ bcore }}</td>
+                                        <th>保险费:</th><td>{{ bcore }}</td>
                                     </tr>
                                     <tr>
-                                        <th>总支付:</th>
-                                        <td>{{ num_core }}</td>
+                                        <th>总支付:</th><td>{{ num_core }}</td>
                                     </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-                        <!-- /.col -->
                     </div>
-                    <!-- /.row -->
 
-                    <!-- this row will not appear when printing -->
                     <div class="row no-print">
                         <div class="col-12">
-{#                            <a href="invoice-print.html" target="_blank" class="btn btn-lg  btn-default"><i#}
-{#                                    class="icon icon-print"></i> Print</a>#}
+                            <a href="{% url 'app:pay_ali' %}?pay_num={{ PO }}&pay_price={{ num_core }}">
                             <button type="button" class="btn btn-success btn-lg  float-right"><i
-                                    class="icon icon-credit-card"></i> 更改
-                            </button>
+                                    class="icon icon-credit-card"></i> 支付
+                            </button></a>
                             <button type="button" class="btn btn-primary btn-lg float-right mr-2">
-                                <i class="icon icon-cloud-download"></i> 支付
+                                <i class="icon icon-cloud-download"></i> 更改
                             </button>
                         </div>
                     </div>
-
                 </div>
-
             </div>
         </div>
     </div>

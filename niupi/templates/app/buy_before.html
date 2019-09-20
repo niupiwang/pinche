@@ -93,35 +93,12 @@
 
                                                     </script>
                                                 {% endfor %}
-
-
-
-{#						                        <div class="card-body b-b">#}
-{#						                            <div class="card-title">乘客信息</div>#}
-{#						                            <div>#}
-{#														<input style="height: 25px;margin-bottom: 5px;" class="form-control form-control-lg datePicker" placeholder="乘客" type="text" id="usero">#}
-{#						                                <!-- <input type="text" value="乘客" class="form-control"/> -->#}
-{#                                                        <input hidden="hidden" value="222" id="bianhao">#}
-{#                                                        <input hidden="hidden" value="222" id="jiage">#}
-{#						                            </div>#}
-{#													<div>#}
-{#													    <input style="height: 25px;margin-bottom: 5px;" class="form-control form-control-lg datePicker" placeholder="身份证号" type="text" id="idnum">#}
-{#													</div>#}
-{#													<div>#}
-{#													    <input style="height: 25px;margin-bottom: 5px;" class="form-control form-control-lg datePicker" placeholder="电话" type="text" id="phone">#}
-{#													</div>#}
-{#						                        </div>#}
 						                        <div class="card-body b-b">
                                                     <h5>牛皮王</h5>
-
-
-{#                                                    <input class="btn btn-success btn-lg btn-block" value="添加" type="submit" id="ooo">#}
-
 						                        </div>
 						                    </div>
 						                </div>
 						            </div>
-
 
                                     <div class="col-md-6">
 						                <div class="card">
@@ -130,47 +107,17 @@
                                                     <h5>订单列表</h5>
 						                        </div>
                                                 <div class="card-body b-b">
-{#						                            <div class="card-title">列车编号 / 车牌号</div>#}
                                                     <h5> 所有订票如下：</h5>
 						                        </div>
                                                 <div id="ooooo">
 
-
                                                 </div>
 
-{#						                        <div class="card-body b-b">#}
-{#						                            <div class="card-title"> 出发</div>#}
-{#						                                <h5>{{ bus.start_time }} <span>&nbsp;&nbsp;&nbsp;&nbsp;{{ bus.start_station }}</span></h5>#}
-{#                                                    <div class="card-title"> 到达</div>#}
-{##}
-{#														<h5>{{ bus.end_time }} <span>&nbsp;&nbsp;&nbsp;&nbsp;{{ bus.end_station }}</span></h5>#}
-{#                                                </div>#}
-{#						                        <div class="card-body b-b">#}
-{#						                            <div class="card-title">票务情况</div>#}
-{#													<h5><span><strong>{{ bus.standby_ticket }}</strong></span> /  {{ bus.ticket }}</h5>#}
-{#						                        </div>#}
-{#						                        <div class="card-body b-b">#}
-{#						                            <div class="card-title">乘客信息</div>#}
-{#						                            <div>#}
-{#														<input style="height: 25px;margin-bottom: 5px;" class="form-control form-control-lg datePicker" placeholder="乘客" type="text" id="usero">#}
-{#						                                <!-- <input type="text" value="乘客" class="form-control"/> -->#}
-{#                                                        <input hidden="hidden" value="222" id="bianhao">#}
-{#                                                        <input hidden="hidden" value="222" id="jiage">#}
-{#						                            </div>#}
-{#													<div>#}
-{#													    <input style="height: 25px;margin-bottom: 5px;" class="form-control form-control-lg datePicker" placeholder="身份证号" type="text" id="idnum">#}
-{#													</div>#}
-{#													<div>#}
-{#													    <input style="height: 25px;margin-bottom: 5px;" class="form-control form-control-lg datePicker" placeholder="电话" type="text" id="phone">#}
-{#													</div>#}
-{#						                        </div>#}
 						                        <div class="card-body b-b">
                                                     <a id="ppp" href=""><input class="btn btn-success btn-lg btn-sm" value="购买" type="submit" id="ooo" onclick="f()"> </a>
-                                                          <input class="btn btn-success btn-lg btn-sm" value="加入订单" type="submit" id="ooo" onclick="f()">
+                                                          <input class="btn btn-success btn-lg btn-sm" value="加入订单" type="submit" id="ooo" onclick="fo()">
                                                 <script>
                                                     function f() {
-
-
                                                         $(this).attr('disabled', 1);
 
                                                         var gu = $('#ooooo div');
@@ -178,17 +125,52 @@
                                                         for (var i=0;i<gu.length;i++){
                                                             gu_id.push($(gu[i]).attr('id'));
                                                         }
+                                                        var o = {{ bus.price }};
+                                                        var price = o*gu_id.length;
                                                         console.log(gu_id);
                                                         if (gu_id.length>0){
-                                                            document.getElementById('ppp').href = '{% url 'app:payment' %}?uu='+gu_id+'&bid='+'{{ bid }}'
+                                                            document.getElementById('ppp').href = '{% url 'app:payment' %}?uu='+gu_id+'&bid={{ bid }}&user={{ uid }}&price='+price;
                                                         }
+
                                                         $.ajax({
                                                             url:{% url 'app:payment' %},
                                                             type:'GET',
-                                                            data:{'id':gu_id},
+                                                            data:{'id':gu_id,
+                                                                "price":price,
+                                                                "user":{{ uid }},
+                                                                "bid":{{ bid }}},
+
                                                             success:function (data) {
 
                                                             }
+                                                        })
+                                                    }
+
+                                                    function fo() {
+                                                        {#$(this).attr('disabled', 1);#}
+                                                        var gu = $('#ooooo div');
+                                                        gu_id = [];
+                                                        for (var i=0;i<gu.length;i++){
+                                                            gu_id.push($(gu[i]).attr('id'));
+                                                        }
+                                                        console.log(gu_id);
+                                                        console.log(gu_id[2],'------');
+                                                        bj = 'a';
+                                                        for (var j=0;j<gu_id.length;j++){
+                                                            bj = bj +','+ gu_id[j]
+                                                        }
+                                                        var o = {{ bus.price }};
+                                                        var price = o*gu_id.length;
+                                                        $.ajax({
+                                                            url:{% url 'app:add_payment' %},
+                                                            type:'GET',
+                                                            data:{
+                                                                "id":bj,
+                                                                "price":price,
+                                                                "user":{{ uid }},
+                                                                "bid":{{ bid }}
+                                                            },
+
                                                         })
                                                     }
                                                 </script>

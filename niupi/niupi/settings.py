@@ -130,3 +130,11 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static')
 ]
 AUTH_USER_MODEL = 'App.User'
+
+
+#应用用程序私钥
+APP_PRIVATE_KEY = open(os.path.join(BASE_DIR,'alipay/app_private_key.pem')).read()
+#支支付宝公钥
+ALIPAY_PUBLIC_KEY =open (os.path.join(BASE_DIR,'alipay/alipay_public_key.pem')).read()
+#沙箱APPID
+ALI_APP_ID = "2016100100641498"
