@@ -1,6 +1,3 @@
-import datetime
-import random
-
 from django.contrib.auth import authenticate, login, logout
 import os
 from django.contrib.auth import authenticate, login
@@ -13,7 +10,7 @@ from django.urls import reverse
 from django.views import View
 
 from App.form import RegisterForm
-from App.models import User, Userdetail
+from App.models import User, Userdetail, News, Car
 from niupi.settings import BASE_DIR
 from tools.file import Fileup
 from tools.verifycode import VerifyCode
@@ -63,26 +60,53 @@ def buy(request):
 
 
 def userinfo(request):
-    # 上传头像
+    userdetail1 = Userdetail.objects.filter(user_uid=request.user.uid)[0]
+    # cars = Car.objects.all()
+    # a = []
+    # for i in cars:
+    #     a.append(i.car_uid)
+    # if int(request.user.uid) not in a:
+    #     car = Car()
+    #     car.car_num = request.POST.get('carnum')
+    #     car.car_type = request.POST.get('cartype')
+    #     car.uid = int(request.user.uid)
+    #     car.seats = request.POST.get('seats')
+    #     car.save()
+    # else:
+    car = Car.objects.filter(car_uid=request.user.uid)[0]
     uid = request.GET.get('uid')
     print(uid)
     if request.method == 'POST':
+        print(request.POST.get('realname'))
+        userdetail1.real_name = request.POST.get('realname')
+        userdetail1.birthday = request.POST.get('birthday')
+        request.user.email = request.POST.get('email')
+        request.user.phone = request.POST.get('phone')
+        userdetail1.address = request.POST.get('address')
+        car.car_num = request.POST.get('carnum')
+        car.car_type = request.POST.get('cartype')
+        car.seats = request.POST.get('seats')
+        userdetail1.save()
+        request.user.save()
+        car.save()
         print('----------------------')
-        obj = Fileup(request.FILES.get('file'), is_randomname=True)
-        path = os.path.join(BASE_DIR,'static/assets/img/portrait')
-        if obj.upload(path) > 0:
-            # userdetail = Userdetail.objects.filter(user_uid=uid).first()
-            # print(userdetail)
-            # print(os.path.join('static/assets/img/portrait',obj.file_name))
-            # userdetail.pic = os.path.join('/static/assets/img/portrait',obj.file_name)
-            # userdetail.save()
-            user = User.objects.filter(uid=uid).first()
-            user.portrait = os.path.join('/static/assets/img/portrait',obj.file_name)
-            user.save()
-            return render(request, 'app/userinfo.html',locals())
-        else:
-            print(obj.upload(path))
-            return HttpResponse('失败')
+        # 上传头像
+        if request.FILES.get('file'):
+            obj = Fileup(request.FILES.get('file'), is_randomname=True)
+            path = os.path.join(BASE_DIR,'static/assets/img/portrait')
+            if obj.upload(path) > 0:
+                # userdetail = Userdetail.objects.filter(user_uid=uid).first()
+                # print(userdetail)
+                # print(os.path.join('static/assets/img/portrait',obj.file_name))
+                # userdetail.pic = os.path.join('/static/assets/img/portrait',obj.file_name)
+                # userdetail.save()
+                user = User.objects.filter(uid=uid).first()
+                user.portrait = os.path.join('/static/assets/img/portrait',obj.file_name)
+                user.save()
+                return render(request, 'app/userinfo.html',locals())
+            else:
+                print(obj.upload(path))
+                return HttpResponse('失败')
     return render(request, 'app/userinfo.html', locals())
 
 
@@ -136,9 +160,13 @@ def register(request):
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             phone = form.cleaned_data.get('phone')
+
             user = User.objects.create_user(username=username,password=password,phone=phone)
+            user.portrait = '/static/assets/img/basic/cirrus.png'
+            user.save()
             userdetail = Userdetail()
             userdetail.user_uid_id = user.uid
+
             userdetail.save()
             login(request,user)
             userdetail = Userdetail.objects.filter(user_uid=user.uid).first()
@@ -164,7 +192,26 @@ def pay(request):
 
 
 def relation(request):
-    return render(request,'app/add_user.html')
+    # print(request.user.uid)
+    str = request.user.friends
+    x = str.split(',')
+    a = []
+    userdetail = Userdetail.objects.all()
+    for i in x:
+        i = int(i)
+        a.append(i)
+    if request.GET.get('search'):
+        search = request.GET.get('search')
+        users = Userdetail.objects.filter(id_num__exact=search)[0]
+    if request.GET.get('userid'):
+        x = request.GET.get('userid')
+        if int(x) not in a:
+            str = str+','+x
+            userself = User.objects.filter(uid=request.user.uid)[0]
+            userself.friends = str
+            userself.save()
+
+    return render(request,'app/add_user.html',locals())
 
 
 def payment(request):
@@ -198,5 +245,15 @@ def payment(request):
     print(cash,bcore,num_core)
     return render(request, 'app/payment.html',locals())
 
+
 def news(request):
-    return render(request, 'app/news.html')
+    print(request.user.uid)
+    new = News.objects.all()
+    userdetail = Userdetail.objects.all()
+    newsol = {k:v for k,v in zip(new,userdetail)}
+    print(newsol)
+    if request.GET.get('read'):
+        print('拿到更改按钮了')
+        a = request.GET.get('read')
+        print(a)
+    return render(request, 'app/news.html',locals())

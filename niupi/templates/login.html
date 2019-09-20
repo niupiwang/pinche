@@ -100,8 +100,8 @@
                         <input name='loginsubmit' type="submit" class="btn btn-success btn-lg btn-block" value="登录">
                         <div>
 {#                            <label for="autologin"><input type="checkbox" name="cookietime" id="autologin">自动登录</label>#}
-                        	<a href="#"><p class="forget-pass">忘记密码?</p></a>
-                        	<a href="#"><p class="forget-pass">注册新用户</p></a>
+                        	<a href="{% url 'app:findpassword' %}"><p class="forget-pass">忘记密码?</p></a>
+                        	<a href="{% url 'app:register' %}"><p class="forget-pass">注册新用户</p></a>
                         </div>
                         
                     </form>

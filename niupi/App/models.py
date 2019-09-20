@@ -76,6 +76,7 @@ class Car(models.Model):
     left_seats = models.IntegerField(null=True, verbose_name='剩余座位')
     car_uid = models.ForeignKey(User, models.DO_NOTHING, db_column='uid', blank=True, null=True)
 
+
     class Meta:
         db_table = 'car'
         verbose_name_plural = '拼车表'
@@ -107,6 +108,7 @@ class News(models.Model):
     set_time = models.DateTimeField(null=True)
     from_user = models.IntegerField(null=True)
     belong_user = models.ForeignKey(User, models.DO_NOTHING, db_column='uid', blank=True, null=False)
+    is_read = models.IntegerField(default=0)
 
     class Meta:
         db_table = 'news'

@@ -1,6 +1,12 @@
 {% extends 'app/base.html' %}
 {% load static %}
 
+{% block head %}
+    {{ block.super }}
+    <script src="https://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+
+{% endblock %}
+
 {% block content %}
 
     <div class="page has-sidebar-left height-full">
@@ -49,20 +55,16 @@
                                                        href="#w3-tab1" role="tab" aria-controls="tab1"
                                                        aria-expanded="true" aria-selected="true">Tab 1</a>
                                                 </li>
+                                                <li>&nbsp&nbsp&nbsp</li>
                                                 <li class="nav-item">
-                                                    <a class="nav-link r-20" id="w3--tab2" data-toggle="tab"
-                                                       href="#w3-tab2" role="tab" aria-controls="tab2"
-                                                       aria-selected="false">Tab 2</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link r-20" id="w3--tab3" data-toggle="tab"
-                                                       href="#w3-tab3" role="tab" aria-controls="tab3"
-                                                       aria-selected="false">Tab 3</a>
+                                                    <a class="nav-link active show r-20" id="w3--tab2" data-toggle="tab"
+                                                       role="tab" aria-controls="tab2"
+                                                       aria-expanded="true" aria-selected="true">未读消息：</a>
                                                 </li>
                                             </ul>
                                         </div>
                                         <div class="align-self-center">
-                                            <h5>Awesome Title</h5>
+                                            <h5>牛皮网</h5>
                                         </div>
 
                                     </div>
@@ -76,71 +78,48 @@
 
                                                     <tbody>
                                                     <tr class="no-b">
-                                                        <td class="w-10"><span class="round">
-                                        <img src="assets/img/dummy/u1.png" alt="user"></span>
-                                                        </td>
-                                                        <td>
-                                                            <h6>Sara Kamzoon</h6>
-                                                            <small class="text-muted">Marketing Manager</small>
-                                                        </td>
-                                                        <td>25</td>
-                                                        <td>$250</td>
+                                                        <th class="w-10"><span class="round">
+
+                                                        </th>
+                                                        <th width="300px">标题/发送时间</th>
+                                                        <th width="400px">内容</th>
+                                                        <th width="300px">发信人</th>
+                                                        <th>bling</th>
                                                     </tr>
-                                                    <tr>
-                                                        <td class="w-10"><span class="round">
-                                        <img src="assets/img/dummy/u2.png" alt="user"></span>
-                                                        </td>
-                                                        <td>
-                                                            <h6>Sara Kamzoon</h6>
-                                                            <small class="text-muted">Marketing Manager</small>
-                                                        </td>
-                                                        <td>25</td>
-                                                        <td>$250</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="w-10"><span class="round">
-                                        <img src="assets/img/dummy/u3.png" alt="user"></span>
-                                                        </td>
-                                                        <td>
-                                                            <h6>Sara Kamzoon</h6>
-                                                            <small class="text-muted">Marketing Manager</small>
-                                                        </td>
-                                                        <td>25</td>
-                                                        <td>$250</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="w-10"><span class="round">
-                                        <img src="assets/img/dummy/u4.png" alt="user"></span>
-                                                        </td>
-                                                        <td>
-                                                            <h6>Sara Kamzoon</h6>
-                                                            <small class="text-muted">Marketing Manager</small>
-                                                        </td>
-                                                        <td>25</td>
-                                                        <td>$250</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="w-10"><span class="round">
-                                        <img src="assets/img/dummy/u5.png" alt="user"></span>
-                                                        </td>
-                                                        <td>
-                                                            <h6>Sara Kamzoon</h6>
-                                                            <small class="text-muted">Marketing Manager</small>
-                                                        </td>
-                                                        <td>25</td>
-                                                        <td>$250</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="w-10"><span class="round">
-                                        <img src="assets/img/dummy/u6.png" alt="user"></span>
-                                                        </td>
-                                                        <td>
-                                                            <h6>Sara Kamzoon</h6>
-                                                            <small class="text-muted">Marketing Manager</small>
-                                                        </td>
-                                                        <td>25</td>
-                                                        <td>$250</td>
-                                                    </tr>
+                                                    {% for new1,real in newsol.items %}
+
+                                                        {% if new1.belong_user.uid == user.uid %}
+
+                                                            <tr class="no-b">
+                                                                <td class="w-10"><span class="round">
+                                                                    <img style="width: 66px" src="{{ real.user_uid.portrait }}" alt="user"></span>
+                                                                </td>
+                                                                <td style="width: 200px">
+                                                                    <h6>{{ new1.title }}</h6>
+                                                                    <small class="text-muted">{{ new1.set_time }}</small>
+                                                                </td>
+                                                                <td>{{ new1.content }}</td>
+                                                                <td>{{ real.real_name }}</td>
+                                                                <div>
+                                                                    <td>
+                                                                        <a id="aid" href="{% url 'app:news' %}">
+                                                                            <span id="clickbut" class="r-3 badge badge-warning">朕知道了</span></a>
+                                                                    </td>
+                                                                    <input name="read" id="vid" type="hidden" value="{{ new1.nid }}">
+                                                                </div>
+                                                                    <SCRIPT>
+                                                                        $('#clickbut').click(function () {
+                                                                            var bo = $('#vid').val();
+                                                                            document.getElementById('aid').href = '{% url 'app:news' %}?read='+bo
+                                                                        })
+                                                                    </SCRIPT>
+
+                                                            </tr>
+
+                                                        {% endif %}
+
+                                                    {% endfor %}
+
                                                     </tbody>
                                                 </table>
                                             </div>

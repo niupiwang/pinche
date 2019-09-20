@@ -43,7 +43,7 @@
                                     <div class="col-md-8">
                                         <div class="form-group m-0">
                                             <label for="name" class="col-form-label s-12">真实姓名</label>
-                                            <input id="name" placeholder="" class="form-control r-0 light s-12 " type="text">
+                                            <input name="realname" id="name" value="{{ userdetail1.real_name }}" class="form-control r-0 light s-12 " type="text">
                                         </div>
 
                                         <div class="form-row">
@@ -53,7 +53,7 @@
                                             </div>
                                             <div class="form-group col-6 m-0">
                                                 <label for="dob" class="col-form-label s-12"><i class="icon-calendar mr-2"></i>DATE OF BIRTH</label>
-                                                <input id="dob" placeholder="" class="form-control r-0 light s-12 datePicker" data-time-picker="false"
+                                                <input name="birthday" id="dob" value="{{ userdetail1.birthday }}" class="form-control r-0 light s-12 datePicker" data-time-picker="false"
                                                        data-format-date='Y/m/d' type="text">
                                             </div>
                                         </div>
@@ -68,6 +68,10 @@
                                             <div class="custom-control custom-radio custom-control-inline">
                                                 <input type="radio" id="female" name="gender" class="custom-control-input">
                                                 <label class="custom-control-label m-0" for="female">女</label>
+                                            </div>
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" id="secret" name="gender" class="custom-control-input">
+                                                <label class="custom-control-label m-0" for="secret">保密</label>
                                             </div>
                                         </div>
                                     </div>
@@ -97,47 +101,45 @@
                                 <div class="form-row mt-1">
                                     <div class="form-group col-4 m-0">
                                         <label for="email" class="col-form-label s-12"><i class="icon-envelope-o mr-2"></i>邮箱</label>
-                                        <input id="email" placeholder="" class="form-control r-0 light s-12 " type="text">
+                                        <input name="email" id="email" value="{{ user.email }}" class="form-control r-0 light s-12 " type="text">
                                     </div>
 
                                     <div class="form-group col-4 m-0">
                                         <label for="phone" class="col-form-label s-12"><i class="icon-phone mr-2"></i>移动电话</label>
-                                        <input id="phone" placeholder="" class="form-control r-0 light s-12 " type="text">
+                                        <input name="phone" id="phone" value="{{ user.phone }}" class="form-control r-0 light s-12 " type="text">
                                     </div>
                                     <div class="form-group col-4 m-0">
                                         <label for="mobile" class="col-form-label s-12"><i class="icon-mobile-phone mr-2"></i>固定电话</label>
-                                        <input id="mobile" placeholder="" class="form-control r-0 light s-12 " type="text">
+                                        <input id="mobile" value="固定电话已被淘汰" class="form-control r-0 light s-12 " type="text">
                                     </div>
 
                                 </div>
                                 <div class="form-row">
-                                    <div class="form-group col-3 m-0">
-                                        <label for="inputCity" class="col-form-label s-12">城市</label>
-                                        <input type="text" class="form-control r-0 light s-12" id="inputCity">
-                                    </div>
-                                    <div class="form-group col-9 m-0">
+
+                                    <div class="form-group col-12 m-0">
                                         <label for="address"  class="col-form-label s-12">具体地址</label>
-                                        <input type="text" class="form-control r-0 light s-12" id="address"
-                                               placeholder="">
+                                        <input name="address" type="text" class="form-control r-0 light s-12" id="address"
+                                               value="{{ userdetail1.address }}">
                                     </div>
 
                                 </div>
                             </div>
                             <hr>
+
                             <div class="card-body">
                                 <h5 class="card-title">车辆信息</h5>
                                 <div class="form-row">
                                     <div class="form-group col-5 m-0">
                                         <label for="roll1" class="col-form-label s-12"># 车牌号</label>
-                                        <input id="roll1" placeholder="" class="form-control r-0 light s-12 " type="text">
+                                        <input name="carnum" id="roll1" value="{{ car.car_num }}" class="form-control r-0 light s-12 " type="text">
                                     </div>
                                     <div class="form-group col m-0">
                                         <label for="roll2" class="col-form-label s-12">车辆类型</label>
-                                        <input id="roll2" placeholder="" class="form-control r-0 light s-12 " type="text">
+                                        <input name="cartype" id="roll2" value="{{ car.car_type }}" class="form-control r-0 light s-12 " type="text">
                                     </div>
                                     <div class="form-group col m-0">
                                         <label for="roll4" class="col-form-label s-12">座位数</label>
-                                        <input id="roll4" placeholder="" class="form-control r-0 light s-12 " type="text">
+                                        <input name="seats" id="roll4" value="{{ car.seats }}" class="form-control r-0 light s-12 " type="text">
                                     </div>
                                 </div>
 
@@ -149,6 +151,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <hr>
 {#                            <div class="card-body">#}
 {#                                <h5 class="card-title">PARENT / GUARDIAN</h5>#}
