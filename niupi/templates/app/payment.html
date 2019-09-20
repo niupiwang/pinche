@@ -37,11 +37,11 @@
                     <!-- title row -->
                     <div class="row">
                         <div class="col-12">
-                            <img class="w-80px mb-4" src="assets/img/dummy/bootstrap-social-logo.png" alt="">
+                            <img class="w-80px mb-4" src="{% static 'assets/img/dummy/bootstrap-social-logo.png' %}" alt="">
 
                             <div class="float-right">
 
-                                <h4>Invoice #007612</h4><br>
+                                <h4>NP #{{ PO }}</h4><br>
                                 <table>
                                     <tr>
                                         <td class="font-weight-normal">Date:</td>
@@ -70,24 +70,22 @@
                     <!-- info row -->
                     <div class="row my-3 ">
                         <div class="col-sm-4">
-                            From
+                            来自
                             <address>
-                                <strong>Admin, Inc.</strong><br>
-                                795 Folsom Ave, Suite 600<br>
-                                San Francisco, CA 94107<br>
-                                Phone: (804) 123-5432<br>
-                                Email: info@almasaeedstudio.com
+                                <strong>用户：{{ user.username }}</strong><br>
+                                addsdasdsdsa<br>
+                                手机号：{{ user.phone }}<br>
+                                邮箱：{{ user.email }}
                             </address>
                         </div>
                         <!-- /.col -->
                         <div class="col-sm-4">
-                            To
+                            支付提供
                             <address>
-                                <strong>John Doe</strong><br>
-                                795 Folsom Ave, Suite 600<br>
-                                San Francisco, CA 94107<br>
-                                Phone: (555) 539-1037<br>
-                                Email: john.doe@example.com
+                                <strong>牛皮网</strong><br>
+                                负责人：李子坤<br>
+                                联系电话： (555) 539-1037<br>
+                                认证号：ICP955J0X
                             </address>
                         </div>
                         <!-- /.col -->
@@ -102,44 +100,26 @@
                     <div class="row my-3">
                         <div class="col-12 table-responsive">
                             <table class="table table-striped">
-                                <thead>
-                                <tr>
-                                    <th>Qty</th>
-                                    <th>Product</th>
-                                    <th>Serial #</th>
-                                    <th>Description</th>
-                                    <th>Subtotal</th>
-                                </tr>
-                                </thead>
                                 <tbody>
                                 <tr>
-                                    <td>1</td>
-                                    <td>Call of Duty</td>
-                                    <td>455-981-221</td>
-                                    <td>El snort testosterone trophy driving gloves handsome</td>
-                                    <td>$64.50</td>
+                                    <th>编号</th>
+                                    <th>车次</th>
+                                    <th>乘车编号</th>
+                                    <th>乘车人名字</th>
+                                    <th>始发/终点</th>
+                                    <th>价格</th>
                                 </tr>
+
+                                {% for k,v in kll.items %}
                                 <tr>
-                                    <td>1</td>
-                                    <td>Need for Speed IV</td>
-                                    <td>247-925-726</td>
-                                    <td>Wes Anderson umami biodiesel</td>
-                                    <td>$50.00</td>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ bun.bus_num }}</td>
+                                    <td>{{ v }}</td>
+                                    <td>{{ k.username }}</td>
+                                    <td>{{ bun.start_city }} / {{ bun.end_city }}</td>
+                                    <td>{{ bun.price }}</td>
                                 </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Monsters DVD</td>
-                                    <td>735-845-642</td>
-                                    <td>Terry Richardson helvetica tousled street art master</td>
-                                    <td>$10.70</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Grown Ups Blue Ray</td>
-                                    <td>422-568-642</td>
-                                    <td>Tousled lomo letterpress</td>
-                                    <td>$25.99</td>
-                                </tr>
+                                {% endfor %}
                                 </tbody>
                             </table>
                         </div>
@@ -150,40 +130,44 @@
                     <div class="row">
                         <!-- accepted payments column -->
                         <div class="col-6">
-                            <p class="lead">Payment Methods:</p>
-                            <img src="assets/img/basic/visa.png" alt="Visa">
-                            <img src="assets/img/basic/mastercard.png" alt="Mastercard">
-                            <img src="assets/img/basic/american-express.png" alt="American Express">
-                            <img src="assets/img/basic/paypal2.png" alt="Paypal">
+                            <p class="lead">支付方式:</p>
+                            <img src="{% static 'assets/img/basic/visa.png' %}" alt="Visa">
+
+                            <img src="{% static 'assets/img/basic/mastercard.png' %}" alt="Mastercard">
+                            <span>(目前暂不支持此支付方式)</span>
+{#                            <img src="assets/img/basic/visa.png" alt="Visa">#}
+{#                            <img src="assets/img/basic/mastercard.png" alt="Mastercard">#}
+{#                            <img src="assets/img/basic/american-express.png" alt="American Express">#}
+{#                            <img src="assets/img/basic/paypal2.png" alt="Paypal">#}
 
                             <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
-                                Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya
-                                handango imeem plugg
-                                dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
+                                请在支付之前确认客户信息,订单出错造成的损失我们概不负责
+                                ！ ！ ！
+                                您可以在右边选择更改和付款
                             </p>
                         </div>
                         <!-- /.col -->
                         <div class="col-6">
-                            <p class="lead">Amount Due 2/22/2014</p>
+                            <p class="lead">&nbsp;&nbsp;{{ time }}</p>
 
                             <div class="table-responsive">
                                 <table class="table">
                                     <tbody>
                                     <tr>
-                                        <th style="width:50%">Subtotal:</th>
-                                        <td>$250.30</td>
+                                        <th style="width:50%">总票价:</th>
+                                        <td>{{ cash }}</td>
                                     </tr>
                                     <tr>
-                                        <th>Tax (9.3%)</th>
-                                        <td>$10.34</td>
+                                        <th>保险费率:</th>
+                                        <td>10%</td>
                                     </tr>
                                     <tr>
-                                        <th>Shipping:</th>
-                                        <td>$5.80</td>
+                                        <th>保险费:</th>
+                                        <td>{{ bcore }}</td>
                                     </tr>
                                     <tr>
-                                        <th>Total:</th>
-                                        <td>$265.24</td>
+                                        <th>总支付:</th>
+                                        <td>{{ num_core }}</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -196,13 +180,13 @@
                     <!-- this row will not appear when printing -->
                     <div class="row no-print">
                         <div class="col-12">
-                            <a href="invoice-print.html" target="_blank" class="btn btn-lg  btn-default"><i
-                                    class="icon icon-print"></i> Print</a>
+{#                            <a href="invoice-print.html" target="_blank" class="btn btn-lg  btn-default"><i#}
+{#                                    class="icon icon-print"></i> Print</a>#}
                             <button type="button" class="btn btn-success btn-lg  float-right"><i
-                                    class="icon icon-credit-card"></i> Submit Payment
+                                    class="icon icon-credit-card"></i> 更改
                             </button>
                             <button type="button" class="btn btn-primary btn-lg float-right mr-2">
-                                <i class="icon icon-cloud-download"></i> Generate PDF
+                                <i class="icon icon-cloud-download"></i> 支付
                             </button>
                         </div>
                     </div>

@@ -35,7 +35,7 @@
         <div class="animated fadeInUpShort">
             <div class="row my-3">
                 <div class="col-md-7  offset-md-2">
-                    <form action="{% url 'app:userinfo' %}" enctype="multipart/form-data" method="post">
+                    <form action="{% url 'app:userinfo' %}?uid={{ user.uid }}" enctype="multipart/form-data" method="post">
                         <div class="card no-b  no-r">
                             <div class="card-body">
                                 <h5 class="card-title">用户信息</h5>
@@ -73,8 +73,8 @@
                                     </div>
                                     <div class="col-md-3 offset-md-1" style="border: 1px solid gainsboro">
                                         <div style="width:100%;height: 80%">
-                                            {% if userdetail.pic %}
-                                                <img style="width:100%;height: 100%" src="{{ userdetail.pic }}" alt="touxiang">
+                                            {% if user.portrait %}
+                                                <img style="width:100%;height: 100%" src="{{ user.portrait }}" alt="touxiang">
                                             {% else %}
                                                 <img style="width:100%;height: 100%" src="{% static 'assets/img/basic/cirrus.png' %}">
                                             {% endif %}

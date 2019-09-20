@@ -1,3 +1,6 @@
+import datetime
+import random
+
 from django.contrib.auth import authenticate, login, logout
 import os
 from django.contrib.auth import authenticate, login
@@ -26,23 +29,38 @@ def index(request):
         print(buses)
         if start_city and end_city:
 
-            return render(request, 'app/picket.html', locals())
+            return render(request, 'app/ticket.html', locals())
     return render(request,'app/index.html',locals())
 
 def select(request):
+    start_city = request.POST.get('st')
+    end_city = request.POST.get('ed')
+    print(start_city,end_city)
     if request.method == 'POST':
-        start_city = request.POST.get('from')
-        end_city = request.POST.get('go')
-        print(start_city)
+        start_city = request.POST.get('qian')
+        end_city = request.POST.get('hou')
+        print(start_city,end_city)
+        buses = Bus.objects.filter(start_city=start_city, end_city=end_city).order_by('start_time')
+        return render(request, 'app/ticket.html', locals())
     # cars = Bus.objects.filter(start_city=start_city,end_city=end_city)
-    return render(request, 'app/picket.html')
+    return render(request, 'app/ticket.html')
 
 def buy(request):
+    print(request.GET,'-----------------')
     bid = request.GET.get('bid')
+    uid = request.GET.get('uid')
+    print(uid)
+    lis = User.objects.filter(uid=uid).first().friends
+    sp = lis.split(',')
+    print(sp)
+    foos = User.objects.filter(uid__in=sp)
+
+    print(foos)
     print(bid)
     bus = Bus.objects.filter(bid=bid).first()
     print(bus)
     return render(request, 'app/buy_before.html',locals())
+
 
 def userinfo(request):
     # 上传头像
@@ -53,14 +71,17 @@ def userinfo(request):
         obj = Fileup(request.FILES.get('file'), is_randomname=True)
         path = os.path.join(BASE_DIR,'static/assets/img/portrait')
         if obj.upload(path) > 0:
-            userdetail = Userdetail.objects.filter(user_uid=uid).first()
-            print()
-            print(os.path.join('static/assets/img/portrait',obj.file_name))
-            userdetail.pic = os.path.join('static/assets/img/portrait',obj.file_name)
-            userdetail.save()
+            # userdetail = Userdetail.objects.filter(user_uid=uid).first()
+            # print(userdetail)
+            # print(os.path.join('static/assets/img/portrait',obj.file_name))
+            # userdetail.pic = os.path.join('/static/assets/img/portrait',obj.file_name)
+            # userdetail.save()
             user = User.objects.filter(uid=uid).first()
+            user.portrait = os.path.join('/static/assets/img/portrait',obj.file_name)
+            user.save()
             return render(request, 'app/userinfo.html',locals())
         else:
+            print(obj.upload(path))
             return HttpResponse('失败')
     return render(request, 'app/userinfo.html', locals())
 
@@ -86,7 +107,11 @@ def user_login(request):
             print(user)
             if user:
                 login(request,user)
-                return redirect(reverse('app:index'))
+                print(user.uid)
+                userdetail = Userdetail.objects.filter(user_uid=user.uid).first()
+                print(userdetail,'--------------------------')
+                u = 6
+                return redirect(reverse('app:index'),locals())
     return render(request,'login.html')
 
 
@@ -112,8 +137,12 @@ def register(request):
             password = form.cleaned_data.get('password')
             phone = form.cleaned_data.get('phone')
             user = User.objects.create_user(username=username,password=password,phone=phone)
+            userdetail = Userdetail()
+            userdetail.user_uid_id = user.uid
+            userdetail.save()
             login(request,user)
-            return redirect(reverse('app:index'))
+            userdetail = Userdetail.objects.filter(user_uid=user.uid).first()
+            return redirect(reverse('app:index'),locals())
         return render(request,'register.html',{'form':form})
     else:
         form = RegisterForm()
@@ -139,8 +168,35 @@ def relation(request):
 
 
 def payment(request):
-    return render(request, 'app/payment.html')
-
+    sb = request.GET.get('uu').split(',')
+    print(sb)
+    oo = [];PO = []
+    for n in range(len(sb)):
+        op = []
+        for i in range(4):
+            i = random.randint(0, 9)
+            op.append(i)
+        op = ''.join(str(i) for i in op)
+        date = datetime.datetime.now()
+        detester = date.strftime('%Y-%m-%d %H:%M:%S')
+        kko = ''.join(detester.split(' ')[0].split('-')) + op
+        oo.append(kko)
+    for i in range(4):
+        i = random.choice('VASJNAKCDSNOIDAAKNLASDMCACNJ')
+        PO.append(i)
+    PO = oo[0] + ''.join(PO)
+    users = User.objects.filter(uid__in=sb)
+    kll = {k:v for k,v in zip(users,oo)}
+    print(kll,'killlllllllllllllllllllllllllllllllllllllllllllllll')
+    time = datetime.datetime.now()
+    bid = request.GET.get('bid')
+    bun = Bus.objects.filter(bid=bid).first()
+    print(bun)
+    cash = float(len(sb) * int(bun.price))
+    bcore = float(cash * 0.1)
+    num_core = cash+bcore
+    print(cash,bcore,num_core)
+    return render(request, 'app/payment.html',locals())
 
 def news(request):
     return render(request, 'app/news.html')

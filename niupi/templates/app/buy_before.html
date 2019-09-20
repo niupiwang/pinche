@@ -47,8 +47,8 @@
                                                     <h5>列车信息</h5>
 						                        </div>
 						                        <div class="card-body b-b">
-						                            <div class="card-title">列车编号</div>
-                                                    <h5>{{ bus.num }}</h5>
+						                            <div class="card-title">列车编号 / 车牌号</div>
+                                                    <h5>{{ bus.num }} / {{ bus.bus_num }}</h5>
 						                        </div>
 						                        <div class="card-body b-b">
 						                            <div class="card-title"> 出发</div>
@@ -61,59 +61,171 @@
 						                            <div class="card-title">票务情况</div>
 													<h5><span><strong>{{ bus.standby_ticket }}</strong></span> /  {{ bus.ticket }}</h5>
 						                        </div>
-						                        <div class="card-body b-b">
-						                            <div class="card-title">乘客信息</div>
-						                            <div>
-														<input style="height: 25px;margin-bottom: 5px;" class="form-control form-control-lg datePicker" placeholder="乘客" type="text" id="usero">
-						                                <!-- <input type="text" value="乘客" class="form-control"/> -->
-                                                        <input hidden="hidden" value="222" id="bianhao">
-                                                        <input hidden="hidden" value="222" id="jiage">
-						                            </div>
-													<div>
-													    <input style="height: 25px;margin-bottom: 5px;" class="form-control form-control-lg datePicker" placeholder="身份证号" type="text" id="idnum">
-													</div>
-													<div>
-													    <input style="height: 25px;margin-bottom: 5px;" class="form-control form-control-lg datePicker" placeholder="电话" type="text" id="phone">
-													</div>
+                                                <div class="card-body b-b">
+                                                    <h4>常用联系人</h4>
 						                        </div>
-						                        <div class="card-body b-b">
 
-                                                    <input class="btn btn-success btn-lg btn-block" value="添加" type="submit" id="ooo">
+                                                {% for foo in foos %}
+                                                <div class="card-body b-b" id="a{{ foo.uid }}">
+                                                    <input hidden name="{{ foo.uid }}">
+                                                    <div style="height: 100%;width: 22%;float: left;line-height: 100%;margin-left: 5%">
+                                                        <h5 style="line-height: 100%" id="c{{ foo.uid }}">{{ foo.username }}</h5>
+                                                    </div>
+                                                    <div style="height: 100%;width: 30%;float: left;line-height: 100%">
+                                                        <h5  style="line-height: 100%">{{ foo.phone }}</h5>
+                                                    </div>
+                                                    <div style="height: 100%;width: 18%;float: left;line-height: 100%">
+                                                        <h5 style="line-height: 100%">255</h5>
+                                                    </div>
+                                                    <div style="height: 100%;width: 15%;float: left;line-height: 100%">
+                                                        <button type="button" class="btn btn-primary btn" id="b{{ foo.uid }}"></button>
+{#                                                        <input style="margin-bottom: 10%" value="添加" type="submit" id="ooo">#}
+                                                    </div>
+                                                </div>
+                                                    <script>
+
+                                                        $('#b{{ foo.uid }}').click(function () {
+                                                            $(this).attr('disabled', 1);
+                                                            console.log('ooo');
+                                                            var add = $('#c{{ foo.uid }}').text();
+                                                            $('#ooooo').append("<div class=\"card-body b-b\"  id=\"{{ foo.uid }}\"><h5>"+add+"</h5></div>")
+                                                        })
+
+                                                    </script>
+                                                {% endfor %}
+
+
+
+{#						                        <div class="card-body b-b">#}
+{#						                            <div class="card-title">乘客信息</div>#}
+{#						                            <div>#}
+{#														<input style="height: 25px;margin-bottom: 5px;" class="form-control form-control-lg datePicker" placeholder="乘客" type="text" id="usero">#}
+{#						                                <!-- <input type="text" value="乘客" class="form-control"/> -->#}
+{#                                                        <input hidden="hidden" value="222" id="bianhao">#}
+{#                                                        <input hidden="hidden" value="222" id="jiage">#}
+{#						                            </div>#}
+{#													<div>#}
+{#													    <input style="height: 25px;margin-bottom: 5px;" class="form-control form-control-lg datePicker" placeholder="身份证号" type="text" id="idnum">#}
+{#													</div>#}
+{#													<div>#}
+{#													    <input style="height: 25px;margin-bottom: 5px;" class="form-control form-control-lg datePicker" placeholder="电话" type="text" id="phone">#}
+{#													</div>#}
+{#						                        </div>#}
+						                        <div class="card-body b-b">
+                                                    <h5>牛皮王</h5>
+
+
+{#                                                    <input class="btn btn-success btn-lg btn-block" value="添加" type="submit" id="ooo">#}
 
 						                        </div>
 						                    </div>
 						                </div>
 						            </div>
 
-									<div class="col-md-6">
 
-										<div style="background-color: white;border: 1px solid gainsboro;">
-											<div style="margin-left: 5%;margin-top: 3%;margin-bottom: 3%;">
-												<h3>添加你的订单</h3>
-											</div>
-											<table style="margin-left: 5%;margin-top: 3%;margin-bottom: 3%;width: 94%;" id="ppp">
-												<tr style="height: 40px">
-													<td>乘客</td>
-                                                    <td>身份证号</td>
-													<td>乘车号</td>
-													<td>价格</td>
-												</tr>
-												<tr>
-													<td>李子坤</td>
-                                                    <td>乘客</td>
-													<td>527419</td>
-													<td>255</td>
-												</tr>
-											</table>
-											<div style="margin-left: 5%;margin-bottom: 3%;">
-												<a href=""  class="btn btn-xs btn-primary">提交</a>
-												<a href=""  class="btn btn-outline-primary btn-xs">加入订单</a>
-											</div>
-
-										</div>
+                                    <div class="col-md-6">
+						                <div class="card">
+						                    <div>
+                                                <div class="card-body b-b">
+                                                    <h5>订单列表</h5>
+						                        </div>
+                                                <div class="card-body b-b">
+{#						                            <div class="card-title">列车编号 / 车牌号</div>#}
+                                                    <h5> 所有订票如下：</h5>
+						                        </div>
+                                                <div id="ooooo">
 
 
-									</div>
+                                                </div>
+
+{#						                        <div class="card-body b-b">#}
+{#						                            <div class="card-title"> 出发</div>#}
+{#						                                <h5>{{ bus.start_time }} <span>&nbsp;&nbsp;&nbsp;&nbsp;{{ bus.start_station }}</span></h5>#}
+{#                                                    <div class="card-title"> 到达</div>#}
+{##}
+{#														<h5>{{ bus.end_time }} <span>&nbsp;&nbsp;&nbsp;&nbsp;{{ bus.end_station }}</span></h5>#}
+{#                                                </div>#}
+{#						                        <div class="card-body b-b">#}
+{#						                            <div class="card-title">票务情况</div>#}
+{#													<h5><span><strong>{{ bus.standby_ticket }}</strong></span> /  {{ bus.ticket }}</h5>#}
+{#						                        </div>#}
+{#						                        <div class="card-body b-b">#}
+{#						                            <div class="card-title">乘客信息</div>#}
+{#						                            <div>#}
+{#														<input style="height: 25px;margin-bottom: 5px;" class="form-control form-control-lg datePicker" placeholder="乘客" type="text" id="usero">#}
+{#						                                <!-- <input type="text" value="乘客" class="form-control"/> -->#}
+{#                                                        <input hidden="hidden" value="222" id="bianhao">#}
+{#                                                        <input hidden="hidden" value="222" id="jiage">#}
+{#						                            </div>#}
+{#													<div>#}
+{#													    <input style="height: 25px;margin-bottom: 5px;" class="form-control form-control-lg datePicker" placeholder="身份证号" type="text" id="idnum">#}
+{#													</div>#}
+{#													<div>#}
+{#													    <input style="height: 25px;margin-bottom: 5px;" class="form-control form-control-lg datePicker" placeholder="电话" type="text" id="phone">#}
+{#													</div>#}
+{#						                        </div>#}
+						                        <div class="card-body b-b">
+                                                    <a id="ppp" href=""><input class="btn btn-success btn-lg btn-sm" value="购买" type="submit" id="ooo" onclick="f()"> </a>
+                                                          <input class="btn btn-success btn-lg btn-sm" value="加入订单" type="submit" id="ooo" onclick="f()">
+                                                <script>
+                                                    function f() {
+
+
+                                                        $(this).attr('disabled', 1);
+
+                                                        var gu = $('#ooooo div');
+                                                        gu_id = [];
+                                                        for (var i=0;i<gu.length;i++){
+                                                            gu_id.push($(gu[i]).attr('id'));
+                                                        }
+                                                        console.log(gu_id);
+                                                        if (gu_id.length>0){
+                                                            document.getElementById('ppp').href = '{% url 'app:payment' %}?uu='+gu_id+'&bid='+'{{ bid }}'
+                                                        }
+                                                        $.ajax({
+                                                            url:{% url 'app:payment' %},
+                                                            type:'GET',
+                                                            data:{'id':gu_id},
+                                                            success:function (data) {
+
+                                                            }
+                                                        })
+                                                    }
+                                                </script>
+						                        </div>
+						                    </div>
+						                </div>
+						            </div>
+
+{#									<div class="col-md-6">#}
+{##}
+{#										<div style="background-color: white;border: 1px solid gainsboro;">#}
+{#											<div style="margin-left: 5%;margin-top: 3%;margin-bottom: 3%;">#}
+{#												<h3>添加你的订单</h3>#}
+{#											</div>#}
+{#											<table style="margin-left: 5%;margin-top: 3%;margin-bottom: 3%;width: 94%;" id="ppp">#}
+{#												<tr style="height: 40px">#}
+{#													<td>乘客</td>#}
+{#                                                    <td>身份证号</td>#}
+{#													<td>乘车号</td>#}
+{#													<td>价格</td>#}
+{#												</tr>#}
+{#												<tr>#}
+{#													<td>李子坤</td>#}
+{#                                                    <td>乘客</td>#}
+{#													<td>527419</td>#}
+{#													<td>255</td>#}
+{#												</tr>#}
+{#											</table>#}
+{#											<div style="margin-left: 5%;margin-bottom: 3%;">#}
+{#												<a href=""  class="btn btn-xs btn-primary">结算</a>#}
+{#												<a href="{% url 'app:payment' %}?bid={{ bus.bid }}&uid={{ user.uid }}"  class="btn btn-outline-primary btn-xs">加入订单</a>#}
+{#											</div>#}
+{##}
+{#										</div>#}
+{##}
+{##}
+{#									</div>#}
 						    </div>
 						</div>
 
@@ -125,18 +237,40 @@
 			</div>
 
     <script>
+    {#var u = $('#usero').val();#}
+    function d(){
+        var u = $('#usero').val();
+        var ao = $('#{{ foo }}')
+        console.log(u);
+        $.ajax({
+        url:{% url 'app:buy' %},
+        type:'GET',
+        data:{'KKK':u},
+        success:function (data) {
+    }})}
+
+
     console.log('lll');
-    $("#ooo").click(function () {
+    $("#{{ foo.uid }}").click(function () {
         console.log('ooo');
         var a = $('#usero').val();
         var b = $('#bianhao').val();
         var c = $('#jiage').val();
         var d = $('#idnum').val();
         var e = $('#phone').val();
-        if (a & d & e ){
-            $("#ppp").append('<tr><td>'+a+'</td><td>'+d+'</td><td>'+b+'</td><td>'+c+'</td></tr>')
+        if (a ){
+             $.ajax({
+        url:{% url 'app:payment' %},
+        type:'get',
+        data:{'KKK':uid},
+        success:function (data) {
+
         }
-    })
+    });
+                {#$("#ppp").append("<tr id=''><td>'+a+'</td><td>'+d+'</td><td>'+b+'</td><td>'+c+'</td></tr>")#}
+        }
+    });
+
 </script>
 
 {% endblock %}

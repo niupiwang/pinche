@@ -8,17 +8,20 @@
             <div class="container-fluid text-white">
                 <div class="row p-t-b-10 ">
                     <div class="col">
-                        <h4><i class="icon icon-home2"></i>牛皮网</h4>
+                        <h4>
+                            <i class="icon-database"></i>
+                        用户中心
+                    </h4>
                     </div>
                 </div>
                 <div class="row">
                     <ul class="nav responsive-tab nav-material nav-material-white">
                         <li>
-                            <a class="nav-link " href="{% url 'app:index' %}"><i
+                            <a class="nav-link " href="{% url 'app:userinfo' %}"><i
                                     class="icon icon-list"></i>首页</a>
                         </li>
                         <li>
-                            <a class="nav-link" href="{% url 'app:select' %}"><i
+                            <a class="nav-link" href="{% url 'app:relation' %}"><i
                                     class="icon icon-plus-circle"></i> 常用联系人</a>
                         </li>
                         <li>

@@ -9,24 +9,19 @@
             <div class="row">
                 <div class="col">
                     <h4>
-                        <i class="icon-package"></i>
-                        Compose
+                        <i class="icon-database"></i>
+                        用户中心
                     </h4>
                 </div>
             </div>
-            <div class="row ">
+            <div class="row justify-content-between">
                 <ul class="nav nav-material nav-material-white responsive-tab" id="v-pills-tab" role="tablist">
-{#                    <li class="nav-item">#}
-{#                        <a class="nav-link active" href="panel-page-users-create.html">#}
-{#                            <i class="icon icon-clipboard-add"></i> Compose New Message#}
-{#                        </a>#}
-{#                    </li>#}
                     <li>
-                        <a class="nav-link"  href="{% url 'app:userinfo' %}" ><i class="icon icon-home2"></i> 个人信息</a>
+                        <a class="nav-link"  href="{% url 'app:userinfo' %}" ><i class="icon icon-plus-circle"></i> 个人信息</a>
                     </li>
 
                     <li>
-                        <a class="nav-link  active"  href="{% url 'app:relation' %}"><i class="icon icon-plus-circle"></i>常用联系人</a>
+                        <a class="nav-link  active"  href="{% url 'app:relation' %}"><i class="icon icon-home2"></i>常用联系人</a>
                     </li>
                     <li>
                         <a class="nav-link"  href="{% url 'app:news' %}"><i class="icon icon-home2"></i>消息</a>
@@ -37,7 +32,7 @@
         </div>
     </header>
     <div class="container-fluid animatedParent animateOnce">
-        <div class="animated fadeInUpShort my-3">
+        <div class="animated fadeInUpShort">
            <div class="row">
                <div class="col-md-3">
 

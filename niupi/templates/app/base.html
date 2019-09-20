@@ -110,7 +110,7 @@
                     <div class="user-panel p-3 light mb-2">
                         <div>
                             <div class="float-left image">
-                                <img class="user_avatar" src="{% static 'assets/img/dummy/u2.png' %}" alt="User Image">
+                                <img class="user_avatar" src="{{ user.portrait }}" alt="ooo">
                             </div>
                             <div class="float-left info">
                                 <h6 class="font-weight-light mt-2 mb-1">{{ user.username }}</h6>
@@ -239,51 +239,51 @@
                     <div class="navbar-custom-menu p-t-10">
                         <ul class="nav navbar-nav">
                             <!-- Messages-->
-                            <li class="dropdown custom-dropdown messages-menu">
-                                <a href="#" class="nav-link" data-toggle="dropdown">
-                                    <i class="icon-message "></i>
-                                    <span class="badge badge-success badge-mini rounded-circle">4</span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <!-- inner menu: contains the actual data -->
-                                        <ul class="menu pl-2 pr-2">
-                                            <!-- start message -->
-                                            <li>
-                                                <a href="#">
-                                                    <div class="avatar float-left">
-                                                        <img src="{% static 'assets/img/dummy/u4.png' %}" alt="">
-                                                        <span class="avatar-badge busy"></span>
-                                                    </div>
-                                                    <h4>
-                                                        Support Team
-                                                        <small><i class="icon icon-clock-o"></i> 5 mins</small>
-                                                    </h4>
-                                                    <p>Why not buy a new awesome theme?</p>
-                                                </a>
-                                            </li>
-                                            <!-- end message -->
-                                            <!-- start message -->
-                                            <li>
-                                                <a href="#">
-                                                    <div class="avatar float-left">
-                                                        <img src="{% static 'assets/img/dummy/u1.png' %}" alt="">
-                                                        <span class="avatar-badge online"></span>
-                                                    </div>
-                                                    <h4>
-                                                        Support Team
-                                                        <small><i class="icon icon-clock-o"></i> 5 mins</small>
-                                                    </h4>
-                                                    <p>Why not buy a new awesome theme?</p>
-                                                </a>
-                                            </li>
-                                            <!-- end message -->
-
-                                        </ul>
-                                    </li>
-                                    <li class="footer s-12 p-2 text-center"><a href="#">See All Messages</a></li>
-                                </ul>
-                            </li>
+{#                            <li class="dropdown custom-dropdown messages-menu">#}
+{#                                <a href="#" class="nav-link" data-toggle="dropdown">#}
+{#                                    <i class="icon-message "></i>#}
+{#                                    <span class="badge badge-success badge-mini rounded-circle">4</span>#}
+{#                                </a>#}
+{#                                <ul class="dropdown-menu">#}
+{#                                    <li>#}
+{#                                        <!-- inner menu: contains the actual data -->#}
+{#                                        <ul class="menu pl-2 pr-2">#}
+{#                                            <!-- start message -->#}
+{#                                            <li>#}
+{#                                                <a href="#">#}
+{#                                                    <div class="avatar float-left">#}
+{#                                                        <img src="{% static 'assets/img/dummy/u4.png' %}" alt="">#}
+{#                                                        <span class="avatar-badge busy"></span>#}
+{#                                                    </div>#}
+{#                                                    <h4>#}
+{#                                                        Support Team#}
+{#                                                        <small><i class="icon icon-clock-o"></i> 5 mins</small>#}
+{#                                                    </h4>#}
+{#                                                    <p>Why not buy a new awesome theme?</p>#}
+{#                                                </a>#}
+{#                                            </li>#}
+{#                                            <!-- end message -->#}
+{#                                            <!-- start message -->#}
+{#                                            <li>#}
+{#                                                <a href="#">#}
+{#                                                    <div class="avatar float-left">#}
+{#                                                        <img src="{% static 'assets/img/dummy/u1.png' %}" alt="">#}
+{#                                                        <span class="avatar-badge online"></span>#}
+{#                                                    </div>#}
+{#                                                    <h4>#}
+{#                                                        Support Team#}
+{#                                                        <small><i class="icon icon-clock-o"></i> 5 mins</small>#}
+{#                                                    </h4>#}
+{#                                                    <p>Why not buy a new awesome theme?</p>#}
+{#                                                </a>#}
+{#                                            </li>#}
+{#                                            <!-- end message -->#}
+{##}
+{#                                        </ul>#}
+{#                                    </li>#}
+{#                                    <li class="footer s-12 p-2 text-center"><a href="#">{{ user.user }}</a></li>#}
+{#                                </ul>#}
+{#                            </li>#}
                             <!-- Notifications -->
 
                             <li>
@@ -297,10 +297,15 @@
                             <!-- User Account-->
                             <li class="dropdown custom-dropdown user user-menu">
                                 <a href="#" class="nav-link" data-toggle="dropdown">
-                                    <img src="{% static 'assets/img/dummy/u8.png' %}" class="user-image" alt="User Image">
+                                    <img src="{{ user.portrait }}" class="user-image" alt="User Image">
                                 </a>
                             </li>
-                            <li><a href="{% url 'app:logout' %}">退出登录</a></li>
+                            <li class="dropdown custom-dropdown user user-menu">
+                                <a href="{% url 'app:logout' %}" class="nav-link">
+                                    退出
+                                </a>
+                            </li>
+
                         </ul>
                     </div>
                 </div>
@@ -450,56 +455,22 @@
                     <!--Top Menu Start -->
                     <div class="navbar-custom-menu p-t-10">
                         <ul class="nav navbar-nav">
-                            <!-- Messages-->
-                            <li class="dropdown custom-dropdown messages-menu">
-                                <a href="#" class="nav-link" data-toggle="dropdown">
-                                    <i class="icon-message "></i>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <!-- inner menu: contains the actual data -->
-                                        <ul class="menu pl-2 pr-2">
-                                            <!-- start message -->
-
-                                            <!-- end message -->
-                                            <!-- start message -->
-                                            <li>
-                                                <a href="#">
-                                                    <div class="avatar float-left">
-                                                        <img src="{% static 'assets/img/dummy/nologin.jpg' %}" alt="">
-                                                        <span class="avatar-badge online"></span>
-                                                    </div>
-                                                    <h4>
-                                                        请登录
-                                                        <small><i class="icon icon-clock-o"></i></small>
-                                                    </h4>
-                                                    <p>登录以查看消息</p>
-                                                </a>
-                                            </li>
-                                            <!-- end message -->
-
-                                        </ul>
-                                    </li>
-                                    <li class="footer s-12 p-2 text-center"><a href="#">See All Messages</a></li>
-                                </ul>
-                            </li>
-                            <!-- Notifications -->
-
-                            <li>
-                                <a class="nav-link " data-toggle="collapse" data-target="#navbarToggleExternalContent"
-                                   aria-controls="navbarToggleExternalContent"
-                                   aria-expanded="false" aria-label="Toggle navigation">
-                                    <i class=" icon-search3 "></i>
-                                </a>
-                            </li>
-
-                            <!-- User Account-->
+{#                            <li>#}
+{#                                <a class="nav-link " data-toggle="collapse" data-target="#navbarToggleExternalContent"#}
+{#                                   aria-controls="navbarToggleExternalContent"#}
+{#                                   aria-expanded="false" aria-label="Toggle navigation">#}
+{#                                    <i class=" icon-search3 "></i>#}
+{#                                </a>#}
+{#                            </li>#}
                             <li class="dropdown custom-dropdown user user-menu">
                                 <a href="{% url 'app:login' %}">
                                     <img src="{% static 'assets/img/dummy/nologin.jpg' %}" class="user-image" alt="User Image">
                                 </a>
-                                <a href="{% url 'app:register' %}">注册新用户</a>
                             </li>
+                            <li class="dropdown custom-dropdown user user-menu">
+                                <a href="{% url 'app:register' %}">注册</a>
+                            </li>
+
                         </ul>
                     </div>
                 </div>

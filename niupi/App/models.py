@@ -15,6 +15,8 @@ class User(AbstractUser):
     phone = models.CharField(max_length=64,verbose_name='手机号')
     is_active = models.IntegerField(default=1) # 1代表激活 0代表锁定
     type = models.IntegerField(default=0) # 0为普通用户 1为司机 2为管理员用户
+    portrait = models.CharField(max_length=196,verbose_name='手机号')
+    friends = models.CharField(max_length=128,null=True)
 
     class Meta:
         db_table = 'user'
@@ -45,6 +47,8 @@ class Bus(models.Model):
     bid = models.AutoField(primary_key=True)
     num = models.CharField(max_length=10, verbose_name='列车编号')
     bus_num = models.CharField(max_length=10, verbose_name='车牌号码')
+    num = models.CharField(max_length=128, verbose_name='列车编号')
+    bus_num = models.CharField(max_length=10, unique=True, verbose_name='车牌号码')
     start_time = models.DateTimeField(verbose_name='起始时间')
     end_time = models.DateTimeField(verbose_name='到达时间')
     start_city = models.CharField(max_length=128, verbose_name='起始城市')
@@ -62,7 +66,7 @@ class Bus(models.Model):
 #4汽车信息表
 class Car(models.Model):
     cid = models.AutoField(primary_key=True)
-
+    car_num = models.IntegerField(unique=True, verbose_name='车牌号码',null=True)
     car_type = models.CharField(max_length=100, verbose_name='车型描述（品牌，名称，座位数）')
     start_time = models.DateTimeField(verbose_name='出发时间')
     start_city = models.CharField(max_length=128, verbose_name='起始城市')
