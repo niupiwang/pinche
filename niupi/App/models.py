@@ -28,7 +28,7 @@ class Userdetail(models.Model):
     is_vip = models.IntegerField(default=0) # 0否 1是
     real_name = models.CharField(null=True, max_length=20, verbose_name='真实姓名')
     id_num = models.CharField(null=True, unique=True,max_length=254, verbose_name='身份证号')
-    birthday = models.DateTimeField(null=True, verbose_name='生日')
+    birthday = models.DateField(null=True, verbose_name='生日')
     address = models.CharField(null=True, max_length=200, verbose_name='地址')
     age = models.IntegerField(null=True, verbose_name='年龄')
     pic = models.CharField(null=True,max_length=128) # 头像

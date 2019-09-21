@@ -4,7 +4,7 @@ from random import randint
 
 
 class Fileup:
-    def __init__(self, file, exts=None, size=1024 * 1024, is_randomname=False):
+    def __init__(self, file, exts=None, size=24*1024 * 1024, is_randomname=False):
 
 
         if exts is None:

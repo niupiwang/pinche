@@ -148,36 +148,30 @@
                                         <tbody>
                                             {% for i in userdetail %}
                                                 {% if i.user_uid.uid in a %}
-                                                    <div>{{ i.uid }}</div>
-
-                                                    <tr>
-            {#                                          <td>#}
-            {#                                              <div class="custom-control custom-checkbox">#}
-            {#                                                  <input class="custom-control-input checkSingle" id="user_id_2"#}
-            {#                                                         required="" type="checkbox"><label class="custom-control-label"#}
-            {#                                                                                              for="user_id_2"></label>#}
-            {#                                              </div>#}
-            {#                                          </td>#}
-                                                        <td>
-                                                            <div class="avatar avatar-md mr-3 mt-1 float-left">
+                                                    <tr id="{{ i.user_uid.uid }}">
+                                                        <td><div  class="avatar avatar-md mr-3 mt-1 float-left">
                                                                 <img src="{{ i.user_uid.portrait }}" alt="">
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                                <div>
-                                                                    <strong>{{ i.real_name }}</strong>
-                                                                </div>
-                                                        </td>
+                                                            </div></td>
+                                                        <td><div><strong>{{ i.real_name }}</strong></div></td>
                                                         <td>{{ i.id_num }}</td>
                                                         <td>{{ i.user_uid.phone }}</td>
                                                         <td><span class="r-3 badge badge-warning">联系人</span></td>
-                                                        <td>
-                                                            <a href="#"><i class="icon-pencil"></i></a>
-                                                        </td>
+                                                        <td><a href="#"><i id="a{{ i.user_uid.uid }}" class="icon-pencil"></i></a></td>
                                                     </tr>
-
                                                 {% endif %}
 
+                                            <script>
+                                                $('#a{{ i.user_uid.uid }}').click(function () {
+                                                    $('#{{ i.user_uid.uid }}').remove();
+                                                    $.ajax({
+                                                        url:'{% url 'app:relation' %}',
+                                                        type:'GET',
+                                                        data:{'uid':{{ i.user_uid.uid }}}
+
+                                                    })
+                                                })
+
+                                            </script>
                                             {% endfor %}
                                         </tbody>
                                     </table>

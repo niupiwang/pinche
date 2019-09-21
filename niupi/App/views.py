@@ -1,6 +1,7 @@
 import datetime
 import random
 
+from alipay import AliPay
 from django.contrib.auth import authenticate, login, logout
 import os
 from django.contrib.auth import authenticate, login
@@ -68,67 +69,61 @@ def buy(request):
 
 def userinfo(request):
     userdetail1 = Userdetail.objects.filter(user_uid=request.user.uid)[0]
-    # cars = Car.objects.all()
-    # a = []
-    # for i in cars:
-    #     a.append(i.car_uid)
-    # if int(request.user.uid) not in a:
-    #     car = Car()
-    #     car.car_num = request.POST.get('carnum')
-    #     car.car_type = request.POST.get('cartype')
-    #     car.uid = int(request.user.uid)
-    #     car.seats = request.POST.get('seats')
-    #     car.save()
-    # else:
-    car = Car.objects.filter(car_uid=request.user.uid)[0]
-    uid = request.GET.get('uid')
-    print(uid)
+
+    # 得到汽车车主列表
+    cids = Car.objects.all()
+    ci = []
+    for i in cids:
+        ci.append(i.car_uid)
+
     if request.method == 'POST':
-        print(request.POST.get('realname'))
-        userdetail1.real_name = request.POST.get('realname')
-        userdetail1.birthday = request.POST.get('birthday')
-        request.user.email = request.POST.get('email')
-        request.user.phone = request.POST.get('phone')
-        userdetail1.address = request.POST.get('address')
-        car.car_num = request.POST.get('carnum')
-        car.car_type = request.POST.get('cartype')
-        car.seats = request.POST.get('seats')
-        userdetail1.save()
-        request.user.save()
-        car.save()
+        if request.user.uid not in ci:
+            userdetail1.real_name = request.POST.get('realname')
+            print(request.POST.get('birthday'),type(request.POST.get('birthday')))
+            userdetail1.birthday = request.POST.get('birthday')
+            userdetail1.address = request.POST.get('address')
+            request.user.email = request.POST.get('email')
+            request.user.phone = request.POST.get('phone')
+            userdetail1.save()
+            request.user.save()
+            print('没车的')
+        else:
+            car = Car.objects.filter(car_uid=request.user.uid)[0]
+            userdetail1.real_name = request.POST.get('realname')
+            userdetail1.birthday = request.POST.get('birthday')
+            request.user.email = request.POST.get('email')
+            request.user.phone = request.POST.get('phone')
+            userdetail1.address = request.POST.get('address')
+            car.car_num = request.POST.get('carnum')
+            car.car_type = request.POST.get('cartype')
+            car.seats = request.POST.get('seats')
+            userdetail1.save()
+            request.user.save()
+            car.save()
+            print('有车的')
         print('----------------------')
         obj = Fileup(request.FILES.get('file'), is_randomname=True)
         path = os.path.join(BASE_DIR, 'static/assets/img/portrait')
-        if obj.upload(path) > 0:
-            # userdetail = Userdetail.objects.filter(user_uid=uid).first()
-            # print(userdetail)
-            # print(os.path.join('static/assets/img/portrait',obj.file_name))
-            # userdetail.pic = os.path.join('/static/assets/img/portrait',obj.file_name)
-            # userdetail.save()
-            user = User.objects.filter(uid=uid).first()
-            user.portrait = os.path.join('/static/assets/img/portrait', obj.file_name)
-            user.save()
-            return render(request, 'app/userinfo.html', locals())
-        else:
-            print(obj.upload(path))
-            return HttpResponse('失败')
         # 上传头像
         if request.FILES.get('file'):
             obj = Fileup(request.FILES.get('file'), is_randomname=True)
             path = os.path.join(BASE_DIR,'static/assets/img/portrait')
             if obj.upload(path) > 0:
-                # userdetail = Userdetail.objects.filter(user_uid=uid).first()
-                # print(userdetail)
-                # print(os.path.join('static/assets/img/portrait',obj.file_name))
-                # userdetail.pic = os.path.join('/static/assets/img/portrait',obj.file_name)
-                # userdetail.save()
-                user = User.objects.filter(uid=uid).first()
+                user = User.objects.filter(uid=request.user.uid).first()
                 user.portrait = os.path.join('/static/assets/img/portrait',obj.file_name)
                 user.save()
+                userdetail = Userdetail.objects.filter(user_uid=request.user.uid)[0]
+                # 生日
+                birth = str(userdetail.birthday)
+                print(birth, '生日')
                 return render(request, 'app/userinfo.html',locals())
             else:
                 print(obj.upload(path))
                 return HttpResponse('失败')
+    userdetail = Userdetail.objects.filter(user_uid=request.user.uid)[0]
+    # 生日
+    birth = str(userdetail.birthday)
+    print(birth, '生日')
     return render(request, 'app/userinfo.html', locals())
 
 
@@ -217,7 +212,16 @@ def pay(request):
 
 
 def relation(request):
-    # print(request.user.uid)
+    print(request.GET)
+    # 删除好友
+    if request.GET:
+        uid = request.GET['uid']
+        user1 = User.objects.filter(uid=request.user.uid).first()
+        lists = user1.friends.split(',')
+        lists.remove(uid)
+        friendss = ','.join(lists)
+        user1.friends = friendss
+        user1.save()
     str = request.user.friends
     x = str.split(',')
     a = []
