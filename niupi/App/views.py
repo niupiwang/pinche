@@ -275,7 +275,9 @@ def payment(request):
         print('订单购买')
 
         if request.GET.get('hoo'):
-            hoo = request.GET.get('hoo').replace('(', '').replace(')', '').replace("'", '').strip('[]').replace(' ','').split(',')
+            kel = List.objects.filter(lid=request.GET.get('hoo')).first()
+            print(kel)
+            hoo = kel.list.replace('(', '').replace(')', '').replace("'", '').strip('[]').replace(' ','').split(',')
             su = set(hoo)
             print(hoo)
             sb = []
@@ -290,12 +292,14 @@ def payment(request):
             kll = {k: v for k, v in zip(users, sun)}
             time = datetime.datetime.now()
             bun = Bus.objects.filter(bid=bid).first()
-            PO = su[0]
+            PO = kel.num_list
             # 总票价，保险费，总价
             cash = float(price)
             bcore = float(cash * 0.1)
             num_core = cash + bcore
             return render(request, 'app/payment.html', locals())
+
+
         print('直接购买')
         uuo = request.GET.get('uu')
         if uuo:
@@ -360,10 +364,11 @@ def pay_list(request):
     print('---订单列表---')
     lists = List.objects.all()
     lists_w = List.objects.filter(status=0)
+    lists_d = List.objects.filter(status=1)
     lists_a = List.objects.filter(status=2)
     li = lists.first()
     print('---订单结束---')
-    return render(request,'app/payment_all.html',locals())
+    return render(request, 'app/pay_list.html', locals())
 
 
 
@@ -402,7 +407,7 @@ def ali_buy(request,pay_id,pay_price):
         # 订单名称
         subject='NP'+pay_id,
         # 回调地址
-        return_url='http://127.0.0.1:8000',
+        return_url='http://127.0.0.1:8000/send_new?payment_num='+pay_id+'&code=0',
         # 异步通知商家服务器器地址,postnotify_url="http://localhost:8000/mine/index"使用用默认notify url
     )
     print(order_string,'000000000000000000000000000000000000000000000')
@@ -427,9 +432,27 @@ def pay_ali(request):
 
 
 def all(request):
-    return render(request,'app/payment_all.html')
+    print('---')
+    return render(request, 'app/pay_list.html')
 
 
-
-
-
+def send_new(request):
+    print('取消订单')
+    if request.GET['code']== '1':
+        pay_de = request.GET['id']
+        print(pay_de)
+        payment0 = List.objects.filter(num_list=pay_de).first()
+        print(payment0)
+        payment0.status = 1
+        payment0.save()
+    print('已完成订单')
+    print(request.GET['code'])
+    if request.GET['code']== '0':
+        print(request.GET['code'])
+        pay_id = request.GET.get('payment_num')
+        print(pay_id)
+        payment1 = List.objects.filter(num_list=pay_id).first()
+        print(payment1)
+        payment1.status = 2
+        payment1.save()
+    return render(request,'app/success.html')

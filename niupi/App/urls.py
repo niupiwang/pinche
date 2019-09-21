@@ -13,6 +13,8 @@ url(r'^news/$', views.news, name='news'),
 url(r'^pay_ali/$', views.pay_ali, name='pay_ali'),
 url(r'^all/$', views.all, name='all'),
 url(r'^pay_list/$', views.pay_list, name='pay_list'),
+url(r'^send_new/$', views.send_new, name='send_new'),
+
 
 
 url(r'^add_payment/$', views.add_payment, name='add_payment'),

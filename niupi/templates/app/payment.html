@@ -1,6 +1,12 @@
 {% extends 'app/base.html' %}
 {% load static %}
 
+{% block head %}
+    {{ block.super }}
+    <script src="https://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+
+{% endblock %}
+
 {% block content %}
 
     <div class="page has-sidebar-left">
@@ -152,15 +158,31 @@
                             <button type="button" class="btn btn-success btn-lg  float-right"><i
                                     class="icon icon-credit-card"></i> 支付
                             </button></a>
-                            <button type="button" class="btn btn-primary btn-lg float-right mr-2">
-                                <i class="icon icon-cloud-download"></i> 更改
-                            </button>
+                            <a id="ooo" href="">
+                            <button id="xiao" type="button" class="btn btn-primary btn-lg float-right mr-2">
+                                <i class="icon icon-cloud-download"></i> 取消
+                            </button></a>
+
                         </div>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        $('#xiao').click(function () {
+            console.log('ooo');
+            $.ajax({
+                url:'{% url 'app:send_new' %}',
+                type:'GET',
+                data:{'id':'{{ PO }}',
+                    'code':1,
+                }
+            });
+            document.getElementById('ooo').href = '{% url 'app:pay_list' %}'
+        })
+    </script>
 
 {% endblock %}
 
