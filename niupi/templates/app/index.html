@@ -50,19 +50,26 @@
                                         <i class="icon-calendar-check-o s-48 text-primary"></i>
                                         <p class="p-t-b-20">输入以查询车票</p>
                                     </div>
-                                    <form action="{% url 'app:index' %}?start=&end=" method="post" id="aaa">
-                                        <div class="form-group has-icon"><i class="icon-calendar"></i>
-                                            <input class="form-control form-control-lg datePicker" placeholder="出发地"
-                                                   type="text" name="from">
-                                        </div>
-                                        <div class="form-group has-icon"><i class="icon-calendar"></i>
-                                            <input class="form-control form-control-lg datePicker" placeholder="目的地"
-                                                   type="text" name="go">
-                                        </div>
-                                        {% csrf_token %}
-                                        <input class="btn btn-success btn-lg btn-block" value="查询" type="submit"
-                                               id="bbb">
-                                    </form>
+                                    <div class="form-group has-icon"><i class="icon-calendar"></i>
+                                        <input class="form-control form-control-lg datePicker" placeholder="出发地"
+                                               type="text" name="from" id="start">
+                                    </div>
+                                    <div class="form-group has-icon"><i class="icon-calendar"></i>
+                                        <input class="form-control form-control-lg datePicker" placeholder="目的地"
+                                               type="text" name="go" id="end">
+                                    </div>
+                                    <a href="" id="poo">
+                                    <button class="btn btn-success btn-lg btn-block" id="ppp">查询</button></a>
+                                    <script>
+                                        $('#ppp').click(function () {
+                                            var a = $('#start').val();
+                                            console.log(a);
+                                            var b = $('#end').val();
+                                            console.log(b);
+                                            document.getElementById('poo').href = '{% url 'app:select' %}?st='+a+'&ed='+b+'&page=1'
+                                            console.log($('#poo').href)
+                                        })
+                                    </script>
                                 </div>
                             </div>
                         </div>

@@ -19,11 +19,11 @@
                                     class="icon icon-list"></i>订单</a>
                         </li>
                         <li>
-                            <a class="nav-link" href="＃"><i
+                            <a class="nav-link" href="#"><i
                                     class="icon icon-plus-circle"></i> 保险订单</a>
                         </li>
                         <li>
-                            <a class="nav-link" href="＃"><i class="icon icon-trash-can"></i>　投诉与建议</a>
+                            <a class="nav-link" href="#"><i class="icon icon-trash-can"></i>　投诉与建议</a>
                         </li>
                     </ul>
                 </div>
@@ -103,7 +103,23 @@
                                                     </tbody>
                                                 </table>
                                             </div>
+{#                                            <nav class="pt-3" aria-label="Page navigation">#}
+{#                                                <ul class="pagination">#}
+{#                                                    <li class="page-item"><a class="page-link" href="#">Previous</a>#}
+{#                                                    </li>#}
+{#                                                    <li class="page-item"><a class="page-link" href="#">1</a>#}
+{#                                                    </li>#}
+{#                                                    <li class="page-item"><a class="page-link" href="#">2</a>#}
+{#                                                    </li>#}
+{#                                                    <li class="page-item"><a class="page-link" href="#">3</a>#}
+{#                                                    </li>#}
+{#                                                    <li class="page-item"><a class="page-link" href="#">Next</a>#}
+{#                                                    </li>#}
+{#                                                </ul>#}
+{#                                            </nav>#}
                                         </div>
+
+
                                         <div class="tab-pane fade" id="w3-tab2" role="tabpanel"
                                              aria-labelledby="w3-tab1">
                                             <div class="table-responsive">
@@ -121,7 +137,9 @@
                                                     {% for payment in lists_w %}
                                                         <tr>
                                                             <td class="w-10">{{ forloop.counter }}</td>
-                                                            <td><a href="{% url 'app:payment' %}?user={{ user.uid }}&bid={{ payment.traffic_id }}&price={{ payment.price_list }}&hoo={{ payment.lid }}">{{ payment.num_list }}</a></td>
+                                                            <td>
+                                                                <a href="{% url 'app:payment' %}?user={{ user.uid }}&bid={{ payment.traffic_id }}&price={{ payment.price_list }}&hoo={{ payment.lid }}">{{ payment.num_list }}</a>
+                                                            </td>
                                                             <td>{{ payment.traffic.num }}</td>
                                                             <td>{{ payment.traffic.start_time }}</td>
                                                             <td>{{ payment.price_list }}</td>
@@ -187,25 +205,9 @@
                                                 </table>
                                             </div>
                                         </div>
-
-
                                     </div>
                                 </div>
                             </div>
-                            <nav class="pt-3" aria-label="Page navigation">
-                                <ul class="pagination">
-                                    <li class="page-item"><a class="page-link" href="#">Previous</a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">Next</a>
-                                    </li>
-                                </ul>
-                            </nav>
                         </div>
                     </div>
                 </div>
@@ -213,126 +215,4 @@
         </div>
     </div>
 
-
-
-    {#<div class="content-wrapper animatedParent animateOnce">#}
-    {#        <div class="container">#}
-    {#            <section class="paper-card">#}
-    {##}
-    {#                <!-- /.row -->#}
-    {#                <div class="row">#}
-    {#                    <div class="col-12">#}
-    {#                        <div class="box">#}
-    {#                            <div class="box-header">#}
-    {#                                <h3 class="box-title">Responsive Hover Table</h3>#}
-    {#                                <div class="box-tools">#}
-    {#                                    <div class="input-group input-group-sm" style="width: 150px;">#}
-    {#                                        <input name="table_search" class="form-control float-right" placeholder="Search" type="text">#}
-    {#                                        <div class="input-group-btn">#}
-    {#                                            <button type="submit" class="btn btn-secondary"><i class="icon-search"></i>#}
-    {#                                            </button>#}
-    {#                                        </div>#}
-    {#                                    </div>#}
-    {#                                </div>#}
-    {#                            </div>#}
-    {#                            <div class="card-header white pb-0">#}
-    {#                                    <div class="d-flex justify-content-between">#}
-    {#                                        <div class="align-self-center">#}
-    {#                                            <ul class="nav nav-pills mb-3" role="tablist">#}
-    {#                                                <li class="nav-item">#}
-    {#                                                    <a class="nav-link active show r-20" id="w3--tab1" data-toggle="tab"#}
-    {#                                                       href="#w3-tab1" role="tab" aria-controls="tab1"#}
-    {#                                                       aria-expanded="true" aria-selected="true">Tab 1</a>#}
-    {#                                                </li>#}
-    {#                                                <li class="nav-item">#}
-    {#                                                    <a class="nav-link r-20" id="w3--tab2" data-toggle="tab"#}
-    {#                                                       href="#w3-tab2" role="tab" aria-controls="tab2"#}
-    {#                                                       aria-selected="false">Tab 2</a>#}
-    {#                                                </li>#}
-    {#                                                <li class="nav-item">#}
-    {#                                                    <a class="nav-link r-20" id="w3--tab3" data-toggle="tab"#}
-    {#                                                       href="#w3-tab3" role="tab" aria-controls="tab3"#}
-    {#                                                       aria-selected="false">Tab 3</a>#}
-    {#                                                </li>#}
-    {#                                            </ul>#}
-    {#                                        </div>#}
-    {#                                        <div class="align-self-center">#}
-    {#                                            <h5>Awesome Title</h5>#}
-    {#                                        </div>#}
-    {##}
-    {#                                    </div>#}
-    {#                                </div>#}
-    {#                            <!-- /.box-header -->#}
-    {#                            <div class="box-body table-responsive no-padding">#}
-    {#                                <table class="table table-hover">#}
-    {#                                    <tbody>#}
-    {#                                    <tr>#}
-    {#                                        <th>ID</th>#}
-    {#                                        <th>User</th>#}
-    {#                                        <th>Date</th>#}
-    {#                                        <th>Status</th>#}
-    {#                                        <th>Reason</th>#}
-    {#                                    </tr>#}
-    {#                                    <tr>#}
-    {#                                        <td>183</td>#}
-    {#                                        <td>John Doe</td>#}
-    {#                                        <td>11-7-2014</td>#}
-    {#                                        <td><span class="badge text-white badge text-white-pill badge text-white-success">Approved</span>#}
-    {#                                        </td>#}
-    {#                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>#}
-    {#                                    </tr>#}
-    {#                                    <tr>#}
-    {#                                        <td>219</td>#}
-    {#                                        <td>Alexander Pierce</td>#}
-    {#                                        <td>11-7-2014</td>#}
-    {#                                        <td><span class="badge text-white badge text-white-pill badge text-white-warning">Pending</span>#}
-    {#                                        </td>#}
-    {#                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>#}
-    {#                                    </tr>#}
-    {#                                    <tr>#}
-    {#                                        <td>657</td>#}
-    {#                                        <td>Bob Doe</td>#}
-    {#                                        <td>11-7-2014</td>#}
-    {#                                        <td><span class="badge text-white badge text-white-pill badge text-white-primary">Approved</span>#}
-    {#                                        </td>#}
-    {#                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>#}
-    {#                                    </tr>#}
-    {#                                    <tr>#}
-    {#                                        <td>175</td>#}
-    {#                                        <td>Mike Doe</td>#}
-    {#                                        <td>11-7-2014</td>#}
-    {#                                        <td><span class="badge text-white badge text-white-pill badge text-white-danger">Denied</span>#}
-    {#                                        </td>#}
-    {#                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>#}
-    {#                                    </tr>#}
-    {#                                    </tbody>#}
-    {#                                </table>#}
-    {#                            </div>#}
-    {#                        </div>#}
-    {#                        <div class="box-header">#}
-    {#                                <div class="box-tools">#}
-    {#                                    <ul class="pagination pagination-sm no-margin float-right">#}
-    {#                                        <li class="page-item"><a href="#" class="page-link">«</a>#}
-    {#                                        </li>#}
-    {#                                        <li class="page-item"><a href="#" class="page-link">1</a>#}
-    {#                                        </li>#}
-    {#                                        <li class="page-item"><a href="#" class="page-link">2</a>#}
-    {#                                        </li>#}
-    {#                                        <li class="page-item"><a href="#" class="page-link">3</a>#}
-    {#                                        </li>#}
-    {#                                        <li class="page-item"><a href="#" class="page-link">»</a>#}
-    {#                                        </li>#}
-    {#                                    </ul>#}
-    {#                                </div>#}
-    {#                            </div>#}
-    {#                    </div>#}
-    {#                </div>#}
-    {#            </section>#}
-    {#        </div>#}
-    {#    </div>#}
-
 {% endblock %}
-
-
-
-

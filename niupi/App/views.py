@@ -5,6 +5,7 @@ from alipay import AliPay
 from django.contrib.auth import authenticate, login, logout
 import os
 from django.contrib.auth import authenticate, login
+from django.core.paginator import Paginator
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 
@@ -31,39 +32,48 @@ def index(request):
         buses = Bus.objects.filter(start_city=start_city, end_city=end_city).order_by('start_time')
         print(buses)
         if start_city and end_city:
-            return render(request, 'app/ticket.html', locals())
+            return render(request, 'app/select.html', locals())
     return render(request, 'app/index.html', locals())
 
 
 def select(request):
-    start_city = request.POST.get('st')
-    end_city = request.POST.get('ed')
-    print(start_city, end_city)
-    if request.method == 'POST':
-        start_city = request.POST.get('qian')
-        end_city = request.POST.get('hou')
-        print(start_city, end_city)
+    if request.GET:
+        page = request.GET.get('page')
+        start_city = request.GET.get('st')
+        end_city = request.GET.get('ed')
         buses = Bus.objects.filter(start_city=start_city, end_city=end_city).order_by('start_time')
-        return render(request, 'app/ticket.html', locals())
+        paginator = Paginator(buses,1)
+        page = paginator.page(int(page))
+        buses = page.object_list
+        if request.method == 'POST':
+            page = request.GET.get('page')
+            start_city = request.POST.get('qian')
+            end_city = request.POST.get('hou')
+            buses = Bus.objects.filter(start_city=start_city, end_city=end_city).order_by('start_time')
+            paginator = Paginator(buses, 1)
+            page = paginator.page(int(page))
+            buses = page.object_list
+        return render(request, 'app/select.html', locals())
+    return render(request, 'app/select.html', locals())
     # cars = Bus.objects.filter(start_city=start_city,end_city=end_city)
-    return render(request, 'app/ticket.html')
+
+
 
 
 def buy(request):
-    print(request.GET, '-----------------')
-    bid = request.GET.get('bid')
-    uid = request.GET.get('uid')
-    print(uid)
-    lis = User.objects.filter(uid=uid).first().friends
-    sp = lis.split(',')
-    print(sp)
-    foos = User.objects.filter(uid__in=sp)
-
-    print(foos)
-    print(bid)
-    bus = Bus.objects.filter(bid=bid).first()
-    print(bus)
+    if request.GET:
+        print('购买详情')
+        bid = request.GET.get('bid')
+        uid = request.GET.get('uid')
+        lis = User.objects.filter(uid=uid).first().friends
+        sp = lis.split(',')
+        foos = User.objects.filter(uid__in=sp)
+        bus = Bus.objects.filter(bid=bid).first()
+        suu = int(bus.standby_ticket)
+        print('购买结束')
+        return render(request, 'app/buy_before.html', locals())
     return render(request, 'app/buy_before.html', locals())
+
 
 
 def userinfo(request):
@@ -344,8 +354,10 @@ def add_payment(request):
     if suo:
         suo_list = suo.split(',')
         suo_list = list(int(i) for i in suo_list[1:])
+        print(suo_list)
         su = set(suo_list)
         s = list(zip(suo_list, su[1]))
+        print(s)
         list_pay = List()
         list_pay.num_list = su[0]
         list_pay.price_list = price
@@ -353,7 +365,9 @@ def add_payment(request):
         list_pay.list = s
         list_pay.traffic_id = bid
         buu = Bus.objects.filter(bid=bid).first()
-        buu.standby_ticket = int(buu.standby_ticket)-len(suo_list)
+        if int(buu.standby_ticket) >= len(suo_list):
+            print(len(suo_list),int(buu.standby_ticket))
+            buu.standby_ticket = int(buu.standby_ticket)-len(suo_list)
         buu.save()
         list_pay.save()
     print('---添加订单结束---')
@@ -454,6 +468,11 @@ def send_new(request):
         print(payment0)
         payment0.status = 1
         payment0.save()
+        new0 = News()
+        new0.set_time = datetime.datetime.now()
+        new0.content = '你的订单'+pay_de+'已经取消,您可以在订单页面查看！'
+        new0.belong_user_id = request.user.uid
+        new0.save()
     print('已完成订单')
     print(request.GET['code'])
     if request.GET['code']== '0':
@@ -464,4 +483,9 @@ def send_new(request):
         print(payment1)
         payment1.status = 2
         payment1.save()
+        new1 = News()
+        new1.set_time = datetime.datetime.now()
+        new1.content = '你的订单' + pay_id + '已经支付,感谢您使用牛皮网！'
+        new1.belong_user_id = request.user.uid
+        new1.save()
     return render(request,'app/success.html')

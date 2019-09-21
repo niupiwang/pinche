@@ -1,0 +1,161 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+
+{% block head %}
+    {{ block.super }}
+    <script src="https://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+
+{% endblock %}
+
+{#内容开始        #}
+{% block content %}
+
+
+    <div class="page has-sidebar-left">
+        <header class="blue accent-3 relative">
+            <div class="container-fluid text-white">
+                <div class="row p-t-b-10 ">
+                    <div class="col">
+                        <h4>
+                            <i class="icon-package"></i>
+                            牛皮网
+                        </h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <ul class="nav responsive-tab nav-material nav-material-white">
+                        <li>
+                            <a class="nav-link" href="{% url 'app:index' %}"><i class="icon icon-list"></i>首页</a>
+                        </li>
+                        <li>
+                            <a class="nav-link  active" href="{% url 'app:select' %}"><i
+                                    class="icon icon-plus-circle"></i> 车票</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="{% url 'app:buy' %}"><i class="icon icon-trash-can"></i>购买</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <div class="container-fluid animatedParent animateOnce my-3">
+            <div class="animated fadeInUpShort">
+                <div class="row">
+                    <div class="col-md-10 mx-md-auto m-4">
+                        {#                    <div class="card no-b shadow">#}
+                        <span><select id="category" class="custom-select form-control" required="">
+
+                                    <option value="1">所有车辆</option>
+                                    <option value="2">大巴</option>
+                                    <option value="3">私家车</option>
+                                </select><button type="button" class="btn btn-primary btn-sm">过滤</button></span>
+                        <br>
+                        <form action="{% url 'app:select' %}?st={{ start_city }}&ed={{ end_city }}&page=1" method="post">
+                            <input type="text" value="{{ start_city }}" id="qian" name="qian">
+                            <button type="button" class="btn btn-primary btn-sm" id="swap">交换</button>
+                            <input type="text" value="{{ end_city }}" id="hou" name="hou">
+                            {% csrf_token %}
+                            <input type="submit" class="btn btn-primary btn-sm">
+{#                        <button type="button" class="btn btn-primary btn-sm" name="">查询</button>#}
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-md-10 mx-md-auto m-5">
+                    <div class="card no-b shadow">
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-hover ">
+                                    <tbody>
+                                    <tr class="no-b">
+                                        <th class="w-10"><h6>编号</h6></th>
+                                        <th><h6>车牌号</h6></th>
+                                        <th><h6>起始城市 / 到达城市</h6></th>
+                                        <th><span><i class="icon icon-data_usage"></i> 起始时间</span><br>
+                                            <span><i class="icon icon-timer"></i> 到达时间</span></th>
+                                        <th><h6>价格</h6></th>
+                                        <th><h6>是否有票</h6></th>
+                                        <th><h6>购买</h6></th>
+                                    </tr>
+                                    {% for bus in buses %}
+                                        <tr>
+                                            <td class="w-10"><h6>{{ bus.num }}</h6></td>
+                                            <td><h6>{{ bus.bus_num }}</h6></td>
+                                            <td>{{ start_city }} / {{ end_city }}</td>
+                                            <td><span><i class="icon icon-data_usage"></i> {{ bus.start_time }}</span><br>
+                                                <span><i class="icon icon-timer"></i> {{ bus.end_time }}</span></td>
+                                            <td><h6>{{ bus.price }}</h6></td>
+                                            {% if bus.standby_ticket > 0 %}
+                                                <td><span class="badge badge-success">有</span></td>
+                                                <td><a class="btn-fab btn-fab-sm btn-primary shadow text-white"
+                                                href="{% url 'app:buy' %}?bid={{ bus.bid }}&uid={{ user.uid }}"><i
+                                                    class="icon-pencil"></i></a></td>
+                                            {% elif bus.standby_ticket == 0 %}
+                                                <td><span class="badge badge-danger">无</span></td>
+                                                <td><i class="icon-pencil"></i></td>
+                                            {% endif %}
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                <nav class="pt-3" aria-label="Page navigation">
+                        <ul class="pagination">
+                            {% if page.has_previous %}
+                                <li class="page-item"><a class="page-link" href="{% url 'app:select' %}?page={{ prepage }}">Previous</a>
+                            {% else %}
+                                <li class="page-item"><a class="page-link" href="#">Previous</a>
+                            {% endif %}
+                                {% for io in paginator.page_range %}
+                                    <li class="page-item">
+                                    <a class="page-link" href="{% url 'app:select' %}?st={{ start_city }}&ed={{ end_city }}&page={{ io }}">{{ io }}</a></li>
+                                {% endfor %}
+
+                            {% if page.has_next %}
+                                <li class="page-item"><a class="page-link" href="{% url 'app:select' %}?page={{ prepage }}">Previous</a>
+                            {% else %}
+                                <li class="page-item"><a class="page-link" href="#">Previous</a>
+                            {% endif %}
+
+                        </ul>
+                    <nav class="pt-3" aria-label="Page navigation">
+{#                    <nav class="pt-3" aria-label="Page navigation">#}
+{#                        <ul class="pagination">#}
+{#                            <li class="page-item"><a class="page-link" href="#">Previous</a>#}
+{#                            </li>#}
+{#                            <li class="page-item"><a class="page-link" href="#">1</a>#}
+{#                            </li>#}
+{#                            <li class="page-item"><a class="page-link" href="#">2</a>#}
+{#                            </li>#}
+{#                            <li class="page-item"><a class="page-link" href="#">3</a>#}
+{#                            </li>#}
+{#                            <li class="page-item"><a class="page-link" href="#">Next</a>#}
+{#                            </li>#}
+{#                        </ul>#}
+{#                    </nav>#}
+{#                    <nav class="pt-3" aria-label="Page navigation">#}
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    </div>
+    <script>
+        $('#swap').click(function () {
+            var a = $('#qian').val();
+            var b = $('#hou').val();
+            document.getElementById('qian').value = b;
+            document.getElementById('hou').value = a;
+
+        })
+    </script>
+{% endblock %}
+
+<!-- 内容结束 -->
