@@ -7,7 +7,6 @@ import os
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
-from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.urls import reverse
@@ -214,7 +213,7 @@ def pay(request):
 def relation(request):
     print(request.GET)
     # 删除好友
-    if request.GET:
+    if request.GET.get('uid'):
         uid = request.GET['uid']
         user1 = User.objects.filter(uid=request.user.uid).first()
         lists = user1.friends.split(',')
@@ -239,7 +238,8 @@ def relation(request):
             userself = User.objects.filter(uid=request.user.uid)[0]
             userself.friends = str
             userself.save()
-
+    #         userself = User.objects.filter(uid=request.user.uid)[0]
+    # userdetail = Userdetail.objects.all()
     return render(request,'app/add_user.html',locals())
 
 
@@ -373,15 +373,24 @@ def pay_list(request):
 
 
 def news(request):
+    if request.GET.get('nid'):
+        print('拿到ajax了')
+        print('----=====')
+        print(request.GET.get('nid'))
+        new1 = News.objects.filter(nid=request.GET.get('nid')).first()
+        print(new1.is_read)
+        if new1.is_read == 0:
+            new1.is_read = 1
+            new1.save()
+            print(new1.is_read)
+
     print(request.user.uid)
-    new = News.objects.all()
+    new = News.objects.filter(belong_user=request.user.uid)
+    newss = new.filter(is_read=0)
     userdetail = Userdetail.objects.all()
     newsol = {k:v for k,v in zip(new,userdetail)}
+
     print(newsol)
-    if request.GET.get('read'):
-        print('拿到更改按钮了')
-        a = request.GET.get('read')
-        print(a)
     return render(request, 'app/news.html',locals())
 
 

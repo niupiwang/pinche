@@ -156,20 +156,38 @@
 
                             <div class="card-body">
                                 <h5 class="card-title">车辆信息</h5>
-                                <div class="form-row">
-                                    <div class="form-group col-5 m-0">
-                                        <label for="roll1" class="col-form-label s-12"># 车牌号</label>
-                                        <input name="carnum" id="roll1" value="{{ car.car_num }}" class="form-control r-0 light s-12 " type="text">
+                                {% if user.uid in a %}
+                                    <div class="form-row">
+                                        <div class="form-group col-5 m-0">
+                                            <label for="roll1" class="col-form-label s-12"># 车牌号</label>
+                                            <input name="carnum" id="roll1" value="{{ car.car_num }}" class="form-control r-0 light s-12 " type="text">
+                                        </div>
+                                        <div class="form-group col m-0">
+                                            <label for="roll2" class="col-form-label s-12">车辆类型</label>
+                                            <input name="cartype" id="roll2" value="{{ car.car_type }}" class="form-control r-0 light s-12 " type="text">
+                                        </div>
+                                        <div class="form-group col m-0">
+                                            <label for="roll4" class="col-form-label s-12">座位数</label>
+                                            <input name="seats" id="roll4" value="{{ car.seats }}" class="form-control r-0 light s-12 " type="text">
+                                        </div>
                                     </div>
-                                    <div class="form-group col m-0">
-                                        <label for="roll2" class="col-form-label s-12">车辆类型</label>
-                                        <input name="cartype" id="roll2" value="{{ car.car_type }}" class="form-control r-0 light s-12 " type="text">
+
+                                {% else %}
+                                    <div class="form-row">
+                                        <div class="form-group col-5 m-0">
+                                            <label for="roll1" class="col-form-label s-12"># 车牌号</label>
+                                            <input name="carnum" id="roll1" value="" placeholder="请登记车辆" class="form-control r-0 light s-12 " type="text">
+                                        </div>
+                                        <div class="form-group col m-0">
+                                            <label for="roll2" class="col-form-label s-12">车辆类型</label>
+                                            <input name="cartype" id="roll2" value="" placeholder="请登记车辆" class="form-control r-0 light s-12 " type="text">
+                                        </div>
+                                        <div class="form-group col m-0">
+                                            <label for="roll4" class="col-form-label s-12">座位数</label>
+                                            <input name="seats" id="roll4" value="" placeholder="请登记车辆" class="form-control r-0 light s-12 " type="text">
+                                        </div>
                                     </div>
-                                    <div class="form-group col m-0">
-                                        <label for="roll4" class="col-form-label s-12">座位数</label>
-                                        <input name="seats" id="roll4" value="{{ car.seats }}" class="form-control r-0 light s-12 " type="text">
-                                    </div>
-                                </div>
+                                {% endif %}
 
                                 <div class="form-row">
                                     <div class="form-group col-4 m-0">

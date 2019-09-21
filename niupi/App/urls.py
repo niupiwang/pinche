@@ -30,6 +30,7 @@ url(r'^relation/$', views.relation, name='relation'),
     url(r'^userinfo/$', views.userinfo,name='userinfo'),
     url(r'^last/$',views.UserView.as_view(),name='last'),
 
+
     # 登录登出注册找回密码
     url(r'^login/$',views.user_login,name='login'),
     url(r'^logout/$',views.user_logout,name='logout'),

@@ -53,13 +53,13 @@
                                                 <li class="nav-item">
                                                     <a class="nav-link active show r-20" id="w3--tab1" data-toggle="tab"
                                                        href="#w3-tab1" role="tab" aria-controls="tab1"
-                                                       aria-expanded="true" aria-selected="true">Tab 1</a>
+                                                       aria-expanded="true" aria-selected="true">消息数：{{ newsol|length }}</a>
                                                 </li>
                                                 <li>&nbsp&nbsp&nbsp</li>
                                                 <li class="nav-item">
                                                     <a class="nav-link active show r-20" id="w3--tab2" data-toggle="tab"
                                                        role="tab" aria-controls="tab2"
-                                                       aria-expanded="true" aria-selected="true">未读消息：</a>
+                                                       aria-expanded="true" aria-selected="true">未读消息：{{ newss|length }}</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -78,12 +78,12 @@
 
                                                     <tbody>
                                                     <tr class="no-b">
+                                                        <th ></th>
                                                         <th class="w-10"><span class="round">
-
                                                         </th>
-                                                        <th width="300px">标题/发送时间</th>
-                                                        <th width="400px">内容</th>
-                                                        <th width="300px">发信人</th>
+                                                        <th >标题</th>
+                                                        <th >发送时间</th>
+                                                        <th >内容</th>
                                                         <th>bling</th>
                                                     </tr>
                                                     {% for new1,real in newsol.items %}
@@ -91,33 +91,44 @@
                                                         {% if new1.belong_user.uid == user.uid %}
 
                                                             <tr class="no-b">
-                                                                <td class="w-10"><span class="round">
-                                                                    <img style="width: 66px" src="{{ real.user_uid.portrait }}" alt="user"></span>
+                                                                <td class="w-1">&nbsp;
                                                                 </td>
-                                                                <td style="width: 200px">
-                                                                    <h6>{{ new1.title }}</h6>
-                                                                    <small class="text-muted">{{ new1.set_time }}</small>
+                                                                <td class="w-8"><span class="round">
+                                                                    <img style="width: 42px" src="/static/assets/img/basic/cirrus.png" alt="user"></span>
                                                                 </td>
-                                                                <td>{{ new1.content }}</td>
-                                                                <td>{{ real.real_name }}</td>
-                                                                <div>
-                                                                    <td>
-                                                                        <a id="aid" href="{% url 'app:news' %}">
-                                                                            <span id="clickbut" class="r-3 badge badge-warning">朕知道了</span></a>
-                                                                    </td>
-                                                                    <input name="read" id="vid" type="hidden" value="{{ new1.nid }}">
-                                                                </div>
-                                                                    <SCRIPT>
-                                                                        $('#clickbut').click(function () {
-                                                                            var bo = $('#vid').val();
-                                                                            document.getElementById('aid').href = '{% url 'app:news' %}?read='+bo
-                                                                        })
-                                                                    </SCRIPT>
+                                                                <td class="w-15">
+                                                                    {% if new1.is_read == 0 %}
+                                                                        系统消息<span style="color: red" id="q{{ new1.nid }}">&nbsp;&nbsp;未读</span>
+                                                                    {% else %}
+                                                                        系统消息
+                                                                    {% endif %}
+
+                                                                </td>
+                                                                <td class="w-20">{{ new1.set_time }}</td>
+                                                                <td class="w-42">{{ new1.content }}</td>
+                                                                <td id="b{{ new1.nid }}" class="w-10">
+                                                                    {% if new1.is_read == 0 %}
+                                                                        <button id="aa{{ new1.nid }}" class="btn r-3 badge badge-warning">已读</button>
+                                                                    {% else %}
+                                                                        <span class="r-3 badge badge-secondary">已读</span>
+                                                                    {% endif %}
+                                                                </td>
+
 
                                                             </tr>
 
                                                         {% endif %}
-
+                                                                    <SCRIPT>
+                                                                        $('#aa{{ new1.nid }}').click(function () {
+                                                                            $(this).replaceWith("<span class=\"r-3 badge badge-secondary\">已读</span>");
+                                                                            $('#q{{ new1.nid }}').remove();
+                                                                            $.ajax({
+                                                                                url:'{% url 'app:news' %}',
+                                                                                type:'GET',
+                                                                                data:{'nid':{{ new1.nid }}}
+                                                                            })
+                                                                        })
+                                                                    </SCRIPT>
                                                     {% endfor %}
 
                                                     </tbody>
