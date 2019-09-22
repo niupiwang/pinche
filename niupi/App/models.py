@@ -17,7 +17,8 @@ class User(AbstractUser):
     type = models.IntegerField(default=0) # 0为普通用户 1为司机 2为管理员用户
     portrait = models.CharField(max_length=196,verbose_name='手机号')
     friends = models.CharField(max_length=128,null=True,default=0)
-
+    count = models.IntegerField(default=0)
+    is_locked = models.IntegerField(default=0)
     class Meta:
         db_table = 'user'
         verbose_name_plural = '用户表'

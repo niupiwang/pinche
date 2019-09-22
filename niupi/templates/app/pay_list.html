@@ -86,6 +86,7 @@
                                                         <th>车次</th>
                                                         <th>发车时间</th>
                                                         <th>总价</th>
+                                                        <th></th>
                                                     </tr>
 
                                                     {% for payment in lists %}
@@ -97,6 +98,15 @@
                                                             <td>{{ payment.traffic.num }}</td>
                                                             <td>{{ payment.traffic.start_time }}</td>
                                                             <td>{{ payment.price_list }}</td>
+                                                            {% ifequal payment.status 0 %}
+                                                                <td><button id="{{ payment.lid }}" class="btn r-3 badge badge-light" style="font-weight: 900">未支付</button></td>
+                                                            {% endifequal %}
+                                                            {% ifequal payment.status 1 %}
+                                                                <td><button id="{{ payment.lid }}" class="btn r-3 badge badge-light">已取消</button></td>
+                                                            {% endifequal %}
+                                                            {% ifequal payment.status 2 %}
+                                                                <td><button id="{{ payment.lid }}" class="btn r-3 badge badge-light">已完成</button></td>
+                                                            {% endifequal %}
                                                         </tr>
                                                     {% endfor %}
 
@@ -143,6 +153,7 @@
                                                             <td>{{ payment.traffic.num }}</td>
                                                             <td>{{ payment.traffic.start_time }}</td>
                                                             <td>{{ payment.price_list }}</td>
+                                                            <td><button id="{{ payment.lid }}" class="btn r-3 badge badge-info">去支付</button></td>
                                                         </tr>
                                                     {% endfor %}
 
@@ -171,6 +182,7 @@
                                                             <td>{{ payment.traffic.num }}</td>
                                                             <td>{{ payment.traffic.start_time }}</td>
                                                             <td>{{ payment.price_list }}</td>
+                                                            <td><button id="{{ payment.lid }}" class="btn r-3 badge badge-danger">删除</button></td>
                                                         </tr>
                                                     {% endfor %}
 
@@ -199,6 +211,7 @@
                                                             <td>{{ payment.traffic.num }}</td>
                                                             <td>{{ payment.traffic.start_time }}</td>
                                                             <td>{{ payment.price_list }}</td>
+                                                            <td><button id="{{ payment.lid }}" class="btn r-3 badge badge-warning">删除</button></td>
                                                         </tr>
                                                     {% endfor %}
                                                     </tbody>

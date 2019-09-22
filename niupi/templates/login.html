@@ -98,14 +98,15 @@
                                    placeholder="密码">
                         </div>
                         <input name='loginsubmit' type="submit" class="btn btn-success btn-lg btn-block" value="登录">
-                        <div>
+                        <div style="font-size: large; color: red">{{ errorss }}</div>
+                    </form>
+                    <div>
 {#                            <label for="autologin"><input type="checkbox" name="cookietime" id="autologin">自动登录</label>#}
                         	<a href="{% url 'app:findpassword' %}"><p class="forget-pass">忘记密码?</p></a>
                         	<a href="{% url 'app:register' %}"><p class="forget-pass">注册新用户</p></a>
                         </div>
-                        
-                    </form>
                 </div>
+
             </div>
         </div>
     </div>

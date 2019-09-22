@@ -173,9 +173,12 @@
                                         <i class="icon-user-secret"></i>
                                         <input name='sms' type="text" class="form-control form-control-lg" "
                                                placeholder="短信验证码">
+                                        </td>
+                                    <td>
                                         <span class="input-group-btn">
-                                            <input type="button" id="forcode" onclick="settime(this)" value="获取" class="btn btn-success" ></span>
+                                        <input type="button" id="forcode" onclick="settime(this)" value="获取" class="btn btn-success" ></span>
                                     </td>
+
                                 </tr>
                                 <td>
                                     {{ form.sms.errors }}
@@ -183,10 +186,11 @@
                             </table>
                     <script>
                         $('#forcode').click(function () {
+                            var bo = $('#mobile').val();
                             $.ajax({
                                 cache:false,
                                 type:"POST",
-                                url:"{% url 'app:sms' %}",
+                                url:"{% url 'app:sms1' %}?phone="+bo,
                                 data:{
                                     csrfmiddlewaretoken:$('[name="csrfmiddlewaretoken"]').val(),
                                     mobile:$("#mobile").val()

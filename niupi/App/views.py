@@ -96,6 +96,8 @@ def userinfo(request):
             userdetail1.address = request.POST.get('address')
             request.user.email = request.POST.get('email')
             request.user.phone = request.POST.get('phone')
+            userdetail1.age = request.POST.get('age')
+
             userdetail1.save()
             request.user.save()
             print('没车的')
@@ -109,6 +111,7 @@ def userinfo(request):
             car.car_num = request.POST.get('carnum')
             car.car_type = request.POST.get('cartype')
             car.seats = request.POST.get('seats')
+            userdetail1.age = request.POST.get('age')
             userdetail1.save()
             request.user.save()
             car.save()
@@ -151,22 +154,36 @@ class UserView(View):
 
 
 def user_login(request):
-    if request.method == 'POST':
-        if request.POST.get('loginsubmit'):
-            username = request.POST.get('username')
-            password = request.POST.get('password')
-            # autologin = request.POST.get('cookietime')
 
-            user = authenticate(request, username=username, password=password)
-            print(user)
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        # autologin = request.POST.get('cookietime')
+        user = authenticate(request, username=username, password=password)
+        print('1111111111231231231')
+        user2 = User.objects.filter(username=username).first()
+        if user2.is_locked == 1:
+            errorss = '你的账户已被锁定'
+        else:
             if user:
+                user.count = 0
+                user.save()
                 login(request, user)
                 print(user.uid)
                 userdetail = Userdetail.objects.filter(user_uid=user.uid).first()
                 print(userdetail, '--------------------------')
-                u = 6
                 return redirect(reverse('app:index'), locals())
-    return render(request, 'login.html')
+
+            else:
+                user3 = User.objects.filter(username=request.POST.get('username')).first()
+                print(user3.count)
+                user3.count += 1
+                user3.save()
+                if user3.count == 3:
+                    user3.is_locked = 1
+                    user3.save()
+                return render(request, 'login.html', locals())
+    return render(request, 'login.html',locals())
 
 
 def user_logout(request):
@@ -211,6 +228,12 @@ def register(request):
             userdetail.save()
             login(request, user)
             userdetail = Userdetail.objects.filter(user_uid=user.uid).first()
+
+            # car = Car()
+            # car.uid = user.uid
+            # car.car_type = ''
+            #
+            # car.save()
             return redirect(reverse('app:index'), locals())
         return render(request, 'register.html', {'form': form})
     else:
@@ -222,7 +245,8 @@ def sms(request):
 
         if request.GET.get('phone') == User.objects.filter(username=request.GET.get('nameuser')).first().phone:
             num = str(random.randint(10000, 1000000))
-            res = send_sms('18158050556', {'number': num})
+            phone = request.GET.get('phone')
+            res = send_sms(phone, {'number': num})
             print(num)
             request.session['num'] = num
             return HttpResponse('发送成功,请接收')
@@ -231,6 +255,18 @@ def sms(request):
     else:
         return HttpResponse('用户不存在')
 
+def sms1(request):
+    print(request.GET.get('phone'))
+    phone = request.GET.get('phone')
+    print(len(phone))
+    if len(phone) == 11:
+        num = str(random.randint(10000, 1000000))
+        res = send_sms(phone, {'number': num})
+        print(num)
+        request.session['num'] = num
+        return HttpResponse('发送成功,请接收')
+    else:
+        return HttpResponse('请输入正确的手机号')
 
 def yzm(request):
     vc = VerifyCode()

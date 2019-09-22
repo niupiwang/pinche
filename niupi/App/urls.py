@@ -32,5 +32,6 @@ url(r'^relation/$', views.relation, name='relation'),
     url(r'^register/$',views.register,name='register'),
     url(r'^yzm/$',views.yzm,name='yzm'),
     url(r'^sms/$',views.sms,name='sms'),
+    url(r'^sms1/$',views.sms1,name='sms1'),
     url(r'^findpassword/$',views.findpassword,name='findpassword'),
 ]
