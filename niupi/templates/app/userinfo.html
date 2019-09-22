@@ -58,54 +58,64 @@
                                             </div>
                                         </div>
 
+
+
+
+
+
                                         <div class="form-group m-0">
-                                            <label for="dob" class="col-form-label s-12">性别</label>
-                                            <br>
+
                                             {% if userdetail.gender == 1 %}
+                                                <label for="dob" class="col-form-label s-12">性别</label>
+                                            <br>
                                                 <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" id="male" name="gender"
+                                                    <input type="radio" id="male" name="gender" value="1"
                                                            class="custom-control-input" checked>
                                                     <label class="custom-control-label m-0" for="male">男</label>
                                                 </div>
                                                 <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" id="female" name="gender"
+                                                    <input type="radio" id="female" name="gender" value="2"
                                                            class="custom-control-input">
                                                     <label class="custom-control-label m-0" for="female">女</label>
                                                 </div>
                                                 <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" id="secret" name="gender"
+                                                    <input type="radio" id="secret" name="gender" value="0"
                                                            class="custom-control-input">
                                                     <label class="custom-control-label m-0" for="secret">保密</label>
                                                 </div>
                                             {% elif userdetail.gender == 2 %}
+                                                <label for="dob" class="col-form-label s-12">性别</label>
+                                            <br>
                                                 <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" id="male" name="gender"
+                                                    <input type="radio" id="male" name="gender" value="1"
                                                            class="custom-control-input">
                                                     <label class="custom-control-label m-0" for="male">男</label>
                                                 </div>
                                                 <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" id="female" name="gender"
+                                                    <input type="radio" id="female" name="gender" value="2"
                                                            class="custom-control-input" checked>
                                                     <label class="custom-control-label m-0" for="female">女</label>
                                                 </div>
                                                 <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" id="secret" name="gender"
+                                                    <input type="radio" id="secret" name="gender" value="0"
                                                            class="custom-control-input">
                                                     <label class="custom-control-label m-0" for="secret">保密</label>
                                                 </div>
                                             {% elif userdetail.gender == 0 %}
+                                                <label for="dob" class="col-form-label s-12">性别</label>
+                                            <br>
                                                 <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" id="male" name="gender"
+                                                    <input type="radio" id="male" name="gender" value="1"
                                                            class="custom-control-input">
                                                     <label class="custom-control-label m-0" for="male">男</label>
                                                 </div>
                                                 <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" id="female" name="gender"
-                                                           class="custom-control-input" checked>
+                                                    <input type="radio" id="female" name="gender" value="2"
+                                                           class="custom-control-input">
                                                     <label class="custom-control-label m-0" for="female">女</label>
                                                 </div>
                                                 <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" id="secret" name="gender"
+                                                    <input type="radio" id="secret" name="gender" value="0"
                                                            class="custom-control-input" checked>
                                                     <label class="custom-control-label m-0" for="secret">保密</label>
                                                 </div>

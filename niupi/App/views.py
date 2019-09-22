@@ -1,12 +1,10 @@
 import datetime
 import random
-import re
 
 from alipay import AliPay
 from django.contrib.auth import authenticate, login, logout
 import os
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.hashers import make_password
 from django.core.paginator import Paginator
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
@@ -80,42 +78,39 @@ def buy(request):
 
 
 def userinfo(request):
-    userdetail1 = Userdetail.objects.filter(user_uid=request.user.uid)[0]
-
     # 得到汽车车主列表
+    uid = request.GET.get('uid')
+    print(uid, 'ooo')
     cids = Car.objects.all()
     ci = []
     for i in cids:
         ci.append(i.car_uid)
-
     if request.method == 'POST':
-        if request.user.uid not in ci:
-            userdetail1.real_name = request.POST.get('realname')
-            print(request.POST.get('birthday'),type(request.POST.get('birthday')))
-            userdetail1.birthday = request.POST.get('birthday')
-            userdetail1.address = request.POST.get('address')
-            request.user.email = request.POST.get('email')
-            request.user.phone = request.POST.get('phone')
-            userdetail1.age = request.POST.get('age')
-
-            userdetail1.save()
-            request.user.save()
-            print('没车的')
-        else:
-            car = Car.objects.filter(car_uid=request.user.uid)[0]
-            userdetail1.real_name = request.POST.get('realname')
-            userdetail1.birthday = request.POST.get('birthday')
-            request.user.email = request.POST.get('email')
-            request.user.phone = request.POST.get('phone')
-            userdetail1.address = request.POST.get('address')
-            car.car_num = request.POST.get('carnum')
-            car.car_type = request.POST.get('cartype')
-            car.seats = request.POST.get('seats')
-            userdetail1.age = request.POST.get('age')
-            userdetail1.save()
-            request.user.save()
-            car.save()
-            print('有车的')
+        userdetail1 = Userdetail.objects.filter(user_uid=request.GET.get('uid')).first()
+        userdetail1.real_name = request.POST.get('realname')
+        print(request.POST.get('birthday'),type(request.POST.get('birthday')))
+        userdetail1.birthday = request.POST.get('birthday')
+        userdetail1.address = request.POST.get('address')
+        userdetail1.gender = request.POST.get('gender')
+        request.user.email = request.POST.get('email')
+        request.user.phone = request.POST.get('phone')
+        print(request.POST.get('gender'),'000000000000000000000000')
+        userdetail1.save()
+        request.user.save()
+        print('没车的')
+            # car = Car.objects.filter(car_uid=request.user.uid)[0]
+            # userdetail1.real_name = request.POST.get('realname')
+            # userdetail1.birthday = request.POST.get('birthday')
+            # request.user.email = request.POST.get('email')
+            # request.user.phone = request.POST.get('phone')
+            # userdetail1.address = request.POST.get('address')
+            # car.car_num = request.POST.get('carnum')
+            # car.car_type = request.POST.get('cartype')
+            # car.seats = request.POST.get('seats')
+            # userdetail1.save()
+            # request.user.save()
+            # car.save()
+            # print('有车的')
         print('----------------------')
         obj = Fileup(request.FILES.get('file'), is_randomname=True)
         path = os.path.join(BASE_DIR, 'static/assets/img/portrait')
@@ -135,7 +130,9 @@ def userinfo(request):
             else:
                 print(obj.upload(path))
                 return HttpResponse('失败')
-    userdetail = Userdetail.objects.filter(user_uid=request.user.uid)[0]
+
+    userdetail = Userdetail.objects.filter(user_uid=request.GET.get('uid')).first()
+    print(userdetail,'---')
     # 生日
     birth = str(userdetail.birthday)
     print(birth, '生日')
@@ -154,7 +151,6 @@ class UserView(View):
 
 
 def user_login(request):
-
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -353,6 +349,25 @@ def pay(request):
 
 
 def relation(request):
+    uid = request.user.uid
+    print(request.GET)
+    # 添加好友
+    if request.GET.get('sss'):
+        uid = request.GET['sss']
+        user1 = User.objects.filter(uid=request.user.uid).first()
+        print(user1,'haohahahahahahhahahaah')
+        lists = user1.friends.split(',')
+        if uid not in lists:
+            lists.append(uid)
+            friendss = ','.join(lists)
+            user1.friends = friendss
+            user1.save()
+        user2 = User.objects.filter(uid=request.user.uid).first()
+        print(user2, 'haohahahahahahhahahaah')
+        lists = user2.friends.split(',')
+        userdetail = Userdetail.objects.filter(user_uid__in=lists)
+        print(userdetail)
+        return render(request, 'app/add_user.html', locals())
     # 删除好友
     if request.GET.get('uid'):
         uid = request.GET['uid']
@@ -362,25 +377,46 @@ def relation(request):
         friendss = ','.join(lists)
         user1.friends = friendss
         user1.save()
-    str = request.user.friends
-    x = str.split(',')
-    a = []
-    userdetail = Userdetail.objects.all()
-    for i in x:
-        i = int(i)
-        a.append(i)
+        user2 = User.objects.filter(uid=request.user.uid).first()
+        print(user2, 'haohahahahahahhahahaah')
+        lists = user2.friends.split(',')
+        userdetail = Userdetail.objects.filter(user_uid__in=lists)
+        print(userdetail)
+        return render(request, 'app/add_user.html', locals())
+    # str = request.user.friends
+    # x = str.split(',')
+    # a = []
+    # userdetail = Userdetail.objects.all()
+    # for i in x:
+    #     i = int(i)
+    #     a.append(i)
+
+
     if request.GET.get('search'):
         search = request.GET.get('search')
-        users = Userdetail.objects.filter(id_num__exact=search)[0]
-    if request.GET.get('userid'):
-        x = request.GET.get('userid')
-        if int(x) not in a:
-            str = str+','+x
-            userself = User.objects.filter(uid=request.user.uid)[0]
-            userself.friends = str
-            userself.save()
+        print(search)
+        usess = User.objects.filter(username__contains=search).all()
+        oo = []
+        for uu in usess:
+            oo.append(uu.uid)
+        print(oo)
+        uu= '0'
+        userss = Userdetail.objects.filter(user_uid__in=oo)
+        print(userss)
+    # if request.GET.get('userid'):
+    #     x = request.GET.get('userid')
+    #     if int(x) not in a:
+    #         str = str+','+x
     #         userself = User.objects.filter(uid=request.user.uid)[0]
-    # userdetail = Userdetail.objects.all()
+    #         userself.friends = str
+    #         userself.save()
+    # #         userself = User.objects.filter(uid=request.user.uid)[0]
+    # # userdetail = Userdetail.objects.all()
+    user2 = User.objects.filter(uid=request.user.uid).first()
+    print(user2, 'haohahahahahahhahahaah')
+    lists = user2.friends.split(',')
+    userdetail = Userdetail.objects.filter(user_uid__in=lists)
+    print(userdetail)
     return render(request,'app/add_user.html',locals())
 
 
@@ -619,5 +655,8 @@ def send_new(request):
         new1.content = '你的订单' + pay_id + '已经支付,感谢您使用牛皮网！'
         new1.belong_user_id = request.user.uid
         new1.save()
+    if request.GET['code'] == '2':
+        pay_id = request.GET.get('pid')
+        payment1 = List.objects.filter(lid=pay_id).first()
+        payment1.delete()
     return render(request,'app/success.html')
-

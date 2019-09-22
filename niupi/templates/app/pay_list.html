@@ -92,20 +92,27 @@
                                                     {% for payment in lists %}
                                                         <tr>
                                                             <td class="w-10">{{ forloop.counter }}</td>
+
                                                             <td>
-                                                                <a href="{% url 'app:payment' %}?user={{ user.uid }}&bid={{ payment.traffic_id }}&price={{ payment.price_list }}&hoo={{ payment.lid }}">{{ payment.num_list }}</a>
+                                                                {% if payment.status == 0 %}
+                                                                    <a href="{% url 'app:payment' %}?user={{ user.uid }}&bid={{ payment.traffic_id }}&price={{ payment.price_list }}&hoo={{ payment.lid }}">{{ payment.num_list }}</a>
+                                                                {% else %}
+                                                                    {{ payment.num_list }}
+                                                                {% endif %}
                                                             </td>
                                                             <td>{{ payment.traffic.num }}</td>
                                                             <td>{{ payment.traffic.start_time }}</td>
                                                             <td>{{ payment.price_list }}</td>
                                                             {% ifequal payment.status 0 %}
-                                                                <td><button id="{{ payment.lid }}" class="btn r-3 badge badge-light" style="font-weight: 900">未支付</button></td>
+                                                                <td>
+                                                                    <a href="{% url 'app:payment' %}?user={{ user.uid }}&bid={{ payment.traffic_id }}&price={{ payment.price_list }}&hoo={{ payment.lid }}">
+                                                                        <button onclick="funks()" id="{{ payment.lid }}" class="btn r-3 badge badge-light" style="font-weight: 900">未支付</button></a></td>
                                                             {% endifequal %}
                                                             {% ifequal payment.status 1 %}
-                                                                <td><button id="{{ payment.lid }}" class="btn r-3 badge badge-light">已取消</button></td>
+                                                                <td><span id="{{ payment.lid }}" class="btn r-3 badge badge-light">已取消</span></td>
                                                             {% endifequal %}
                                                             {% ifequal payment.status 2 %}
-                                                                <td><button id="{{ payment.lid }}" class="btn r-3 badge badge-light">已完成</button></td>
+                                                                <td><span id="{{ payment.lid }}" class="btn r-3 badge badge-light">已完成</span></td>
                                                             {% endifequal %}
                                                         </tr>
                                                     {% endfor %}
@@ -113,20 +120,6 @@
                                                     </tbody>
                                                 </table>
                                             </div>
-{#                                            <nav class="pt-3" aria-label="Page navigation">#}
-{#                                                <ul class="pagination">#}
-{#                                                    <li class="page-item"><a class="page-link" href="#">Previous</a>#}
-{#                                                    </li>#}
-{#                                                    <li class="page-item"><a class="page-link" href="#">1</a>#}
-{#                                                    </li>#}
-{#                                                    <li class="page-item"><a class="page-link" href="#">2</a>#}
-{#                                                    </li>#}
-{#                                                    <li class="page-item"><a class="page-link" href="#">3</a>#}
-{#                                                    </li>#}
-{#                                                    <li class="page-item"><a class="page-link" href="#">Next</a>#}
-{#                                                    </li>#}
-{#                                                </ul>#}
-{#                                            </nav>#}
                                         </div>
 
 
@@ -142,6 +135,7 @@
                                                         <th>车次</th>
                                                         <th>发车时间</th>
                                                         <th>总价</th>
+                                                        <th></th>
                                                     </tr>
 
                                                     {% for payment in lists_w %}
@@ -153,7 +147,10 @@
                                                             <td>{{ payment.traffic.num }}</td>
                                                             <td>{{ payment.traffic.start_time }}</td>
                                                             <td>{{ payment.price_list }}</td>
-                                                            <td><button id="{{ payment.lid }}" class="btn r-3 badge badge-info">去支付</button></td>
+                                                            <td>
+                                                                <a href="{% url 'app:payment' %}?user={{ user.uid }}&bid={{ payment.traffic_id }}&price={{ payment.price_list }}&hoo={{ payment.lid }}">
+                                                                    <button id="{{ payment.lid }}" class="btn r-3 badge badge-info">去支付</button></a>
+                                                                </td>
                                                         </tr>
                                                     {% endfor %}
 
@@ -173,6 +170,7 @@
                                                         <th>车次</th>
                                                         <th>发车时间</th>
                                                         <th>总价</th>
+                                                        <th></th>
                                                     </tr>
 
                                                     {% for payment in lists_a %}
@@ -182,9 +180,26 @@
                                                             <td>{{ payment.traffic.num }}</td>
                                                             <td>{{ payment.traffic.start_time }}</td>
                                                             <td>{{ payment.price_list }}</td>
-                                                            <td><button id="{{ payment.lid }}" class="btn r-3 badge badge-danger">删除</button></td>
+                                                            <td>
+                                                                <button onclick="funk(this)" id="{{ payment.lid }}" class="btn r-3 badge badge-danger">删除</button></td>
                                                         </tr>
+
+                                                    <script>
+                                                        function funk(that) {
+                                                            $(that).parent().parent().remove();
+                                                            $.ajax({
+                                                                url:'{% url 'app:send_new' %}',
+                                                                type:'GET',
+                                                                data:{'pid':'{{ payment.lid }}',
+                                                                    'code':2
+                                                                }
+                                                            })
+                                                        }
+                                                    </script>
+
                                                     {% endfor %}
+
+
 
                                                     </tbody>
                                                 </table>
@@ -202,6 +217,7 @@
                                                         <th>车次</th>
                                                         <th>发车时间</th>
                                                         <th>总价</th>
+                                                        <th></th>
                                                     </tr>
 
                                                     {% for payment in lists_d %}
@@ -211,8 +227,21 @@
                                                             <td>{{ payment.traffic.num }}</td>
                                                             <td>{{ payment.traffic.start_time }}</td>
                                                             <td>{{ payment.price_list }}</td>
-                                                            <td><button id="{{ payment.lid }}" class="btn r-3 badge badge-warning">删除</button></td>
+                                                            <td><button onclick="fun(this)" id="{{ payment.lid }}" class="btn r-3 badge badge-warning">删除</button></td>
                                                         </tr>
+
+                                                    <script>
+                                                        function fun(that) {
+                                                            $(that).parent().parent().remove();
+                                                            $.ajax({
+                                                                url:'{% url 'app:send_new' %}',
+                                                                type:'GET',
+                                                                data:{'pid':'{{ payment.lid }}',
+                                                                    'code':2
+                                                                }
+                                                            })
+                                                        }
+                                                    </script>
                                                     {% endfor %}
                                                     </tbody>
                                                 </table>

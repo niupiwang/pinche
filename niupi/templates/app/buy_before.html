@@ -76,6 +76,64 @@
                                                     <th class="w-45">移动电话</th>
                                                     <th class="w-28"></th>
                                                 </tr>
+
+                                                <tr class="no-b">
+                                                    <td><span id="cpar"></span></td>
+                                                    <td class="w-25">{{ user.username }}</td>
+                                                    <td class="w-45">{{ user.phone }}</td>
+                                                    <td class="w-28">
+                                                        <button class="btn btn-primary btn" id="bpar">添加
+                                                        </button>
+                                                    </td>
+                                                </tr>
+
+                                                <script>
+                                                    $('#bpar').click(function () {
+                                                        console.log('op');
+                                                        var o = $('#stand').text();
+                                                        console.log(o);
+
+                                                        function isInArray(arr, value) {
+                                                            for (var i = 0; i < arr.length; i++) {
+                                                                if (value === arr[i]) {
+                                                                    return false;
+                                                                }
+                                                            }
+                                                            return true;
+                                                        }
+
+                                                        var gu = $('#ooooo div');
+                                                        gu_id = [];
+                                                        for (var i = 0; i < gu.length; i++) {
+                                                            gu_id.push(eval($(gu[i]).attr('id')));
+                                                        }
+                                                        console.log(gu_id,'===');
+                                                        var p = {{ user.uid }};
+                                                        console.log(p,'999');
+                                                        if (o > 0 && isInArray(gu_id,p)===true) {
+                                                            {#$(this).attr('disabled', 1);#}
+                                                            $('#ooooo').append("<div class=\"card-body b-b\" onclick=\"ffo(this)\"  id=\"{{ user.uid }}\"><h5>" + '{{ user.username }}' + "</h5>" +
+                                                                "<button class=\"btn btn-primary btn\" id=\"epar\">撤回\n" +
+                                                                "</button>" + "</div>");
+                                                            o = o - 1;
+                                                            console.log(o);
+                                                            document.getElementById('stand').innerText = o;
+                                                        }
+                                                    });
+
+
+
+                                                    function ffo(that) {
+                                                        console.log('000');
+                                                        $(that).remove();
+                                                        var o = $('#stand').text();
+                                                        console.log(o);
+                                                        o = eval(o) + 1;
+                                                        document.getElementById('stand').innerText = o;
+                                                    }
+                                                </script>
+
+
                                                 {% for foo in foos %}
                                                     <tr class="no-b">
                                                         <td><span id="c{{ foo.uid }}"></span></td>
@@ -112,7 +170,7 @@
                                                             }
                                                             console.log(gu_id,'===');
                                                             var p = {{ foo.uid }};
-                                                            console.log(p)
+                                                            console.log(p);
                                                             if (o > 0 && isInArray(gu_id,p)===true) {
                                                                 {#$(this).attr('disabled', 1);#}
                                                                 $('#ooooo').append("<div class=\"card-body b-b\" onclick=\"ffo(this)\"  id=\"{{ foo.uid }}\"><h5>" + '{{ foo.username }}' + "</h5>" +
@@ -145,7 +203,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="card">
                                     <div>
                                         <div class="card-body b-b">
@@ -243,7 +301,7 @@
 
         function d() {
             var u = $('#usero').val();
-            var ao = $('#{{ foo }}')
+            var ao = $('#{{ foo }}');
             console.log(u);
             $.ajax({
                 url:{% url 'app:buy' %},

@@ -43,14 +43,10 @@
                <div class="col-md-3">
 
                    <div class="card-header white">
-{#                        <form method="post" action="{% url 'app:relation' %}">#}
-{#                            {% csrf_token %}#}
                             <div class="form-group has-right-icon m-0 focused">
                                 <input id="ooo" name="search" class="form-control light r-30" placeholder="查找用户" type="text">
-{#                                <i class="icon-search"></i>#}
                                 <a id="iii" href="{% url 'app:relation' %}">
                                     <i id="ppp" class="icon-search"></i></a>
-
                             </div>
                                 <SCRIPT>
                                     $('#ppp').click(function () {
@@ -58,44 +54,31 @@
                                         document.getElementById('iii').href = '{% url 'app:relation' %}?search='+bo
                                     })
                                 </SCRIPT>
-{#                        </form>#}
                    </div>
-
-
                        <div class="card my-3">
                        <div class="card-header white">
                            <i class="icon-clipboard-edit blue-text"></i>
                            <strong> 查询结果 </strong>
                        </div>
-
-
-                           {% if users %}
                            <div class="card-body pt-0 bg-light slimScroll" data-height="300">
-                           <ul class="list-unstyled">
-                               <li class="pt-3 pb-3 bg-light sticky">
-                                   <strong>用户如下</strong>
-                               </li>
 
+                           <ul class="list-unstyled">
+                               <!-- Alphabet with number of contacts -->
+                               <li class="pt-3 pb-3 bg-light sticky">
+                                   <strong>所有用户：</strong>
+                                   <span class="badge r-3 badge-success float-right">{{ userss|length }}</span>
+                               </li>
                                <!-- Single contact -->
+                               {% for users in userss %}
                                <li class="my-1">
                                    <div class="card no-b p-3">
                                        <div class="">
-
                                            <div class="float-right">
-                                               <a id="ccc" href="#" class="btn-fab btn-fab-sm btn-success r-5">
-                                                   <i id="xxx" class="icon-star p-0"></i>
-                                               </a>
+                                               <a href="{% url 'app:relation' %}?sss={{ users.user_uid.uid }}">
+                                               <span onclick="hgs()" class="btn-fab btn-fab-sm btn-success r-5">
+                                                   <i class="icon-star p-0"></i>
+                                               </span></a>
                                            </div>
-
-                                           <input name="userid" id="qqq" type="hidden" value="{{ users.user_uid.uid }}">
-
-                                               <SCRIPT>
-                                                    $('#xxx').click(function () {
-                                                        var bo = $('#qqq').val();
-                                                        document.getElementById('ccc').href = '{% url 'app:relation' %}?userid='+bo
-                                                    })
-                                               </SCRIPT>
-
                                            <div class="image mr-3  float-left">
                                                <img class="w-40px" src="{{ users.user_uid.portrait}}" alt="User Image">
                                            </div>
@@ -103,14 +86,27 @@
                                                <div>
                                                    <strong>{{ users.real_name }}</strong>
                                                </div>
-                                               <small>{{ users.id_num }}</small>
+                                               <small> {{ users.id_num }} </small>
                                            </div>
                                        </div>
                                    </div>
                                </li>
+
+{#                               <script>#}
+{#                                    function hgs() {#}
+{#                                        $.ajax({#}
+{#                                            url:'{% url 'app:relation' %}',#}
+{#                                            type:'GET',#}
+{#                                            data:{'sss':{{ users.user_uid.uid }}}#}
+{#                                        })#}
+{#                                    }#}
+{#                                </script>#}
+
+                               {% endfor %}
                            </ul>
+
                        </div>
-                           {% endif %}
+
 
                        <div class="card-footer white">
                            牛皮网
@@ -131,13 +127,6 @@
 
                                         <thead>
                                             <tr class="no-b">
-    {#                                            <th style="width: 30px">#}
-    {#                                                <div class="custom-control custom-checkbox">#}
-    {#                                                    <input id="checkedAll" class="custom-control-input"#}
-    {#                                                           type="checkbox"><label class="custom-control-label"#}
-    {#                                                                                  for="checkedAll"></label>#}
-    {#                                                </div>#}
-    {#                                            </th>#}
                                                 <th></th>
                                                 <th>真实姓名</th>
                                                 <th>身份证号</th>
@@ -145,9 +134,9 @@
                                                 <th></th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="tbo">
                                             {% for i in userdetail %}
-                                                {% if i.user_uid.uid in a %}
+{#                                                {% if i.user_uid.uid in a %}#}
                                                     <tr id="{{ i.user_uid.uid }}">
                                                         <td><div  class="avatar avatar-md mr-3 mt-1 float-left">
                                                                 <img src="{{ i.user_uid.portrait }}" alt="">
@@ -159,7 +148,7 @@
                                                         <td><a href="#"><i id="a{{ i.user_uid.uid }}" class="icon-pencil"></i></a></td>
                                                     </tr>
 
-                                                {% endif %}
+{#                                                {% endif %}#}
 
                                             <script>
                                                 $('#a{{ i.user_uid.uid }}').click(function () {
@@ -168,7 +157,6 @@
                                                         url:'{% url 'app:relation' %}',
                                                         type:'GET',
                                                         data:{'uid':{{ i.user_uid.uid }}}
-
                                                     })
                                                 })
 

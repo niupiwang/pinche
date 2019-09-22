@@ -41,25 +41,25 @@
         </header>
         <div class="container-fluid animatedParent animateOnce my-3">
             <div class="animated fadeInUpShort">
-                <div class="row">
-                    <div class="col-md-10 mx-md-auto m-4">
-                        {#                    <div class="card no-b shadow">#}
-                        <span><select id="category" class="custom-select form-control" required="">
-
-                                    <option value="1">所有车辆</option>
-                                    <option value="2">大巴</option>
-                                    <option value="3">私家车</option>
-                                </select><button type="button" class="btn btn-primary btn-sm">过滤</button></span>
-                        <br>
-                        <form action="{% url 'app:select' %}?st={{ start_city }}&ed={{ end_city }}&page=1" method="post">
-                            <input type="text" value="{{ start_city }}" id="qian" name="qian">
-                            <button type="button" class="btn btn-primary btn-sm" id="swap">交换</button>
-                            <input type="text" value="{{ end_city }}" id="hou" name="hou">
-                            {% csrf_token %}
-                            <input type="submit" class="btn btn-primary btn-sm">
+                <div class="col-md-10 mx-md-auto m-4">
+{#                    <label>#}
+{#                    <select id="category" class="form-check-input form-control" required="">#}
+{#                        <option value="1">所有车辆</option>#}
+{#                        <option value="2">大巴</option>#}
+{#                        <option value="3">私家车</option>#}
+{#                    </select>#}
+{#                        </label><button type="button" class="btn btn-primary btn-sm">过滤</button>#}
+{#                    <br>#}
+                    <div><h5>&nbsp;</h5></div>
+                    <form action="{% url 'app:select' %}?st={{ start_city }}&ed={{ end_city }}&page=1" method="post">
+                        <input type="text" class="btn btn-sm" value="{{ start_city }}" id="qian" name="qian">
+                        <button type="button" class="btn btn-primary btn-sm" id="swap">交换</button>
+                        <input type="text" class="btn btn-sm" value="{{ end_city }}" id="hou" name="hou">
+                        {% csrf_token %}
+                        <input type="submit" class="btn btn-primary btn-sm">
 {#                        <button type="button" class="btn btn-primary btn-sm" name="">查询</button>#}
-                        </form>
-                    </div>
+                    </form>
+
                 </div>
 
                 <div class="col-md-10 mx-md-auto m-5">
