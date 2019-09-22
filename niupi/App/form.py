@@ -113,7 +113,7 @@ class ChangeForm(forms.Form):
                                error_messages={
                                    'max_length': '密码最大长度是128字符',
                                    'min_length': '密码长度不能小于6个字符',
-                                   'required': '用户名必须输入'
+                                   'required': '新密码必须输入'
                                })
 
     renewpassword = forms.CharField(label='确认密码',

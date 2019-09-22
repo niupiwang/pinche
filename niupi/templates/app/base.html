@@ -464,12 +464,14 @@
 {#                                </a>#}
 {#                            </li>#}
                             <li class="dropdown custom-dropdown user user-menu">
-                                <a href="{% url 'app:login' %}">
-                                    <img src="{% static 'assets/img/dummy/nologin.jpg' %}" class="user-image" alt="User Image">
+                                <a href="{% url 'app:login' %}" style="font-size: larger;color: #000000">
+                                    登录
+{#                                    <img src="{% static 'assets/img/dummy/nologin.jpg' %}" class="user-image" alt="User Image">#}
                                 </a>
                             </li>
+                            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
                             <li class="dropdown custom-dropdown user user-menu">
-                                <a href="{% url 'app:register' %}">注册</a>
+                                <a href="{% url 'app:register' %}" style="font-size: larger;color: #000000">注册</a>
                             </li>
 
                         </ul>

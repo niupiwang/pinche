@@ -98,43 +98,43 @@
                         </div>
                         <form action="{% url 'app:register' %}" method="post" name="register">
                             {% csrf_token %}
-                            <table >
-                                <tr>
-                                    <td class="form-group has-icon"><i class="icon-envelope-o"></i>
+                            <div >
+                                <div>
+                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
                                         <input name='username' type="text" class="form-control form-control-lg"
                                                placeholder="用户名">
-                                    </td>
+                                    </div>
 
-                                </tr>
-                                <td>
+                                </div>
+                                <div>
                                     {{ form.username.errors }}
-                                </td>
-                            </table>
-                            <table>
-                                <tr>
-                                    <td class="form-group has-icon"><i class="icon-user-secret"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div class="form-group has-icon"><i class="icon-user-secret"></i>
                                         <input name='password' type="password" class="form-control form-control-lg"
                                                placeholder="密码">
-                                    </td>
+                                    </div>
 
-                                </tr>
-                                <td>
+                                </div>
+                                <div>
                                     {{ form.password.errors }}
-                                </td>
-                            </table>
-                            <table>
-                                <tr>
-                                    <td class="form-group has-icon">
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div class="form-group has-icon">
                                         <i class="icon-user-secret"></i>
                                         <input name='repassword' type="password" class="form-control form-control-lg" placeholder="确认密码">
 
-                                    </td>
+                                    </div>
 
-                                </tr>
-                                <td>
+                                </div>
+                                <div>
                                     {{ form.repassword.errors }}
-                                </td>
-                            </table>
+                                </div>
+                            </div>
 
                     <script type="text/javascript">
                         var countdown=60;
@@ -154,29 +154,29 @@
                         }
                     </script>
 
-                            <table>
-                                <tr>
-                                    <td class="form-group has-icon">
+                            <div>
+                                <div>
+                                    <div class="form-group has-icon">
                                         <i class="icon-user-secret"></i>
                                         <input name='phone' type="text" class="form-control form-control-lg"
                                                id="mobile" placeholder="手机号">
-                                    </td>
+                                    </div>
 
-                                </tr>
-                                <td>
+                                </div>
+                                <div>
                                     {{ form.phone.errors }}
-                                </td>
-                            </table>
+                                </div>
+                            </div>
                             <table>
                                 <tr>
                                     <td class="form-group has-icon">
                                         <i class="icon-user-secret"></i>
-                                        <input name='sms' type="text" class="form-control form-control-lg" "
+                                        <input name='sms' type="text" class="form-control form-control-lg"
                                                placeholder="短信验证码">
                                         </td>
                                     <td>
                                         <span class="input-group-btn">
-                                        <input type="button" id="forcode" onclick="settime(this)" value="获取" class="btn btn-success" ></span>
+                                        <input style="" type="button" id="forcode" onclick="settime(this)" value="获取" class="btn btn-success"></span>
                                     </td>
 
                                 </tr>
@@ -211,7 +211,6 @@
                                     <td>
                                         <div class="form-group has-icon"><i class="icon-user-secret"></i>
                                             <input name='yzm' type="text" class="form-control form-control-lg"
-                                                   style="width: 150px;"
                                                    placeholder="验证码">
                                         </div>
                                     </td>

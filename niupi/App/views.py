@@ -327,14 +327,17 @@ def findpassword(request):
             if request.POST.get('phone') != User.objects.filter(username=request.POST.get('username')).first().phone:
                 form.errors['phone'] = "手机号不匹配"
             if ress and form.is_valid():
-                # form.cleaned_data.pop('repassword')
-                # form.cleaned_data.pop('yzm')
-                # User.objects.create(**form.cleaned_data)
-                user = User.objects.get(username=request.POST.get('username'))
-                user.password = make_password(request.POST.get('newpassword'))
-                user.save()
-                # user = User.objects.create_user(username=username,password=password,phone=phone)
-                return redirect(reverse('app:index'), locals())
+                if request.POST.get('newpassword') != request.POST.get('renewpassword'):
+                    form.errors['renewpassword'] = "两次密码不一致"
+                else:
+                    # form.cleaned_data.pop('repassword')
+                    # form.cleaned_data.pop('yzm')
+                    # User.objects.create(**form.cleaned_data)
+                    user = User.objects.get(username=request.POST.get('username'))
+                    user.password = make_password(request.POST.get('newpassword'))
+                    user.save()
+                    # user = User.objects.create_user(username=username,password=password,phone=phone)
+                    return redirect(reverse('app:index'), locals())
         else:
             form.errors['username'] = '用户不存在'
 
