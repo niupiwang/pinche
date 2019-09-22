@@ -15,12 +15,7 @@ url(r'^all/$', views.all, name='all'),
 url(r'^pay_list/$', views.pay_list, name='pay_list'),
 url(r'^send_new/$', views.send_new, name='send_new'),
 
-
-
 url(r'^add_payment/$', views.add_payment, name='add_payment'),
-
-
-
 
 
     # 常用联系人
@@ -36,5 +31,6 @@ url(r'^relation/$', views.relation, name='relation'),
     url(r'^logout/$',views.user_logout,name='logout'),
     url(r'^register/$',views.register,name='register'),
     url(r'^yzm/$',views.yzm,name='yzm'),
-    url(r'^findpassword/$',views.findpassword,name='findpassword')
+    url(r'^sms/$',views.sms,name='sms'),
+    url(r'^findpassword/$',views.findpassword,name='findpassword'),
 ]

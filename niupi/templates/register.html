@@ -10,6 +10,7 @@
     <title>Paper</title>
     <!-- CSS -->
     <link rel="stylesheet" href="{% static 'assets/css/app.css' %}">
+    <script src="https://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
     <style>
         .loader {
             position: fixed;
@@ -89,7 +90,7 @@
         <div id="primary" class="p-t-b-100 height-full">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-4 mx-md-auto paper-card">
+                    <div class="col-lg-3.5 mx-md-auto paper-card">
                         <div class="text-center">
                             <img src="{% static 'assets/img/dummy/u4.png' %}" alt="">
                             <h3 class="mt-2">注册用户</h3>
@@ -97,7 +98,7 @@
                         </div>
                         <form action="{% url 'app:register' %}" method="post" name="register">
                             {% csrf_token %}
-                            <table>
+                            <table >
                                 <tr>
                                     <td class="form-group has-icon"><i class="icon-envelope-o"></i>
                                         <input name='username' type="text" class="form-control form-control-lg"
@@ -123,9 +124,10 @@
                             </table>
                             <table>
                                 <tr>
-                                    <td class="form-group has-icon"><i class="icon-user-secret"></i>
-                                        <input name='repassword' type="password" class="form-control form-control-lg"
-                                               placeholder="确认密码">
+                                    <td class="form-group has-icon">
+                                        <i class="icon-user-secret"></i>
+                                        <input name='repassword' type="password" class="form-control form-control-lg" placeholder="确认密码">
+
                                     </td>
 
                                 </tr>
@@ -133,11 +135,31 @@
                                     {{ form.repassword.errors }}
                                 </td>
                             </table>
+
+                    <script type="text/javascript">
+                        var countdown=60;
+                        function settime(obj) {
+                            if (countdown == 0){
+                                obj.removeAttribute("disabled");
+                                obj.value="获取";
+                                countdown = 60;
+                                return;
+                            }else {
+                                obj.setAttribute("disabled",true);
+                                obj.value="重新发送("+countdown +")";
+                                countdown--;
+                            }
+                        setTimeout(function () {
+                            settime(obj)},1000)
+                        }
+                    </script>
+
                             <table>
                                 <tr>
-                                    <td class="form-group has-icon"><i class="icon-user-secret"></i>
+                                    <td class="form-group has-icon">
+                                        <i class="icon-user-secret"></i>
                                         <input name='phone' type="text" class="form-control form-control-lg"
-                                               placeholder="手机号">
+                                               id="mobile" placeholder="手机号">
                                     </td>
 
                                 </tr>
@@ -145,6 +167,40 @@
                                     {{ form.phone.errors }}
                                 </td>
                             </table>
+                            <table>
+                                <tr>
+                                    <td class="form-group has-icon">
+                                        <i class="icon-user-secret"></i>
+                                        <input name='sms' type="text" class="form-control form-control-lg" "
+                                               placeholder="短信验证码">
+                                        <span class="input-group-btn">
+                                            <input type="button" id="forcode" onclick="settime(this)" value="获取" class="btn btn-success" ></span>
+                                    </td>
+                                </tr>
+                                <td>
+                                    {{ form.sms.errors }}
+                                </td>
+                            </table>
+                    <script>
+                        $('#forcode').click(function () {
+                            $.ajax({
+                                cache:false,
+                                type:"POST",
+                                url:"{% url 'app:sms' %}",
+                                data:{
+                                    csrfmiddlewaretoken:$('[name="csrfmiddlewaretoken"]').val(),
+                                    mobile:$("#mobile").val()
+                                },
+                                async:true,
+                                success:function (data) {
+                                    alert(data)
+                                }
+                            })
+                            }
+
+                        )
+                    </script>
+
 
                             <table>
                                 <tr>

@@ -16,7 +16,7 @@ class User(AbstractUser):
     is_active = models.IntegerField(default=1) # 1代表激活 0代表锁定
     type = models.IntegerField(default=0) # 0为普通用户 1为司机 2为管理员用户
     portrait = models.CharField(max_length=196,verbose_name='手机号')
-    friends = models.CharField(max_length=128,null=True)
+    friends = models.CharField(max_length=128,null=True,default=0)
 
     class Meta:
         db_table = 'user'

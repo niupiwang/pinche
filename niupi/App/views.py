@@ -1,10 +1,12 @@
 import datetime
 import random
+import re
 
 from alipay import AliPay
 from django.contrib.auth import authenticate, login, logout
 import os
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.hashers import make_password
 from django.core.paginator import Paginator
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
@@ -14,13 +16,14 @@ from django.urls import reverse
 from django.views import View
 from rest_framework.response import Response
 
-from App.form import RegisterForm
+from App.form import RegisterForm, ChangeForm
 from App.models import User, Userdetail, News, Car
 from niupi.settings import BASE_DIR
 from App.models import User, Userdetail, List
 from niupi.settings import BASE_DIR, APP_PRIVATE_KEY, ALIPAY_PUBLIC_KEY
 from tools.file import Fileup
 from tools.verifycode import VerifyCode
+from tools.sms import send_sms
 
 from App.models import Bus
 
@@ -176,10 +179,20 @@ def register(request):
         form = RegisterForm(request.POST)
         yzm1 = request.POST.get('yzm')
         yzm2 = request.session.get('code')
+        print('yzm1:',yzm1)
+        print('yzm2:',yzm2)
+        sms1 = request.POST.get('sms')
+        sms2 = request.session.get('num')
+        print('sms1:',sms1)
+        print('sms2:',sms2)
+        ress = (sms1 == sms2)
         res = (yzm1 == yzm2)
+        print(form.is_valid())
         if not res:
             form.errors['yzm'] = "验证码错误"
-        if res and form.is_valid():
+        if not ress:
+            form.errors['sms'] = "手机验证码错误"
+        if res and ress and form.is_valid():
             # form.cleaned_data.pop('repassword')
             # form.cleaned_data.pop('yzm')
             # User.objects.create(**form.cleaned_data)
@@ -189,7 +202,7 @@ def register(request):
             phone = form.cleaned_data.get('phone')
             user = User.objects.create_user(username=username, password=password, phone=phone)
 
-            user = User.objects.create_user(username=username,password=password,phone=phone)
+            # user = User.objects.create_user(username=username,password=password,phone=phone)
             user.portrait = '/static/assets/img/basic/cirrus.png'
             user.save()
             userdetail = Userdetail()
@@ -204,6 +217,20 @@ def register(request):
         form = RegisterForm()
         return render(request, 'register.html', locals())
 
+def sms(request):
+    if User.objects.filter(username=request.GET.get('nameuser')).first():
+
+        if request.GET.get('phone') == User.objects.filter(username=request.GET.get('nameuser')).first().phone:
+            num = str(random.randint(10000, 1000000))
+            res = send_sms('18158050556', {'number': num})
+            print(num)
+            request.session['num'] = num
+            return HttpResponse('发送成功,请接收')
+        else:
+            return HttpResponse('手机号错误')
+    else:
+        return HttpResponse('用户不存在')
+
 
 def yzm(request):
     vc = VerifyCode()
@@ -211,9 +238,75 @@ def yzm(request):
     request.session['code'] = vc.code
     return HttpResponse(res, 'image/png')
 
+# def checkpassword(password):
+#     if re.search(r'\d+',password) and \
+#        re.search(r'[a-z]',password) and  \
+#        re.search(r'[A-Z]',password) and len(password)>=6:
+#         return password
+#     else:
+#         return '密码强度不够'
 
 def findpassword(request):
-    return render(request, 'findpassword.html', locals())
+    # if request.method == 'POST':
+    #     users = User.objects.filter(username=request.POST.get('username'))
+    #     if users: # 如果有这个用户名：
+    #         print(users.first().phone,request.POST.get('mobile'))
+    #         if users.first().phone == request.POST.get('mobile'): # 如果表单提交的手机号与上述用户名的手机号一致
+    #             sms1 = request.POST.get('sms')
+    #             sms2 = request.session.get('num')
+    #             ress = (sms1 == sms2)
+    #             print('sms1:', sms1)
+    #             print('sms2:', sms2)
+    #             if ress: #　如果手机验证码通过了
+    #                 passwords = request.POST.get('newpassword')
+    #                 if checkpassword(passwords) == '密码强度不够': # 如果新密码强度不够checkpassword的要求
+    #                     error4 = checkpassword(passwords)
+    #                 elif request.POST.get('newpassword') == request.POST.get('renewpassword'):# 如果够要求并且两次输入一致
+    #                     # 那么就终于可以将新密码写入到数据库了
+    #                     new_password = request.POST.get('newpassword')
+    #                     user = auth.authenticate(username=username)
+    #                     user.set_password(new_password)
+    #                     user.save()
+    #                 else:
+    #                     error5 = '两次密码不一致'
+    #             else:
+    #                 error3 = '验证码错误'
+    #         else:
+    #             error2 = '手机号错误'
+    #     else:
+    #         error1 = '用户不存在'
+    if request.method == 'POST':
+        form = ChangeForm(request.POST)
+        sms1 = request.POST.get('sms')
+        sms2 = request.session.get('num')
+        print('sms1:',sms1)
+        print('sms2:',sms2)
+        ress = (sms1 == sms2)
+        print(form.is_valid())
+        if not ress:
+            form.errors['sms'] = "手机验证码错误"
+        if User.objects.filter(username=request.POST.get('username')).first():
+            print('在这里')
+            print(request.POST.get('username'))
+            if request.POST.get('phone') != User.objects.filter(username=request.POST.get('username')).first().phone:
+                form.errors['phone'] = "手机号不匹配"
+            if ress and form.is_valid():
+                # form.cleaned_data.pop('repassword')
+                # form.cleaned_data.pop('yzm')
+                # User.objects.create(**form.cleaned_data)
+                user = User.objects.get(username=request.POST.get('username'))
+                user.password = make_password(request.POST.get('newpassword'))
+                user.save()
+                # user = User.objects.create_user(username=username,password=password,phone=phone)
+                return redirect(reverse('app:index'), locals())
+        else:
+            form.errors['username'] = '用户不存在'
+
+
+        return render(request, 'findpassword.html', {'form': form})
+    else:
+        form = RegisterForm()
+        return render(request, 'findpassword.html', locals())
 
 
 def pay(request):
@@ -221,7 +314,6 @@ def pay(request):
 
 
 def relation(request):
-    print(request.GET)
     # 删除好友
     if request.GET.get('uid'):
         uid = request.GET['uid']
@@ -489,3 +581,4 @@ def send_new(request):
         new1.belong_user_id = request.user.uid
         new1.save()
     return render(request,'app/success.html')
+
