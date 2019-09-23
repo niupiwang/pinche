@@ -143,9 +143,9 @@ class BusForm2(forms.Form):
     start_time = forms.CharField(error_messages={
         'required': '必须输入'
     })
-    # hours = forms.CharField(error_messages={
-    #     'required': '必须输入'
-    # })
+    hour = forms.CharField(error_messages={
+        'required': '必须输入'
+    })
     ticket = forms.CharField(error_messages={
         'required': '必须输入'
     })

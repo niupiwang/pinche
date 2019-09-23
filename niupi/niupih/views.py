@@ -257,7 +257,7 @@ def bus_add2(request):
     if id:
         admin = Userdetail.objects.filter(user_uid=id).first()
         if request.method == 'POST':
-            form = BusForm(request.POST)
+            form = BusForm2(request.POST)
             if form.is_valid():
                 print(form.cleaned_data, 11111111)
                 bus = Bus()
@@ -271,7 +271,7 @@ def bus_add2(request):
                 bus.price = form.cleaned_data.get('price')
                 bus.ticket = form.cleaned_data.get('ticket')
                 bus.standby_ticket = form.cleaned_data.get('ticket')
-                hours = form.cleaned_data.get('hours')
+                hours = form.cleaned_data.get('hour')
                 res = datetime.datetime.strptime(bus.start_time, "%Y-%m-%d %H:%M")
                 bus.end_time = res + datetime.timedelta(hours=int(hours))
                 print(bus.start_time, bus.end_time, 1111111)
