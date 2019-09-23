@@ -549,10 +549,10 @@ def add_payment(request):
 # 订单列表
 def pay_list(request):
     print('---订单列表---')
-    lists = List.objects.all()
-    lists_w = List.objects.filter(status=0)
-    lists_d = List.objects.filter(status=1)
-    lists_a = List.objects.filter(status=2)
+    lists = List.objects.filter(list_uid=request.user.uid)
+    lists_w = lists.filter(status=0)
+    lists_d = lists.filter(status=1)
+    lists_a = lists.filter(status=2)
     li = lists.first()
     print('---订单结束---')
     return render(request, 'app/pay_list.html', locals())
