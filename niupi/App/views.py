@@ -5,6 +5,7 @@ from alipay import AliPay
 from django.contrib.auth import authenticate, login, logout
 import os
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.hashers import make_password
 from django.core.paginator import Paginator
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
@@ -158,27 +159,32 @@ def user_login(request):
         user = authenticate(request, username=username, password=password)
         print('1111111111231231231')
         user2 = User.objects.filter(username=username).first()
-        if user2.is_locked == 1:
-            errorss = '你的账户已被锁定'
-        else:
-            if user:
-                user.count = 0
-                user.save()
-                login(request, user)
-                print(user.uid)
-                userdetail = Userdetail.objects.filter(user_uid=user.uid).first()
-                print(userdetail, '--------------------------')
-                return redirect(reverse('app:index'), locals())
-
+        usersss = User.objects.all()
+        op = []
+        for us in usersss:
+            op.append(us.username)
+        if username in op:
+            if user2.is_locked == 1:
+                errorss = '你的账户已被锁定'
             else:
-                user3 = User.objects.filter(username=request.POST.get('username')).first()
-                print(user3.count)
-                user3.count += 1
-                user3.save()
-                if user3.count == 3:
-                    user3.is_locked = 1
+                if user:
+                    user.count = 0
+                    user.save()
+                    login(request, user)
+                    print(user.uid)
+                    userdetail = Userdetail.objects.filter(user_uid=user.uid).first()
+                    print(userdetail, '--------------------------')
+                    return redirect(reverse('app:index'), locals())
+
+                else:
+                    user3 = User.objects.filter(username=request.POST.get('username')).first()
+                    print(user3.count)
+                    user3.count += 1
                     user3.save()
-                return render(request, 'login.html', locals())
+                    if user3.count == 3:
+                        user3.is_locked = 1
+                        user3.save()
+                    return render(request, 'login.html', locals())
     return render(request, 'login.html',locals())
 
 
