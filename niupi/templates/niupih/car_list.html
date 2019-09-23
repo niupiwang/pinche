@@ -3,7 +3,7 @@
         <div class="content-wrapper">
           <div class="card">
             <div class="card-body">
-              <h4 class="card-title">专车信息表</h4>
+              <h2 class="card-title">专车信息表</h2>
               <div class="row">
                 <div class="col-12">
                   <div class="table-responsive">
@@ -32,7 +32,7 @@
                             <td>{{car.end_city}}</td>
                             <td>{{ car.price }}</td>
                             <td>
-                                <label class="badge badge-info">On hold</label>
+{#                                <label class="badge badge-info">On hold</label>#}
                             {% if car.left_seats != 0 %}
                                 <label class="badge badge-success">剩余{{ car.left_seats }}个座位</label>
                             {% endif %}
@@ -41,7 +41,7 @@
                                 {% endifequal %}
                             </td>
                             <td>
-                                <a href="{% url 'myadmin:car_detail' car.cid%}">
+                                <a href="{% url 'myadmin:car_detail' car.cid %}">
                               <button class="btn btn-outline-primary">View</button>
                                     </a>
                             </td>

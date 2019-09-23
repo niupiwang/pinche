@@ -5,7 +5,7 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-body">
-                  <h6 class="card-title">Bus status</h6>
+                  <h2 class="card-title">长途汽车</h2>
                   <div class="d-flex table-responsive">
                     <div class="btn-group mr-2">
 
@@ -31,17 +31,17 @@
                     <table class="table mt-3 border-top">
                       <thead>
                         <tr>
-                            <th>车牌号</th>
-                          <th>汽车编号</th>
+                            <th>汽车编号</th>
+                          <th>汽车牌号</th>
                           <th>始发车站啊</th>
                           <th>到达车站啊</th>
                           <th>票价</th>
                           <th>剩余票数|总票数</th>
-                          <th>Status</th>
+                          <th>操作</th>
                         </tr>
                       </thead>
                       <tbody>
-                      {% for b in bus %}
+                      {% for b in bus_list %}
                         <tr>
                             <td>{{b.num}}</td>
                           <td>{{b.bus_num}}</td>
@@ -63,14 +63,75 @@
                   <div class="d-flex align-items-center justify-content-between flex-column flex-sm-row mt-4">
                     <p class="mb-3 mb-sm-0">Showing 1 to 20 of 20 entries</p>
                     <nav>
-                      <ul class="pagination pagination-info mb-0">
-                        <li class="page-item"><a class="page-link"><i class="mdi mdi-chevron-left"></i></a></li>
-                        <li class="page-item active"><a class="page-link">1</a></li>
-                        <li class="page-item"><a class="page-link">2</a></li>
-                        <li class="page-item"><a class="page-link">3</a></li>
-                        <li class="page-item"><a class="page-link">4</a></li>
-                        <li class="page-item"><a class="page-link"><i class="mdi mdi-chevron-right"></i></a></li>
-                      </ul>
+{#                      <ul class="pagination pagination-info mb-0">#}
+{#                          {% if bus_list.has_previous %}#}
+{#                        <li class="page-item"><a class="page-link" href="/myadmin/bus_list/?page={{ bus_list.previous_page_number }}"><i class="mdi mdi-chevron-left" ></i></a></li>#}
+{#                          {% else %}#}
+{#                              <li class="page-item"><a class="page-link" href="#"><i class="mdi mdi-chevron-left" ></i></a></li>#}
+{#                          {% endif %}#}
+{##}
+{#                          {% for num in paginator.page_range %}#}
+{#                            {% if num == currentPage %}#}
+{#                              <li class="page-item active"><a class="page-link" href="/myadmin/bus_list/?page={{ bus_list.previous_page_number }}">{{ num }}</a></li>#}
+{#                            {% else %}#}
+{#                              <li class="page-item "><a class="page-link" href="/myadmin/bus_list/?page={{ num }}">{{ num }}</a></li>#}
+{#                            {% endif %}#}
+{#                          {% endfor %}#}
+{##}
+{#                         {% if bus_list.has_previous %}#}
+{#                        <li class="page-item"><a class="page-link"><i class="mdi mdi-chevron-right" href="/myadmin/bus_list/?page={{ bus_list.next_page_number }}"></i></a></li>#}
+{#                             {% else %}#}
+{#                        <li class="page-item"><a class="page-link"><i class="mdi mdi-chevron-right" href="#"></i></a></li>#}
+{#                        {% endif %}#}
+{#                      </ul>#}
+
+{#                    分页#}
+                    <ul class="pagination pagination-info mb-0" id="pager">
+{#    判断是否有上一页#}
+         {% if bus_list.has_previous %}
+             <li class="page-item"><a class="page-link" href="/myadmin/bus_list/?page={{ bus_list.previous_page_number }}"><i class="mdi mdi-chevron-left" ></i></a></li>
+         {% else %}
+             <li class="previous disabled"><a class="page-link" ><i class="mdi mdi-chevron-left" ></i></a></li>
+         {% endif %}
+{#    循环页码#}
+         {% for num in paginator.page_range %}
+             {% if num == currentPage %}
+                <li class="page-item active"><a class="page-link" href="/myadmin/bus_list/?page={{ num }}">{{ num }}</a></li>
+             {% else %}
+                 <li class="page-item "><a class="page-link" href="/myadmin/bus_list/?page={{ num }}">{{ num }}</a></li>
+             {% endif %}
+         {% endfor %}
+{#是否有下一页#}
+         {% if bus_list.has_next %}
+             <li class="page-item "><a class="page-link" href="/myadmin/bus_list/?page={{ bus_list.next_page_number }}"><i class="mdi mdi-chevron-right" href="#"></i></a></li>
+         {% else %}
+             <li class="previous disabled" ><a class="page-link" ><i class="mdi mdi-chevron-right" ></i></a></li>
+        {% endif %}
+    </ul>
+{#                    分页无样式#}
+{#    <ul class="pagination pagination-info mb-0" id="pager">#}
+{#    判断是否有上一页#}
+{#         {% if bus_list.has_previous %}#}
+{#             <li class="previous"><a href="/myadmin/bus_list/?page={{ bus_list.previous_page_number }}">上一页</a></li>#}
+{#         {% else %}#}
+{#             <li class="previous disabled"><a href="#">上一页</a></li>#}
+{#         {% endif %}#}
+{#    循环页码#}
+{#         {% for num in paginator.page_range %}#}
+{#             {% if num == currentPage %}#}
+{#                <li class="page-item active"><a href="/myadmin/bus_list/?page={{ num }}">{{ num }}</a></li>#}
+{#             {% else %}#}
+{#                 <li class="item"><a href="/myadmin/bus_list/?page={{ num }}">{{ num }}</a></li>#}
+{#             {% endif %}#}
+{#         {% endfor %}#}
+{##}
+{#         {% if bus_list.has_next %}#}
+{#             <li class="next"><a href="/myadmin/bus_list/?page={{ bus_list.next_page_number }}">下一页</a></li>#}
+{#         {% else %}#}
+{#                          <li class="next disabled"><a href="#">下一页</a></li>#}
+{#        {% endif %}#}
+{#    </ul>#}
+
                     </nav>
                   </div>
                 </div>

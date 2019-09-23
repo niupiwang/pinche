@@ -20,9 +20,11 @@
 <div class="container-scroller">
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
-            <a class="navbar-brand brand-logo" href="{% url 'myadmin:index' %}"><img src="/static/niupih/images/bbsq2.jpeg" alt="logo"/></a>
-            <a class="navbar-brand brand-logo-mini" href="{% url 'myadmin:index' %}"><img src="/static/niupih/images/bus.jpg"
-                                                                           alt="logo"/></a>
+            <a class="navbar-brand brand-logo" href="{% url 'myadmin:index' %}"><img
+                    src="/static/niupih/images/bbsq2.jpeg" alt="logo"/></a>
+            <a class="navbar-brand brand-logo-mini" href="{% url 'myadmin:index' %}"><img
+                    src="/static/niupih/images/bus.jpg"
+                    alt="logo"/></a>
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-center">
             <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -30,17 +32,18 @@
             </button>
             <ul class="navbar-nav">
                 <li class="nav-item dropdown d-none d-lg-flex">
-                    <a class="nav-link dropdown-toggle nav-btn" id="actionDropdown" href="{% url 'myadmin:admin_add' %}" data-toggle="dropdown">
+                    <a class="nav-link dropdown-toggle nav-btn" id="actionDropdown" href="{% url 'myadmin:admin_add' %}"
+                       data-toggle="dropdown">
                         <span class="btn">+ 新创建</span></a>
                     <div class="dropdown-menu navbar-dropdown dropdown-left" aria-labelledby="actionDropdown">
-{#                        <a class="dropdown-item" href="#">#}
-{#                            <i class="icon-user text-primary"></i>普通用户</a>#}
-{#                        <div class="dropdown-divider"></div>#}
+                        {#                        <a class="dropdown-item" href="#">#}
+                        {#                            <i class="icon-user text-primary"></i>普通用户</a>#}
+                        {#                        <div class="dropdown-divider"></div>#}
                         <a class="dropdown-item" href="{% url 'myadmin:admin_add' %}">
                             <i class="icon-user-following text-warning"></i>管理员</a>
                         <div class="dropdown-divider"></div>
-{#                        <a class="dropdown-item" href="#">#}
-{#                            <i class="icon-docs text-success"></i>报表</a>#}
+                        {#                        <a class="dropdown-item" href="#">#}
+                        {#                            <i class="icon-docs text-success"></i>报表</a>#}
                     </div>
                 </li>
             </ul>
@@ -196,7 +199,7 @@
             <!-- partial:partials/_sidebar.html -->
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <ul class="nav">
-{#                    管理员#}
+                    {#                    管理员#}
                     <li class="nav-item nav-profile">
                         <div class="nav-link">
                             <div class="profile-image">
@@ -206,7 +209,7 @@
                             </div>
                             <div class="profile-name">
                                 <p class="name">
-                                    <h3>{{ admin.user_uid.username }}</h3>
+                                <h3>{{ admin.user_uid.username }}</h3>
                                 </p>
                                 <p class="designation">
                                     管理员
@@ -214,7 +217,7 @@
                             </div>
                         </div>
                     </li>
-{#                    管理员个人信息，user_detail页面#}
+                    {#                    管理员个人信息，user_detail页面#}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'myadmin:admin_detail' admin.user_uid.uid %}">
                             <i class="icon-rocket menu-icon"></i>
@@ -222,17 +225,17 @@
                             <span class="badge badge-success">管理员</span>
                         </a>
                     </li>
-{#                    用户管理#}
+                    {#                    用户管理#}
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false"
                            aria-controls="ui-basic">
                             <i class="icon-target menu-icon"></i>
                             <span class="menu-title">用户管理</span>
-                            <span class="badge badge-success">10</span>
+                            <span class="badge badge-success">2</span>
                         </a>
                         <div class="collapse" id="ui-basic">
                             <ul class="nav flex-column sub-menu">
-{#                                小模块循环#}
+                                {#                                小模块循环#}
                                 <li class="nav-item"><a class="nav-link" href="{% url 'myadmin:user_list' %}">所有用户</a>
                                 </li>
                                 <li class="nav-item"><a class="nav-link" href="{% url 'myadmin:admin_list' %}">所有管理员</a>
@@ -240,7 +243,7 @@
                             </ul>
                         </div>
                     </li>
-{#                    汽车管理#}
+                    {#                    汽车管理#}
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-advanced" aria-expanded="false"
                            aria-controls="ui-advanced">
@@ -250,23 +253,27 @@
                         </a>
                         <div class="collapse" id="ui-advanced">
                             <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"><a class="nav-link" href="{% url 'myadmin:bus_list' %}">查询车次</a></li>
-                                <li class="nav-item"><a class="nav-link" href="{% url 'myadmin:bus_add' %}">添加车次</a></li>
-                                <li class="nav-item"><a class="nav-link" href="{% url 'myadmin:bus_delete' 1 %}">取消车次</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{% url 'myadmin:bus_list' %}">查询车次</a>
+                                </li>
+                                <li class="nav-item"><a class="nav-link" href="{% url 'myadmin:bus_add2' %}">添加车次</a>
+                                </li>
+                                <li class="nav-item"><a class="nav-link" href="{% url 'myadmin:bus_delete' %}">取消车次</a>
+                                </li>
                             </ul>
                         </div>
                     </li>
-{#                    专车管理#}
+                    {#                    专车管理#}
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false"
                            aria-controls="charts">
                             <i class="icon-pie-chart menu-icon"></i>
                             <span class="menu-title">专车信息</span>
-                            <span class="badge badge-warning">8</span>
+                            <span class="badge badge-warning">1</span>
                         </a>
                         <div class="collapse" id="charts">
                             <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"><a class="nav-link" href="{% url 'myadmin:car_list' %}">查看信息</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{% url 'myadmin:car_list' %}">查看专车</a>
+                                </li>
                             </ul>
                         </div>
                     </li>
@@ -302,91 +309,91 @@
             </nav>
             <!-- 右侧动态栏 -->
             <!-- ================================================================================================ -->
-{% block portfolio %}
-{% endblock portfolio %}
-        {% block index %}
-        {% endblock index %}
+            {% block portfolio %}
+            {% endblock portfolio %}
+            {% block index %}
+            {% endblock index %}
             {% block gallery %}
-                {% endblock gallery %}
-                {% block popups %}
-                {% endblock popups %}
-                {% block base_table %}
-                {% endblock base_table %}
-                {% block wizard %}
-                {% endblock wizard %}
-                {% block validation %}
-                {% endblock validation %}
-                {% block text_editer %}
-                {% endblock text_editer %}
-                {% block dropify %}
-                {% endblock dropify %}
-                {% block code_editer %}
-                {% endblock code_editer %}
-                {% block basic_elements %}
-                {% endblock basic_elements %}
-                {% block list_detail %}
-                {% endblock list_detail %}
-        {% block data_table %}
-        {% endblock data_table %}
-        {% block badges %}
-        {% endblock badges %}
-        {% block accordions %}
-        {% endblock accordions %}
-        {% block widgets %}
-        {% endblock widgets %}
-        {% block documentation %}
-        {% endblock documentation %}
-        {% block simple %}
-        {% endblock simple %}
-        {% block themify %}
-        {% endblock themify %}
-        {% block c3 %}
-        {% endblock c3 %}
-        {% block boxed %}
-        {% endblock boxed %}
-        {% block landing %}
-        {% endblock landing %}
-        {% block orders %}
-        {% endblock orders %}
-        {% block blank_page %}
-        {% endblock blank_page %}
-        {% block rtl_layout %}
-        {% endblock rtl_layout %}
-        {% block hori %}
-        {% endblock hori %}
-        {% block compact %}
-        {% endblock compact %}
-        {% block news %}
-        {% endblock news %}
-        {% block profile %}
-        {% endblock profile %}
-                <footer class="footer">
-                    <div class="container-fluid clearfix">
+            {% endblock gallery %}
+            {% block popups %}
+            {% endblock popups %}
+            {% block base_table %}
+            {% endblock base_table %}
+            {% block wizard %}
+            {% endblock wizard %}
+            {% block validation %}
+            {% endblock validation %}
+            {% block text_editer %}
+            {% endblock text_editer %}
+            {% block dropify %}
+            {% endblock dropify %}
+            {% block code_editer %}
+            {% endblock code_editer %}
+            {% block basic_elements %}
+            {% endblock basic_elements %}
+            {% block list_detail %}
+            {% endblock list_detail %}
+            {% block data_table %}
+            {% endblock data_table %}
+            {% block badges %}
+            {% endblock badges %}
+            {% block accordions %}
+            {% endblock accordions %}
+            {% block widgets %}
+            {% endblock widgets %}
+            {% block documentation %}
+            {% endblock documentation %}
+            {% block simple %}
+            {% endblock simple %}
+            {% block themify %}
+            {% endblock themify %}
+            {% block c3 %}
+            {% endblock c3 %}
+            {% block boxed %}
+            {% endblock boxed %}
+            {% block landing %}
+            {% endblock landing %}
+            {% block orders %}
+            {% endblock orders %}
+            {% block blank_page %}
+            {% endblock blank_page %}
+            {% block rtl_layout %}
+            {% endblock rtl_layout %}
+            {% block hori %}
+            {% endblock hori %}
+            {% block compact %}
+            {% endblock compact %}
+            {% block news %}
+            {% endblock news %}
+            {% block profile %}
+            {% endblock profile %}
+            <footer class="footer">
+                <div class="container-fluid clearfix">
                         <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © 2017 <a
                                 href="#">UrbanUI</a>. All rights reserved.</span>
-                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i
-                                class="mdi mdi-heart text-danger"></i></span>
-                    </div>
-                </footer>
+                    <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i
+                            class="mdi mdi-heart text-danger"></i></span>
+                </div>
+            </footer>
         </div>
     </div>
 </div>
 {% block script %}
-                <script src="/static/niupih/node_modules/jquery/dist/jquery.min.js"></script>
-                <script src="/static/niupih/node_modules/popper.js/dist/umd/popper.min.js"></script>
-                <script src="/static/niupih/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-                <script src="/static/niupih/node_modules/perfect-scrollbar/dist/js/perfect-scrollbar.jquery.min.js"></script>
-                <script src="/static/niupih/node_modules/jquery-bar-rating/dist/jquery.barrating.min.js"></script>
-                <script src="/static/niupih/node_modules/chart.js/dist/Chart.min.js"></script>
-                <script src="/static/niupih/node_modules/raphael/raphael.min.js"></script>
-                <script src="/static/niupih/node_modules/morris.js/morris.min.js"></script>
-                <script src="/static/niupih/node_modules/jquery-sparkline/jquery.sparkline.min.js"></script>
-                <script src="/static/niupih/js/off-canvas.js"></script>
-                <script src="/static/niupih/js/hoverable-collapse.js"></script>
-                <script src="/static/niupih/js/misc.js"></script>
-                <script src="/static/niupih/js/settings.js"></script>
-                <script src="/static/niupih/js/todolist.js"></script>
-                <script src="/static/niupih/js/dashboard.js"></script>
+    <script src="/static/niupih/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/static/niupih/node_modules/popper.js/dist/umd/popper.min.js"></script>
+    <script src="/static/niupih/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/static/niupih/node_modules/perfect-scrollbar/dist/js/perfect-scrollbar.jquery.min.js"></script>
+    <script src="/static/niupih/node_modules/jquery-bar-rating/dist/jquery.barrating.min.js"></script>
+    <script src="/static/niupih/node_modules/chart.js/dist/Chart.min.js"></script>
+    <script src="/static/niupih/node_modules/raphael/raphael.min.js"></script>
+    <script src="/static/niupih/node_modules/morris.js/morris.min.js"></script>
+    <script src="/static/niupih/node_modules/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <script src="/static/niupih/js/off-canvas.js"></script>
+    <script src="/static/niupih/js/hoverable-collapse.js"></script>
+    <script src="/static/niupih/js/misc.js"></script>
+    <script src="/static/niupih/js/settings.js"></script>
+    <script src="/static/niupih/js/todolist.js"></script>
+    <script src="/static/niupih/js/dashboard.js"></script>
 {% endblock script %}
 </body>
 </html>

@@ -158,6 +158,7 @@ def user_login(request):
         user = authenticate(request, username=username, password=password)
         print('1111111111231231231')
         user2 = User.objects.filter(username=username).first()
+        print(user2)
         if user2.is_locked == 1:
             errorss = '你的账户已被锁定'
         else:
