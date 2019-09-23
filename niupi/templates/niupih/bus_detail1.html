@@ -1,0 +1,83 @@
+{% extends 'niupih/base.html' %}
+{% block validation %}
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="card">
+                <div class="card-body">
+                  <h2 class="card-title">由{{ bus.start_city }}开往{{ bus.end_city }}的{{bus.num}}次班车</h2>
+                  <form class="cmxform" id="signupForm" method="post" action="{% url 'myadmin:bus_update' bus.bid %}">
+                      {% csrf_token %}
+                      <p></p>
+                    <fieldset>
+                        <div class="form-group">
+{#                      <h3 class="card-title">选择城市</h3>#}
+                        <span class="card-description">始发城市</span>
+                      <input type='text' class="input-group" value="{{bus.start_city}}" name="start_city" placeholder="" />
+                            {{ form.start_city.errors }}
+                        <span class="card-description">到达城市</span>
+                      <input type='text' class="input-group" value="{{ bus.end_city }}" name="end_city" placeholder="" />
+                            {{ form.end_city.errors }}
+                        </div>
+                        <div class="form-group">
+{#                            <h3 class="card-title">选择车辆</h3>#}
+                        <span class="card-description">车辆编号</span>
+                      <input type='text' class="color-picker" value="{{ bus.num }}" name="num" placeholder="" />
+                            {{ form.num.errors }}
+                        <span class="card-description">汽车牌号</span>
+                      <input type='text' class="color-picker" value="{{ bus.bus_num }}" name="bus_num" placeholder="" />
+                            {{ form.bus_num.errors }}
+                        </div>
+                      <div class="form-group">
+{#                          <h3 class="card-title">选择车站</h3>#}
+                        <label for="start_station">起始车站</label>
+                          <input id="start_station" class="form-control" type='text' name="start_station" value="{{ bus.start_station }}"/>
+                          <font color="#ff4500">{{ form.start_station.errors }}</font>
+{#                        <input id="firstname" class="form-control" name="start_city" type="text">#}
+                      </div>
+                      <div class="form-group">
+                        <label for="end_station">到达车站</label>
+                        <input id="end_station" class="form-control" name="end_station" type="text" value="{{ bus.end_station }}">
+                          {{ form.end_station.errors }}
+                      </div>
+{#                      <div class="form-group">#}
+{#                          <h3 class="card-title">选择时间</h3>#}
+{#                        <label for="start_time">发车时间</label>#}
+{#                        <input id="start_time" class="form-control" name="start_time" type="text">#}
+{#                          {{ form.start_time.errors }}#}
+{#                      </div>#}
+                      <div class="form-group">
+{#                           <p><div class="badge badge-success badge-fw"><h3 >选择时间</h3></div>#}
+                          </p>
+                        <label for="start_time">发车时间</label>
+                          <p>
+                        <input id="start_time" class="shadow" name="start_time" type="text" value="{{ bus.start_time }}">
+
+{#                          <input id="start_time1" class="shadow1" name="start_time1" type="time" value="{{ bus. }}">#}
+     </p>
+{#                        <label for="start_time">预计路程</label>#}
+{#                              <input id="start_time" type="number" class="shadow" name="hours">#}
+{#                          <font color="#a52a2a">{{ form.end_time.errors }}</font>#}
+
+                      </div>
+                      <div class="form-group">
+                          <h3 class="card-title">其他</h3>
+                        <label for="price">票价(单人)</label>
+                        <input id="price" class="form-control" name="price" type="text" value="{{ bus.price }}">
+                          {{ form.price.errors }}
+                      </div>
+                      <div class="form-group">
+                        <label for="ticket">总座位数</label>
+                        <input id="ticket" class="form-control" name="ticket" type="text" value="{{ bus.ticket }}">
+                          {{ form.ticket.errors }}
+                      </div>
+                      <input class="btn btn-primary" type="submit" value="修改">
+                    </fieldset>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+{% endblock validation %}
