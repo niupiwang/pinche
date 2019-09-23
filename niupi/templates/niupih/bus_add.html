@@ -6,30 +6,30 @@
               <div class="card">
                 <div class="card-body">
                   <h2 class="card-title">添加一个BUS车次</h2>
-                  <form class="cmxform" id="signupForm" method="post" action="{% url 'myadmin:bus_add' %}">
+                  <form class="cmxform" id="signupForm" method="post" action="{% url 'myadmin:bus_add2' %}">
                       {% csrf_token %}
                       <p></p>
                     <fieldset>
                         <div class="form-group">
-                      <h3 class="card-title">选择城市</h3>
+{#                      <h3 class="card-title">选择城市</h3>#}
                         <span class="card-description">始发城市</span>
                       <input type='text' class="input-group" value="" name="start_city" placeholder="秦皇岛" />
-                            {{ form.start_city.errors }}
+                          <font color="#ff4500">{{ form.start_city.errors }}</font>
                         <span class="card-description">到达城市</span>
                       <input type='text' class="input-group" value="" name="end_city" placeholder="石家庄" />
-                            {{ form.end_city.errors }}
+                          <font color="#ff4500">{{ form.end_city.errors }}</font>
                         </div>
                         <div class="form-group">
-                            <h3 class="card-title">选择车辆</h3>
+{#                            <h3 class="card-title">选择车辆</h3>#}
                         <span class="card-description">车辆编号</span>
                       <input type='text' class="color-picker" value="" name="num" placeholder="编号" />
-                            {{ form.num.errors }}
+                          <font color="#ff4500">{{ form.num.errors }}</font>
                         <span class="card-description">汽车牌号</span>
                       <input type='text' class="color-picker" value="" name="bus_num" placeholder="翼AXXXXX" />
-                            {{ form.bus_num.errors }}
+                          <font color="#ff4500">{{ form.bus_num.errors }}</font>
                         </div>
                       <div class="form-group">
-                          <h3 class="card-title">选择车站</h3>
+{#                          <h3 class="card-title">选择车站</h3>#}
                         <label for="start_station">起始车站</label>
                           <input id="start_station" class="form-control" type='text' name="start_station" />
                           <font color="#ff4500">{{ form.start_station.errors }}</font>
@@ -38,7 +38,7 @@
                       <div class="form-group">
                         <label for="end_station">到达车站</label>
                         <input id="end_station" class="form-control" name="end_station" type="text">
-                          {{ form.end_station.errors }}
+                          <font color="#ff4500">{{ form.end_station.errors }}</font>
                       </div>
 {#                      <div class="form-group">#}
 {#                          <h3 class="card-title">选择时间</h3>#}
@@ -47,28 +47,31 @@
 {#                          {{ form.start_time.errors }}#}
 {#                      </div>#}
                       <div class="form-group">
-                           <p><div class="badge badge-success badge-fw"><h3 >选择时间</h3></div>
+{#                           <p><div class="badge badge-success badge-fw"><h3 >选择时间</h3></div>#}
                           </p>
                         <label for="start_time">发车时间</label>
                           <p>
-                        <input id="start_time" class="shadow" name="start_time" type="date">
+                        <input id="start_time" class="shadow" name="start_time" type="text" value="{{ time }}">
 
-                          <input id="start_time1" class="shadow1" name="start_time1" type="time">
+{#                          <input id="start_time1" class="shadow1" name="start_time1" type="time">#}
      </p>
-                        <label for="start_time">预计路程</label>
+                          <p>
+                        <label for="start_time">预计路程(单位:小时)</label>
+                          </p>
                               <input id="start_time" type="number" class="shadow" name="hours">
-                          <font color="#a52a2a">{{ form.end_time.errors }}</font>
+                          <font color="#a52a2a">{{ form.hours.errors }}</font>
+
                       </div>
                       <div class="form-group">
                           <h3 class="card-title">其他</h3>
                         <label for="price">票价</label>
                         <input id="price" class="form-control" name="price" type="text">
-                          {{ form.price.errors }}
+                          <font color="#ff4500">{{ form.price.errors }}</font>
                       </div>
                       <div class="form-group">
                         <label for="ticket">总座位数</label>
                         <input id="ticket" class="form-control" name="ticket" type="text">
-                          {{ form.ticket.errors }}
+                          <font color="#ff4500">{{ form.ticket.errors }}</font>
                       </div>
                       <input class="btn btn-primary" type="submit" value="添加">
                     </fieldset>

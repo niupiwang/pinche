@@ -5,11 +5,11 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Orders</h4>
+                  <h3 class="card-title">点击×取消车次来删除一条信息</h3>
                   <div class="row grid-margin">
                     <div class="col-12">
-                      <div class="alert alert-warning" role="alert">
-                          <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
+                      <div class="alert alert-warning" role="alert" >
+                          <h5><strong>请注意！！！</strong>信息删除后无法恢复，请谨慎处理</h5>
                       </div>
                     </div>
                   </div>
@@ -37,17 +37,21 @@
                                 <td>￥{{b.price}}</td>
                                 <td>{{b.start_time}}</td>
                                 <td>
-                                  <label class="badge badge-info">On hold</label>
+{#                                    {% if b.start_time < time3 %}#}
+{#                                  <label class="badge badge-info">已发车</label>#}
+{#                                        {% else %}#}
+{#                                        <label class="badge badge-info">未发车</label>#}
+{#                                    {% endif %}#}
                                 </td>
                                 <td>
                                     <a href="{% url 'myadmin:bus_detail' b.bid %}">
                                   <button class="btn btn-light">
-                                    <i class="mdi mdi-eye text-primary"></i>View
+                                    <i class="mdi mdi-eye text-primary"></i>查看详情
                                   </button>
                                         </a>
                                     <a href="{% url 'myadmin:bus_delete' b.bid %}">
                                   <button class="btn btn-light">
-                                    <i class="mdi mdi-close text-danger"></i>Remove
+                                    <i class="mdi mdi-close text-danger"></i>取消车次
                                   </button>
                                         </a>
                                 </td>

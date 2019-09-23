@@ -37,20 +37,48 @@
     <input type="hidden" name="uid" value="{{ u.user_uid.uid }}">
                         <tr>
                           <td class="py-1">
-                            <img src="/static/niupih/images/{{ u.pic }}" alt="image"/>
+
+                              {% ifequal u.user_uid.type 0 %}
+                                  {% if u.user_uid.portrait == None %}
+                                    <img src="/static/niupih/images/user.jpeg" alt="image"/>
+                              {% endif %}
+                                  {% if u.user_uid.portrait != None %}
+                                    <img src="{{ u.user_uid.portrait }}" alt="image"/>
+                                  {% endif %}
+                              {% endifequal %}
+
+                          {% ifequal u.user_uid.type  1 %}
+                              {% if u.pic == None %}
+                                    <img src="/static/niupih/images/admin.jpeg" alt="image"/>
+                              {% endif %}
+
+                              {% if u.pic != None %}
+                                  <img src="/static/niupih/images/{{u.pic}}" alt="image"/>
+                              {% endif %}
+                                  {% endifequal %}
+
                           </td>
                           <td>
                               <a href="{% url 'myadmin:user_detail' u.user_uid.uid %}">{{ u.user_uid.username }}</a>
                           </td>
                           <td>
-                            {{ u.id_num }}
+                              {% if u.id_num == None %}
+     -
+                                  {% else %}
+                                  {{ u.id_num }}
+                              {% endif %}
                           </td>
                           <td>
                             {{ u.user_uid.phone }}
                           </td>
 {#                            {% if udetail.user_uid == u.uid %}#}
                           <td>
-                            {{ u.address }}
+                              {% if u.address == None %}
+                                  -
+                                  {% else %}
+                                  {{ u.address }}
+                              {% endif %}
+
                           </td>
 {#                            {% endif %}#}
                         </tr>

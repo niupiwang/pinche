@@ -117,3 +117,38 @@ class BusForm(forms.Form):
     hours = forms.IntegerField(error_messages={
         'required': '必须输入'
     })
+
+
+class BusForm2(forms.Form):
+    num = forms.CharField(max_length=10, error_messages={
+        'max_length': '最大长度为10位',
+        'required': '必须输入',
+    })
+    bus_num = forms.CharField(max_length=10, error_messages={
+        'max_length': '最大长度为10位',
+        'required': '必须输入',
+    })
+    start_city = forms.CharField(max_length=200, error_messages={
+        'required': '必须输入'
+    })
+    end_city = forms.CharField(max_length=200, error_messages={
+        'required': '必须输入'
+    })
+    start_station = forms.CharField(max_length=200, error_messages={
+        'required': '必须输入'
+    })
+    end_station = forms.CharField(max_length=200, error_messages={
+        'required': '必须输入'
+    })
+    start_time = forms.CharField(error_messages={
+        'required': '必须输入'
+    })
+    # hours = forms.CharField(error_messages={
+    #     'required': '必须输入'
+    # })
+    ticket = forms.CharField(error_messages={
+        'required': '必须输入'
+    })
+    price = forms.CharField(error_messages={
+        'required': '必须输入'
+    })
